@@ -1,0 +1,35 @@
+footer {
+    background-color: ghostwhite;
+    padding: 20px 0;
+}
+
+footer.login_footer {
+    position: fixed;
+    bottom: 0;
+    background-color: transparent;
+    color: white;
+    width: 100%;
+    box-shadow: inset 0px 0px 10px rgba(95, 95, 95, 0.5);
+}
+
+// .spacer{
+//     flex: 1 1 auto;
+// }
+// .first_row{
+//     gap: 25px;
+//     button{
+//         font-size: 18px;
+//         height: 40px;
+//         width: 130px;
+//         border-radius: 10px;
+//         border: 1px solid gray;
+//         img{
+//             height: 15px;
+//             width: 20px;
+//         }
+//     }
+// }
+
+p {
+    margin: 0;
+}
