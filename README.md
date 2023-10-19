@@ -1,11 +1,17 @@
 # FDA
 Food Delivery Application 
+
 Requirements in Deliverable 1:
 •	Create Account
+
 •	Login to Account
+
 •	Manage User Roles
+
 •	Manage Profile
+
 •	Forgot Password
+
 •	Register your Restaurant.
 
 Model Classes:
