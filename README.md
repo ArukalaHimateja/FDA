@@ -1,7 +1,7 @@
 # FDA
-Food Delivery Application 
+**Food Delivery Application** 
 
-Requirements in Deliverable 1:
+**Requirements in Deliverable 1:**
 •	Create Account
 
 •	Login to Account
@@ -14,11 +14,11 @@ Requirements in Deliverable 1:
 
 •	Register your Restaurant.
 
-Model Classes:
+**Model Classes:**
 •	VerificationToken : This model stores verification information such as tokens and expiration dates generated during the user login process.
 •	Restaurant: This model class manages and processes a restaurant using FDA
 
-Controller Classes:
+**Controller Classes:**
 
 •	AuthenticationController: The Controller manages user login, validation, and authentication tasks.
 
@@ -30,7 +30,7 @@ Controller Classes:
 
 •	ProfileController : It allows users to view and edit their own profiles and may also enable administrators to manage user profiles.
 
-Services:
+**Services:**
 
 Services are implemented using the following interfaces
 
@@ -42,7 +42,7 @@ Services are implemented using the following interfaces
 
 •	IEmailService : "IEmailService" typically suggests an interface for an email service in a software development context.
 
-MVC x LAYERED ARCHITECTURE
+**MVC x LAYERED ARCHITECTURE**
 
 <img width="2169" alt="Drawing1 - ASE" src="https://github.com/ArukalaHimateja/FDA/assets/53402333/a56e0142-c234-4e0a-80ec-c5c4fc9c9294"> 
 
