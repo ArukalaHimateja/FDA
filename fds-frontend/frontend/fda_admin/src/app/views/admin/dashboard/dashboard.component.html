@@ -1,0 +1,64 @@
+<mat-toolbar class="bg-none">
+    <span class="heading">Dashboard</span>
+</mat-toolbar>
+
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                    <i class="fa fa-users fa-fw fa-3x"></i>
+                </div>
+                <mat-card-title>{{dashboardData?.totalRestaurant}}</mat-card-title>
+                <mat-card-subtitle>Total Restaurant</mat-card-subtitle>
+            </mat-card-header>
+            <button mat-raised-button color="primary" [routerLink]="'/'">More detais click here..</button>
+        </mat-card>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                    <i class="fa fa-users fa-fw fa-3x"></i>
+                </div>
+                <mat-card-title>{{dashboardData?.totalEmployee}}</mat-card-title>
+                <mat-card-subtitle>Total Employee</mat-card-subtitle>
+            </mat-card-header>
+            <button mat-raised-button color="primary" [routerLink]="'/'">More detais click here..</button>
+        </mat-card>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                    <i class="fa fa-users fa-fw fa-3x"></i>
+                </div>
+                <mat-card-title>{{dashboardData?.totalCustomer}}</mat-card-title>
+                <mat-card-subtitle>Total Customer</mat-card-subtitle>
+            </mat-card-header>
+            <button mat-raised-button color="primary">More detais click here..</button>
+        </mat-card>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                    <i class="fa fa-users fa-fw fa-3x"></i>
+                </div>
+                <mat-card-title>{{dashboardData?.totalOrder}}</mat-card-title>
+                <mat-card-subtitle>Total Order</mat-card-subtitle>
+            </mat-card-header>
+            <button mat-raised-button color="primary">More detais click here..</button>
+        </mat-card>
+    </div>
+</div>
+
+<div id="chart">
+    <apx-chart style="width: 90%;" [series]="chartOptions.series" [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions" [yaxis]="chartOptions.yaxis"
+        [legend]="chartOptions.legend" [fill]="chartOptions.fill" [stroke]="chartOptions.stroke"
+        [tooltip]="chartOptions.tooltip" [xaxis]="chartOptions.xaxis"></apx-chart>
+</div>

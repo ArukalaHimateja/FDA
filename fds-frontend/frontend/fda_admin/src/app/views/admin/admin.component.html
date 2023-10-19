@@ -1,0 +1,21 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav [mode]="mode" fixedInViewport="fixedInViewport" [opened]="isOpened">
+        <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <!-- Header -->
+        <mat-toolbar class="mat-toolbar-fixed mat-elevation-z1">
+            <button id="toggleButton" (click)="sidenav.toggle()" mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="spacer"></span>
+            <app-header></app-header>
+        </mat-toolbar>
+        <app-loading></app-loading>
+        <div class="wrapper">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- <app-footer></app-footer> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>
