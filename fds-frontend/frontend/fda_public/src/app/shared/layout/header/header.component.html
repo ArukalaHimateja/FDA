@@ -1,0 +1,83 @@
+<mat-toolbar [class.login_toolbar]="isLoginPage">
+    <mat-toolbar-row class="first_row">
+        <h1 class="logo" [routerLink]="'/'">FDA</h1>
+        <form fxLayout="row" fxLayoutAlign="start center" [fxHide]="isLoginPage">
+            <div>
+                <mat-form-field class="location-field">
+                    <mat-label>Search Bar</mat-label>
+                    <mat-icon class="location_on" matPrefix>location_on</mat-icon>
+                    <input [formControl]="location" type="text" placeholder="Location" aria-label="Select your Location"
+                        matInput [matAutocomplete]="locations">
+                    <mat-icon class="postfix" matSuffix
+                        *ngIf="!isAutocompleterActiveforLocation">arrow_drop_up</mat-icon>
+                    <mat-icon class="postfix" matSuffix
+                        *ngIf="isAutocompleterActiveforLocation">arrow_drop_down</mat-icon>
+                    <mat-autocomplete autoActiveFirstOption #locations="matAutocomplete"
+                        (opened)="onAutocompleteOpenedforLocation()" (closed)="onAutocompleteClosedforLocation()">
+                        <mat-option *ngFor="let option of locationOption" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+            <hr class="vertical-hr">
+            <div>
+                <mat-form-field class="search-field">
+                    <mat-label>Search Bar</mat-label>
+                    <input [formControl]="search_bar" type="text"
+                        placeholder="Search For Restaurant, cuisine, or a dish" aria-label="Search Bar" matInput
+                        [matAutocomplete]="search" (input)="onInputProduct()">
+                    <mat-autocomplete autoActiveFirstOption #search="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions" [value]="option.foodName">
+                            {{option.foodName}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+        </form>
+        <span class="spacer"></span>
+
+        <button mat-button aria-label="Singup" [routerLink]="'/contact'">Contact Us</button>
+        <button mat-button aria-label="Logout" [routerLink]="'/session/signin'" *ngIf="!sessionUser">Login</button>
+        <button class="profile_icon_access" mat-button [matMenuTriggerFor]="profileMenu" *ngIf="sessionUser" (menuOpened)="onMenuOpenforProfileMenu()" (menuClosed)="onMenuClosedforProfileMenu()">
+            <span matPrefix><img alt="profileIcon" src="assets/images/user.png" /></span>
+            {{sessionUser.name}}
+            <mat-icon matSuffix>{{ isProfileIconMenuActive ? 'arrow_drop_down' : 'arrow_drop_up' }}</mat-icon>
+        </button>
+        <mat-menu #profileMenu="matMenu">
+            <ng-container *ngIf="sessionUser">
+                <button mat-menu-item aria-label="Login" [routerLink]="'/user/profile'">Profile</button>
+            </ng-container>
+            <ng-container *ngIf="sessionUser">
+                <button mat-menu-item aria-label="Logout" (click)="logout()">Logout</button>
+            </ng-container>
+        </mat-menu>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="second_row" *ngIf="!isLoginPage && !isContactUsPage">
+        <button fxLayout="row" fxLayoutAlign="center center">
+            <img alt="delivery" src="assets/images/motorcycle-delivery-food-isolated-icon-vector.jpg" />
+            Delivery
+        </button>
+        <button fxLayout="row" fxLayoutAlign="center center">
+            <img alt="delivery" src="assets/images/cutlery.jpg" />
+            Dining Out
+        </button>
+        <button fxLayout="row" fxLayoutAlign="center center">
+            <img alt="delivery" src="assets/images/nightlife.jpg" />
+            Night Life
+        </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="third_row" [class.fixed]="isThirdRowFixed" [class.third-row]="!isThirdRowFixed"
+        *ngIf="!isLoginPage && !isContactUsPage">
+        <button [mat-menu-trigger-for]="filter_by_type"><mat-icon>filter_list</mat-icon>Filter</button>
+        <button>Rating<span matSuffix>4.0 +</span></button>
+        <button>Rure veg</button>
+        <button>Cuisines<mat-icon matSuffix>arrow_drop_down</mat-icon></button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-menu #filter_by_type>
+        <mat-option *ngFor="let option of foodVarietyList">
+            {{option}}
+        </mat-option>
+</mat-menu>
