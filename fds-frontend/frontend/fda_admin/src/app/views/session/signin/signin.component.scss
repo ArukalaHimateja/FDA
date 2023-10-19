@@ -1,0 +1,59 @@
+h1 {
+    font-size: 36px;
+    text-align: center;
+    color: black;
+}
+
+.input-box {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    margin-top: 20px;
+
+    input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        font-size: 16px;
+        color: #fff;
+        padding: 20px 40px 20px 20px;
+    }
+
+    input::placeholder {
+        color: #fff;
+
+    }
+}
+
+.password-forgot {
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: 15px 5px 15px;
+    text-align: right;
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: blue;
+    }
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    color: #333;
+    font-weight: 700;
+}
