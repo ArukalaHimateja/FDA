@@ -1,0 +1,66 @@
+<div class="top_head">
+    <img src="/assets/images/logo.png" alt="Logo" height="60px" style="padding: 0 16px;">
+</div>
+<div class="profile-info">
+    <img class="user-img" [src]="_utilityService.getFileUrl(sessionUser?.profileImage,'user')" alt="">
+    <p>{{sessionUser?.name}}</p>
+</div>
+<mat-nav-list class="desktop-sidebar">
+    <ng-container *ngFor="let element of navbarList">
+        <ng-container *ngIf="element.type === 'link'">
+            <a mat-list-item [routerLink]="element.link">
+                <mat-icon>{{element.icon}}</mat-icon>
+                <h3 style="display: inline-block;">{{element.title}}</h3>
+            </a>
+        </ng-container>
+
+        <ng-container *ngIf="element.type === 'dropdown'">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon>{{element.icon}}</mat-icon>
+                        <h3>{{element.title}}</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <ng-container *ngFor="let sub of element.sub">
+                        <a mat-list-item [routerLink]="sub.link">
+                            <mat-icon>{{sub.icon}}</mat-icon>
+                            <h3>{{sub.title}}</h3>
+                        </a>
+                    </ng-container>
+                </mat-nav-list>
+            </mat-expansion-panel>
+        </ng-container>
+    </ng-container>
+</mat-nav-list>
+
+<mat-nav-list class="mobile-sidebar">
+    <ng-container *ngFor="let element of navbarList">
+        <ng-container *ngIf="element.type === 'link'">
+            <a mat-list-item (click)="onClickNavBar(element.link)">
+                <mat-icon>{{element.icon}}</mat-icon>
+                <h3>{{element.title}}</h3>
+            </a>
+        </ng-container>
+
+        <ng-container *ngIf="element.type === 'dropdown'">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon>{{element.icon}}</mat-icon>
+                        <h3>{{element.title}}</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <ng-container *ngFor="let sub of element.sub">
+                        <a mat-list-item (click)="onClickNavBar(sub.link)">
+                            <mat-icon>{{sub.icon}}</mat-icon>
+                            <h3>{{sub.title}}</h3>
+                        </a>
+                    </ng-container>
+                </mat-nav-list>
+            </mat-expansion-panel>
+        </ng-container>
+    </ng-container>
+</mat-nav-list>

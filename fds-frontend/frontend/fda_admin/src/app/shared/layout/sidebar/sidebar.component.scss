@@ -1,0 +1,149 @@
+.profile-info {
+    text-align: center;
+    padding-top: 20px;
+
+    .user-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        border: 3px solid #2d323e;
+        box-shadow: 0 4px 4px rgb(5 5 5 / 80%);
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    p {
+        padding-top: 20px;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
+.desktop-sidebar {
+    display: block;
+}
+
+.mobile-sidebar {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .desktop-sidebar {
+        display: none;
+    }
+
+    .mobile-sidebar {
+        display: block;
+    }
+
+    .profile-info {
+        padding: 10px 0;
+        margin-bottom: 10px;
+
+        .user-img {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #2d323e;
+        }
+
+        p {
+            color: white;
+        }
+    }
+}
+
+.top_head {
+    background-color: white;
+    height: 64px;
+    color: #2c314e;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 60px;
+    border-image-source: linear-gradient(to left, #ec2024, #424d83);
+    border-bottom: 3px solid;
+    border-image-slice: 1;
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    text-align: center;
+}
+
+h3,
+h5 {
+    color: #000000;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+.mat-expansion-panel {
+    background: inherit;
+    color: inherit;
+}
+
+.mat-expansion-panel-header {
+    padding: 0px 16px;
+    height: 48px;
+}
+
+h3 {
+    font: 400 14px/28px Barlow, sans-serif;
+    margin: 0;
+    padding: 0 16px;
+}
+
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 14px 10px !important;
+    // background: #171a2e;
+    color: #fff;
+    box-shadow: 0 3px 3px -1px rgba(0, 0, 0, .07) inset, 0 -3px 3px -1px rgba(0, 0, 0, .07) inset;
+}
+
+::ng-deep .mat-expansion-indicator::after,
+.mat-expansion-panel-header-description {
+    color: rgba(255, 255, 255, .7);
+}
+
+
+mat-icon {
+    // color: white;
+    color: #b8c7ce;
+    font-size: 25px;
+    width: 30px;
+    height: 30px;
+    line-height: 24px;
+    size: 30px;
+    text-align: center;
+    padding: 0;
+    flex-shrink: 0;
+    margin-bottom: -13px;
+}
+
+mat-panel-title {
+    margin: 0;
+    align-items: center;
+    color: white;
+}
+
+
+.mat-list-item {
+    // height: 40px !important;
+}
+
+.acitve-router,
+a:hover {
+    background-color: rgb(20, 4, 65) !important;
+    color: #ffff !important;
+    border-radius: 0 50px 50px 0;
+}
+
+a:hover h3 {
+    color: white;
+}
