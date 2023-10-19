@@ -1,0 +1,60 @@
+
+.cards_section {
+    padding: 40px 120px;
+
+    >div {
+        gap: 25px;
+    }
+
+    .card {
+        position: relative;
+        padding: 10px;
+        width: 30%;
+
+        .offers {
+            position: absolute;
+            color: #fff;
+            left: 10px;
+            top: 50%;
+            padding: 0 6px;
+            text-transform: uppercase;
+            background-color: blue;
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+            font-weight: 400;
+        }
+
+        .mat-mdc-card-content {
+            padding: 16px 0 0 0;
+        }
+
+        .name {
+            font-size: 18px;
+            font-family: Helvetica, sans-serif;
+        }
+
+        .rating {
+            background-color: green;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 2px 6px;
+
+            .mat-icon {
+                font-size: 12px;
+                height: 12px;
+                width: 12px;
+            }
+        }
+
+        .items,
+        .pricing {
+            font-size: 14px;
+            color: gray;
+        }
+
+        .timing {
+            font-weight: bold;
+        }
+    }
+}

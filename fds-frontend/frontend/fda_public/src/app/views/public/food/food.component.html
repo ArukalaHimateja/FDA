@@ -1,0 +1,27 @@
+<div class="cards_section">
+    <p class="section_heading">Inspiration for your first order</p>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <ng-container *ngFor="let element of cardItemList">
+            <mat-card class="card">
+                <img mat-card-image alt="sweets" [src]="element.image" alt="Photo of a Shiba Inu">
+                <p class="offers">{{element.offers}}</p>
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <p class="name">{{element.name}}</p>
+                        <p class="rating" fxLayout="row" fxLayoutAlign=" center">{{element.rating}} <mat-icon>star
+                            </mat-icon></p>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <p class="items">{{element.items}}</p>
+                        <p class="pricing">{{element.pricing}}/p>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <p></p>
+                        <p class="timing">{{element.timing}}</p>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
+    </div>
+
+</div>
