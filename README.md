@@ -13,17 +13,27 @@ Model Classes:
 •	Restaurant: This model class manages and processes a restaurant using FDA
 
 Controller Classes:
+
 •	AuthenticationController: The Controller manages user login, validation, and authentication tasks.
+
 •	RestaurantController : It's responsible for handling various operations associated with restaurants, such as listing available restaurants, providing details, and managing restaurant information.
+
 •	UserController : The User Controller manages user-related operations and functionalities
+
 •	VerificationTokenController : During the login process, this Controller retrieves the verification token and expiration date information.
+
 •	ProfileController : It allows users to view and edit their own profiles and may also enable administrators to manage user profiles.
 
 Services:
+
 Services are implemented using the following interfaces
+
 •	IRestaurantService : This interface implements services related to restaurant management, food ordering, reviews etc.
+
 •	IUserService : This interface implements services that involves user management including registeration, authentication and managing user profiles.
+
 •	IVerificationTokenService : This interface implements services that require user account verification, resetting password or anything involving sending and verifying tokens.
+
 •	IEmailService : "IEmailService" typically suggests an interface for an email service in a software development context.
 
 MVC x LAYERED ARCHITECTURE
