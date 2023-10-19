@@ -1,0 +1,41 @@
+.address_section {
+    .addresses {
+        gap: 30px;
+
+        .address {
+            // border: 1px solid #323232;
+            border-radius: 15px;
+            height: 160px;
+
+            .mat-mdc-card {
+                height: 100%;
+
+                .mat-icon {
+                    color: #EF4F5F;
+                }
+
+                .mat-mdc-card-content {
+                    height: 100%;
+                }
+
+                .mat-mdc-card-actions {
+                    gap: 10px;
+
+                    button {
+                        border: none;
+                        background-color: transparent;
+                        height: 100%;
+                        padding: 4px 10px;
+
+                    }
+
+                    .address_btn_edit {
+                        color: #EF4F5F;
+
+                    }
+                }
+            }
+        }
+    }
+
+}
