@@ -1,0 +1,76 @@
+.section_heading {
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.round_section_first,
+.round_section_second {
+    padding: 40px 120px;
+    position: relative;
+
+    .previous,
+    .next {
+        border: none;
+        background-color: white;
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        top: 50%;
+        padding: 7px 10px;
+        border-radius: 100%;
+    }
+
+    .previous {
+        left: 5%;
+    }
+
+    .next {
+        right: 5%;
+    }
+}
+
+.round_section_first {
+    background-color: whitesmoke;
+}
+
+.round_section_second {
+    background-color: white;
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+
+    .slide {
+        // transition: transform 0.5s ease-in-out;
+        // flex-shrink: 0;
+        gap: 20px;
+        min-width: 16.66%;
+    }
+
+    img {
+        padding: 5px;
+        height: 150px;
+        width: 150px;
+        border: none;
+        border-radius: 100%;
+    }
+
+    p {
+        font-size: 1.5rem;
+        line-height: 3.2rem;
+        text-transform: capitalize;
+    }
+}
+
+.cake {
+    background: linear-gradient(lightpink, #fff);
+}
+
+.burger {
+    background: linear-gradient(gray, #fff);
+}
+
+// card section
