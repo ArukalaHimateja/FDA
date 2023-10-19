@@ -1,0 +1,29 @@
+<section class="order_history">
+    <h1>order history</h1>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <ng-container *ngFor="let element of [1,2,3,4,5]">
+            <mat-card fxFlex="48%">
+                <mat-card-header>
+                    <img mat-card-avatar alt="" src="assets/images/user.png" />
+                    <mat-card-title w>Cake</mat-card-title>
+                    <mat-card-subtitle>Sikar</mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content>
+                    <p class="content_heading">order number</p>
+                    <p class="content_dtl">123456789</p>
+                    <p class="content_heading">Total Amout</p>
+                    <p class="content_dtl">₹100</p>
+                    <p class="content_heading">Items</p>
+                    <p class="content_dtl">123456789</p>
+                    <p class="content_heading">ordered on</p>
+                    <p class="content_dtl">123456789</p>
+                </mat-card-content>
+                <mat-card-actions fxLayoutAlign="end">
+                    <button mat-button>view details</button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </div>
+</section>

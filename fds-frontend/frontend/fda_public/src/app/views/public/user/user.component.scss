@@ -1,0 +1,134 @@
+.profile_section {
+    padding: 0 120px;
+    font-family: Okra, Helvetica, sans-serif !important;
+
+    .jumbotron {
+        width: 100%;
+        color: white;
+        margin-bottom: 40px;
+
+        .spacer {
+            flex: 1 1 100%;
+        }
+
+        >div {
+            height: 220px;
+            width: 100%;
+            padding: 20px;
+            background: url('/assets/images/profile_jumbotron.avif');
+            // background-size:cover ;
+            background-size: 100% 100%;
+
+            >div {
+                gap: 25px;
+
+                .edit_btn {
+                    background-color: #EF4F5F;
+                    border-radius: 5px;
+                    color: white;
+                    text-transform: capitalize;
+                    padding: 10px 15px;
+                    align-items: center;
+                    display: flex;
+                    gap: 8px;
+                    border: none;
+
+                    .mat-icon {
+                        font-size: 18px;
+                        height: 18px;
+                        width: 18px;
+                    }
+                }
+            }
+
+            img {
+                height: 150px;
+                width: 150px;
+                border-radius: 100%;
+                border: 4px solid white;
+            }
+
+            h2,
+            h3 {
+                margin: 0px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .dtl-view {
+                gap: 10px;
+            }
+        }
+
+        .vertical-hr {
+            height: 100%;
+            border-left: 4px;
+            width: 0px;
+            color: white;
+        }
+    }
+
+    .profile_content {
+        margin: 20px 0;
+        gap: 30px;
+
+        .side-bar {
+            // border: 1px solid #f8f8f8;
+            gap: 30px;
+
+            div.activity, div.online_ordering {
+                border: 1px solid #f8f8f8;
+                border-radius: 10px;
+                overflow: hidden;
+
+                h3 {
+                    color: #828282;
+                    padding: 0 20px;
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
+                }
+
+                .mat-mdc-list-item {
+                    height: 40px;
+                    color: #363636;
+
+                    margin: 0px;
+
+                }
+            }
+        }
+    }
+}
+.mdc-list{
+    padding: 0;
+}
+::ng-deep .mdc-list-item__content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+::ng-deep span.mdc-list-item__end.ng-star-inserted {
+    display: none;
+}
+
+::ng-deep .mat-mdc-list-item:hover{
+    // background: transparent;
+    background-color: white;
+}
+::ng-deep .mat-mdc-list-item:focus {
+    // border-left: 2px solid #EF4F5F;
+    // background: linear-gradient(to right, #fff, #EF4F5F);
+    // position: absolute;
+    // top: 0px;
+    // width: 100%;
+    // height: 4rem;
+    border-left: 3px solid rgb(239, 79, 95);
+    // transform: translateY(100%);
+    background: linear-gradient(270deg, rgb(255, 237, 239) 0%, rgba(251, 246, 247, 0) 92.47%);
+    opacity: 1;
+    // z-index: -1;
+    transition: opacity 0.5s ease 0s, transform 0.5s ease 0s;
+}
