@@ -1,0 +1,30 @@
+<div class="WelcomePage">
+    <div class="round_section_first">
+        <p class="section_heading">Inspiration for your first order</p>
+        <div class="slider-container" fxLayout="row" fxLayoutAlign="space-between start">
+            <ng-container *ngFor="let element of foodList">
+                <div class="slide" fxLayout="column" fxLayoutAlign="center center">
+                    <!-- [style.transform]="'translateX(' + slidePosition + 'px)'"> -->
+                    <img [className]="element.name" alt="thail" [src]="'assets/images/' + element.path" />
+                    <p>{{element.name}}</p>
+                </div>
+            </ng-container>
+        </div>
+        <button class="previous" (click)="previousSlide()"><mat-icon>arrow_back_ios</mat-icon></button>
+        <button class="next" (click)="nextSlide()"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+    <!-- <div class="round_section_second">
+        <p class="section_heading">Top brands for you</p>
+        <div class="slider-container" fxLayout="row" fxLayoutAlign="space-between start">
+            <ng-container *ngFor="let element of foodList">
+                <div class="slide" fxLayout="column" fxLayoutAlign="center center">
+                    <img [className]="element.name" alt="thail" [src]="'assets/images/' + element.path" />
+                    <p>{{element.name}}</p>
+                </div>
+            </ng-container>
+        </div>
+        <button class="previous" (click)="previousSlide()"><mat-icon>arrow_back_ios</mat-icon></button>
+        <button class="next" (click)="nextSlide()"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div> -->
+</div>
+<app-popular-food></app-popular-food>
