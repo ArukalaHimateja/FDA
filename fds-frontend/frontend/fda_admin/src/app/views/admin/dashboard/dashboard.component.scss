@@ -1,0 +1,29 @@
+.example-card {
+    max-width: 400px;
+
+    mat-card-header {
+        height: 100px;
+
+        mat-card-title {
+            font-size: 35px;
+        }
+
+        mat-card-subtitle {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+}
+
+#chart {
+    margin-top: 40px;
+    padding-right: 20px;
+    max-width: 90%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+
+i {
+    color: #04046d;
+}

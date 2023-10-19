@@ -1,0 +1,148 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+}
+
+.row {
+    width: 100%;
+}
+
+.wrapper {
+    padding: 10px;
+}
+
+.container-section {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.bg-none {
+    background: none !important;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.breadcrumb-heading {
+    font-size: 30px;
+}
+
+.banner-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/images/jumbotron-image.jpg");
+    background-size: 100% 100%;
+}
+
+.form-heading {
+    font-size: 23px !important;
+}
+
+.pd-tp-bt-80 {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.pd-bt-40 {
+    padding-bottom: 40px;
+}
+
+.pd-tp-80 {
+    padding-top: 80px;
+}
+
+.pd-tp-120 {
+    padding-top: 120px;
+}
+
+.pd-tp-150 {
+    padding-top: 150px;
+}
+
+.pd-tp-180 {
+    padding-top: 180px;
+}
+
+.pd-tp-200 {
+    padding-top: 200px;
+}
+
+.pd-tp-250 {
+    padding-top: 250px;
+}
+
+.pd-bt-80 {
+    padding-bottom: 80px;
+}
+
+.pd-bt-150 {
+    padding-bottom: 150px;
+}
+
+.section-heading {
+    width: 50%;
+    margin: 0 auto;
+    font-size: 20px;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+
+    h1 {
+        font-size: 40px;
+        line-height: 45px;
+        font-weight: 900;
+    }
+
+    p {
+        line-height: 32px;
+    }
+}
+
+.lightblack {
+    color: #707070;
+}
+
+.blackish {
+    color: rgb(255, 255, 255);
+}
+
+.redish {
+    color: #f85a40;
+}
+
+.white {
+    color: white;
+}
+
+.hide {
+    display: none;
+}
+
+.black {
+    color: black;
+}
+
+.theme__color {
+    color: #121231;
+}
+
+.border__radius__20px {
+    border-radius: 20px;
+}
+
+.mat-mdc-raised-button.mat-primary {
+    background-color: rgb(20, 4, 65) !important
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+    background-color: rgb(20, 4, 65) !important
+}

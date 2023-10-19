@@ -1,0 +1,74 @@
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+}
+
+.mat-drawer-side {
+    border-right: none;
+    background: rgb(255, 255, 255);
+    color: #fff;
+    min-width: 270px;
+}
+
+.mat-toolbar-fixed {
+    //box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+}
+
+.mat-sidenav-fixed {
+    width: 270px;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2), -4px 0 16px rgba(0, 0, 0, 0.2);
+}
+
+.mat-sidenav-content {
+    overflow-x: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        padding: 5px;
+    }
+}
+
+.wrapper {
+    margin: 10px;
+}
+
+.mat-drawer-content {
+    max-height: 100%;
+}
+
+.alert {
+    z-index: 2;
+    padding: 16px 1.25rem;
+    border-radius: 0;
+}
+
+#overlay {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 65px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+mat-icon:hover {
+    background-color: rgb(233, 233, 229);
+    height: 40px;
+    width: 40px;
+    padding-top: 8px;
+}

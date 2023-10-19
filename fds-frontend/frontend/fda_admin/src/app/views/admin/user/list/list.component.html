@@ -1,0 +1,94 @@
+<mat-toolbar class="bg-none">
+    <span>Users</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" class="float-right" [routerLink]="'/user/add'">
+        <mat-icon>add_circle</mat-icon> Create User
+    </button>
+</mat-toolbar>
+<hr>
+
+<ng-container *ngIf="dataSource?.filteredData?.length > 0; else noData;">
+
+    <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="no">
+                <th mat-header-cell *matHeaderCellDef class="headers"> No. </th>
+                <td class="headers" mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Image Column -->
+            <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef> Image </th>
+                <td mat-cell *matCellDef="let element">
+                    <app-show-image [image]="element.profileImage" classes="border__radius__20px" type="user"
+                        width="30px" height="30px">
+                    </app-show-image>
+                </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.customerListResponseDto.name}}
+                </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element">
+                    <div style="display: flex;gap: 10px;"> <mat-icon>email</mat-icon>
+                        {{element.customerListResponseDto.email}}</div>
+                </td>
+            </ng-container>
+
+            <!-- Mobile Number Column -->
+            <ng-container matColumnDef="mobileNumber">
+                <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
+                <td mat-cell *matCellDef="let element">
+                    <div style="display: flex;gap: 10px;"><mat-icon>phone</mat-icon>
+                        {{element.customerListResponseDto.mobileNumber}}
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- CreatedAt Column -->
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef> CreatedAt </th>
+                <td mat-cell *matCellDef="let element">
+                    <div style="display: flex;gap: 10px;"><mat-icon>date_range</mat-icon>
+                        {{element.customerListResponseDto.createdAt | dateTime}}
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="text-right"> Action </th>
+                <td mat-cell *matCellDef="let element" class="text-right">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item [routerLink]="'/user/view/' + element.id">
+                            <mat-icon>visibility</mat-icon> View
+                        </button>
+                        <button mat-menu-item [routerLink]="'/user/edit/' + element.id">
+                            <mat-icon>edit</mat-icon> Edit
+                        </button>
+                    </mat-menu>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <mat-paginator [length]="pagination.totalCount" [pageSize]="pagination.perPage" (page)="getNextPageData($event);">
+    </mat-paginator>
+</ng-container>
+<ng-template #noData>
+    <app-no-data></app-no-data>
+</ng-template>
