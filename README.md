@@ -2,6 +2,7 @@
 **Food Delivery Application** 
 
 **Requirements in Deliverable 1:**
+
 •	Create Account
 
 •	Login to Account
@@ -44,7 +45,7 @@ Services are implemented using the following interfaces
 
 **MVC x LAYERED ARCHITECTURE**
 
-<img width="2169" alt="Drawing1 - ASE" src="https://github.com/ArukalaHimateja/FDA/assets/53402333/a56e0142-c234-4e0a-80ec-c5c4fc9c9294"> 
+<img width="2169" alt="Drawing1 - ASE (1)" src="https://github.com/ArukalaHimateja/FDA/assets/53402333/5c7c6082-8590-4a69-b6bb-c45089dadbdf">
 
 In this architecture, the MVC pattern helps separate concerns within the presentation layer, with controllers handling user interactions and views handling the presentation of data. The N-tier architecture provides a clear separation of concerns across multiple layers, with the service layer containing business logic and the data access layer dealing with data storage.
 Communication flows from the presentation layer, where user interactions occur, to the application layer, which routes requests to the service layer for processing. The service layer interacts with the data access layer to retrieve or update data from the database. 
