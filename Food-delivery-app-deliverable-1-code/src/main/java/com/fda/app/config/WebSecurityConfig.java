@@ -19,18 +19,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.client.RestTemplate;
 
-import com.fda.app.constants.Constants;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private final String[] antMatchers = new String[] { "/api/auth/login", "/api/auth/admin/login",
-			"/api/restaurant/add", "/api/file/**", "/v2/api-docs", "/swagger-resources/configuration/ui",
+			"/api/restaurant/add/request", "/api/file/**", "/v2/api-docs", "/swagger-resources/configuration/ui",
 			"/swagger-resources", "/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**",
 			"/api/graph", "/api/registrationConfirm", "/api/user/add", "/api/user/password/forgot",
-			Constants.API_BASE_URL + "/get/all/menu/list", Constants.API_BASE_URL + "/menu/search/{fdaName}",
-			Constants.API_BASE_URL + "/menu/pagination/filter/{fdaName}" };
+			"/api/get/all/product/list", "/api/get/all/product/list", "/api/product/search",
+			"/api/product/search/{productName}", "/api/product/pagination/filter","/api/restaurant/search/{keyword}",
+			"/api/product/pagination/filter/{fdaName}", "/api/category/pagination/filter", "/api/contact/add" };
 	@Resource(name = "userService")
 	private UserDetailsService userDetailsService;
 
