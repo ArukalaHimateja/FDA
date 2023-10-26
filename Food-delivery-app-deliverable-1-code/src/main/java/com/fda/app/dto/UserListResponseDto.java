@@ -9,7 +9,6 @@ public class UserListResponseDto {
 	private String fullName;
 	private String email;
 	private String mobileNumber;
-	private String appId;
 	private String profileImage;
 	private Integer role;
 	private boolean active;
@@ -69,14 +68,6 @@ public class UserListResponseDto {
 
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
-	}
-
-	public String getAppId() {
-		return appId;
-	}
-
-	public void setAppId(String appId) {
-		this.appId = appId;
 	}
 
 	public String getProfileImage() {

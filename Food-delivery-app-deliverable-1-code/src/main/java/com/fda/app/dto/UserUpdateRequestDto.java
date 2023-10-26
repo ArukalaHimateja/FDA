@@ -1,12 +1,10 @@
 package com.fda.app.dto;
 
-public class UserRequestDto {
+public class UserUpdateRequestDto {
 
 	private String fullName;
 	private String email;
-	private String password;
 	private String mobileNumber;
-	private String address;
 
 	public String getFullName() {
 		return fullName;
@@ -24,28 +22,12 @@ public class UserRequestDto {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 }
