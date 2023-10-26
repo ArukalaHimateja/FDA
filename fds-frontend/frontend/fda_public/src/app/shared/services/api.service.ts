@@ -24,7 +24,6 @@ export class ApiService {
       */
     post(json: any, apiUrl: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            console.log(apiUrl);
             this._httpClient.post(`${environment.apiUrl}${apiUrl}`, json, { observe: 'response' })
                 .subscribe((response: any) => {
                     resolve(response);

@@ -10,12 +10,15 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { BecomeAPartnerComponent } from './become-apartner/become-apartner.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     SessionComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    BecomeAPartnerComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FlexLayoutModule
   ]
 })
 export class SessionModule { }

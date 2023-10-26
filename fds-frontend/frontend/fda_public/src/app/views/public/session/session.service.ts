@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, retry } from 'rxjs';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 
@@ -31,6 +31,18 @@ export class SessionService {
             password: [null, Validators.required]
         })
     }
+    setLocalStorage(data: any) {
+        let user = {
+            id: data.id,
+            email: data.email,
+            name: data.fullName,
+            role: data.role,
+            profileImage: data.profileImage,
+            verify: data.verify,
+            mobileNumber: data.mobileNumber
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+    }
 
     /**
      * Login User
@@ -40,42 +52,10 @@ export class SessionService {
     login(data: any) {
         this._apiService.post(data, 'auth/login').then((response: any) => {
             if (response && response.body.status === 'OK') {
-                if ((
-                    response.body.data.user_details.role === 0
-                    || response.body.data.user_details.role === 1
-                )
-                    ||
-                    (response.body.data.user_details.role === 2
-                        && response.body.data.user_details.stripePriceId)
-                ) {
-                    localStorage.setItem('userToken', response.body.data.token);
-                    let user = {
-                        id: response.body.data.user_details.id,
-                        email: response.body.data.user_details.email,
-                        name: response.body.data.user_details.fullName,
-                        role: response.body.data.user_details.role,
-                        profileImage: response.body.data.user_details.profileImage,
-                        stripePriceId: response.body.data.user_details.stripePriceId,
-                        verify: response.body.data.user_details.verify
-                    };
-                    localStorage.setItem('user', JSON.stringify(user));
-                    this.isLoginSubject.next(true);
-                    this._router.navigate(['/']);
-                } else {
-                    localStorage.setItem('userToken', response.body.data.token);
-                    let user = {
-                        id: response.body.data.user_details.id,
-                        email: response.body.data.user_details.email,
-                        name: response.body.data.user_details.fullName,
-                        role: response.body.data.user_details.role,
-                        profileImage: response.body.data.user_details.profileImage,
-                        stripePriceId: response.body.data.user_details.stripePriceId,
-                        verify: response.body.data.user_details.verify
-                    };
-                    localStorage.setItem('user', JSON.stringify(user));
-                    this.isLoginSubject.next(true);
-                    this._router.navigate(['/subscription/user/' + response.body.data.user_details.id]);
-                }
+                localStorage.setItem('userToken', response.body.data.token);
+                this.setLocalStorage(response.body.data.user_details);
+                this.isLoginSubject.next(true);
+                this._router.navigate(['/']);
             } else {
                 this._utilityService.errorMessage(response.body.message, response.statusText);
             }
@@ -109,6 +89,18 @@ export class SessionService {
         //Check whether the token is expired and return
         //true or false
         return !this._jwtHelper.isTokenExpired(token);
+    }
+
+    createRestaurantForm(): FormGroup {
+        return this._formBuilder.group({
+            ownerName: [null, [Validators.required]],
+            restaurantName: [null, [Validators.required]],
+            email: [null, [Validators.required, Validators.email]],
+            mobileNumber: [null, [Validators.required, Validators.pattern("^[0-9]{10,}$")]],
+            restaurantAddress: [null, [Validators.required]],
+            restaurantLicenseNumber: [null, [Validators.required]],
+            documents: [],
+        })
     }
 
 }
