@@ -111,7 +111,7 @@ export class AuthService {
         localStorage.removeItem(`${config.appShortName}UserToken`);
         localStorage.removeItem(`${config.appShortName}User`);
         this.isLoginSubject.next(false);
-        this._router.navigateByUrl("/signin");
+        this._router.navigateByUrl("session/signin");
     }
 
     getAuthUser(): any {
