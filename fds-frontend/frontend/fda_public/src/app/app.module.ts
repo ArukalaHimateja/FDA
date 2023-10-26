@@ -13,14 +13,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtInterceptor } from './views/public/session/auth/jwt.interceptor';
 // import { LayoutModule } from 'src/app/shared/layout/layout.module';
-
+import {MatDialogModule} from '@angular/material/dialog';
 export function tokenGetter() {
   return localStorage.getItem('userToken');
 }
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +37,7 @@ export function tokenGetter() {
         tokenGetter: tokenGetter
       },
     }),
+    MatDialogModule,
   ],
   providers: [
     AuthGuardService,
