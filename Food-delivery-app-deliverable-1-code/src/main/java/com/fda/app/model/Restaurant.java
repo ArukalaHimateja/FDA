@@ -45,10 +45,44 @@ public class Restaurant {
 	private Date updatedAt;
 	private String restaurantName;
 	private String restaurantAddress;
-	private String restaurantGstNo;
-	private String ownerAadharNumber;
+	private String restaurantLicenseNumber;
 	private String restaurantEmail;
+	private String restaurantMobileNumber;
+	private Long restaurantRequestId;
+	private int status = 1;// 0-isInactive,1-isActive;
 	private Long userId;
+
+	public String getRestaurantMobileNumber() {
+		return restaurantMobileNumber;
+	}
+
+	public void setRestaurantMobileNumber(String restaurantMobileNumber) {
+		this.restaurantMobileNumber = restaurantMobileNumber;
+	}
+
+	public Long getRestaurantRequestId() {
+		return restaurantRequestId;
+	}
+
+	public void setRestaurantRequestId(Long restaurantRequestId) {
+		this.restaurantRequestId = restaurantRequestId;
+	}
+
+	public String getRestaurantLicenseNumber() {
+		return restaurantLicenseNumber;
+	}
+
+	public void setRestaurantLicenseNumber(String restaurantLicenseNumber) {
+		this.restaurantLicenseNumber = restaurantLicenseNumber;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public String getRestaurantEmail() {
 		return restaurantEmail;
@@ -104,22 +138,6 @@ public class Restaurant {
 
 	public void setRestaurantAddress(String restaurantAddress) {
 		this.restaurantAddress = restaurantAddress;
-	}
-
-	public String getRestaurantGstNo() {
-		return restaurantGstNo;
-	}
-
-	public void setRestaurantGstNo(String restaurantGstNo) {
-		this.restaurantGstNo = restaurantGstNo;
-	}
-
-	public String getOwnerAadharNumber() {
-		return ownerAadharNumber;
-	}
-
-	public void setOwnerAadharNumber(String ownerAadharNumber) {
-		this.ownerAadharNumber = ownerAadharNumber;
 	}
 
 	public static long getSerialversionuid() {

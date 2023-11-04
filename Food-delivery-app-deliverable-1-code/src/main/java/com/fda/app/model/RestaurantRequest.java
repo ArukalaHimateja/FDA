@@ -1,6 +1,5 @@
 package com.fda.app.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,12 +21,11 @@ import com.fda.app.config.CustomJsonDateSerializer;
 import com.fda.app.constants.Constants;
 
 @Entity
-@Table(name = Constants.USER_TABLE_NAME)
+@Table(name = Constants.RESTAURANT_REQUEST_TABLE_NAME)
 @JsonIgnoreProperties
-public class User implements Serializable {
+public class RestaurantRequest {
 
 	public static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -45,32 +43,20 @@ public class User implements Serializable {
 	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	@JsonDeserialize(using = CustomDateAndTimeDeserialize.class)
 	private Date updatedAt;
-
-	private String fullName;
+	private String restaurantName;
+	private String restaurantAddress;
+	private String restaurantLicenseNumber;
+	private String ownerName;
 	private String email;
-	private String password;
 	private String mobileNumber;
-	private String address;
-	private Integer role;
-	private String stripeUserId;
-	private String profileImage;
-	private Boolean active = Boolean.TRUE;
-	private Boolean verify = Boolean.FALSE;
+	private int status = 0;// 0-Pending,1-Completed,1-Rejected
 
-	public String getProfileImage() {
-		return profileImage;
+	public String getOwnerName() {
+		return ownerName;
 	}
 
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
-	}
-
-	public String getStripeUserId() {
-		return stripeUserId;
-	}
-
-	public void setStripeUserId(String stripeUserId) {
-		this.stripeUserId = stripeUserId;
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 
 	public Long getId() {
@@ -97,20 +83,28 @@ public class User implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getRestaurantName() {
+		return restaurantName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getRestaurantAddress() {
+		return restaurantAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setRestaurantAddress(String restaurantAddress) {
+		this.restaurantAddress = restaurantAddress;
+	}
+
+	public String getRestaurantLicenseNumber() {
+		return restaurantLicenseNumber;
+	}
+
+	public void setRestaurantLicenseNumber(String restaurantLicenseNumber) {
+		this.restaurantLicenseNumber = restaurantLicenseNumber;
 	}
 
 	public String getEmail() {
@@ -121,14 +115,6 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
@@ -137,28 +123,12 @@ public class User implements Serializable {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public Integer getRole() {
-		return role;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setRole(Integer role) {
-		this.role = role;
-	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-
-	public Boolean getVerify() {
-		return verify;
-	}
-
-	public void setVerify(Boolean verify) {
-		this.verify = verify;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public static long getSerialversionuid() {
