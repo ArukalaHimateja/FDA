@@ -1,5 +1,6 @@
 package com.fda.app.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,8 +14,11 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
 	boolean existsByUserId(long id);
 
-	boolean existsByRestaurantGstNo(String restaurantGstNo);
+	boolean existsByRestaurantEmail(String restaurantEmail);
 
-	boolean existsByOwnerAadharNumber(String ownerAadharNumber);
+	List<Restaurant> findAllByStatus(int i);
+
+	Restaurant findByRestaurantEmail(String restaurantEmail);
+
 	
 }
