@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.fda.app.constants.Constants;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
-import com.fda.app.model.Restaurant;
 import com.fda.app.model.User;
 import com.fda.app.model.VerificationToken;
 import com.fda.app.repository.VerificationTokenRepository;
@@ -25,7 +24,8 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 	public static final String TOKEN_INVALID = "invalidToken";
 	public static final String TOKEN_EXPIRED = "expired";
 	public static final String TOKEN_VALID = "valid";
-
+	@Autowired
+	Environment ev;
 	@Autowired
 	private VerificationTokenRepository verificationTokenRepository;
 
@@ -82,7 +82,7 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 	@Override
 	public void sendVerificationToken(User user) {
 		new Thread(() -> {
-			String subject = "FDA Account verification";
+			String subject = "FDA Account Verification";
 			String body = createEmailBody(user.getFullName(), registrationConfirmUrl(user.getId()));
 			emailService.sendEmail(user.getEmail(), subject, body, "", null, null);
 		}).start();
@@ -100,6 +100,7 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 		VerificationToken token = createVerificationToken(userId);
 		String url = environment.getProperty(Constants.SERVER_DOMAIN_URL) + Constants.API_BASE_URL
 				+ "/registrationConfirm?token=" + token.getToken();
+		System.out.println(url);
 		return url;
 	}
 
@@ -114,13 +115,5 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 		verificationTokenRepository.save(vToken);
 		return vToken;
 	}
-	@Override
-	public void sendRestaurantVerificationToken(Restaurant restaurant) {
-		new Thread(() -> {
-			String subject = "fda Account verification";
-			String body = createEmailBody(restaurant.getRestaurantName(), registrationConfirmUrl(restaurant.getUserId()));
-			emailService.sendEmail(restaurant.getRestaurantEmail(), subject, body, "", null, null);
-		}).start();
-		
-	}
+
 }

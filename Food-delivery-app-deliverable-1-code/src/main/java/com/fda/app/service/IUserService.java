@@ -6,8 +6,11 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
+import com.fda.app.dto.ProfileImageRequestDto;
+import com.fda.app.dto.UserAddressRequestDto;
 import com.fda.app.dto.UserFilterWithPaginationDto;
 import com.fda.app.dto.UserRequestDto;
+import com.fda.app.dto.UserUpdateRequestDto;
 import com.fda.app.model.User;
 
 @Service
@@ -40,19 +43,23 @@ public interface IUserService {
 
 	void getAllUserDetails(ApiResponseDtoBuilder apiResponseDtoBuilder);
 
-	void isActiveUser(long id, boolean active, ApiResponseDtoBuilder apiResponseDtoBuilder);
-	
-	void updateUser(@Valid User user, ApiResponseDtoBuilder apiResponseDtoBuilder);
+	void isActiveUser(long id, ApiResponseDtoBuilder apiResponseDtoBuilder);
 
 	void getUserDetailsById(long id, ApiResponseDtoBuilder apiResponseDtoBuilder);
 
-	void referFriendByEmail(String email, ApiResponseDtoBuilder apiResponseDtoBuilder);
-
-	void getUserListByFilterWithPagination(UserFilterWithPaginationDto filterWithPagination,
-			ApiResponseDtoBuilder apiResponseDtoBuilder);
-
-	void isInactiveUser(long id, boolean inActive, ApiResponseDtoBuilder apiResponseDtoBuilder);
+	void isInactiveUser(long id, ApiResponseDtoBuilder apiResponseDtoBuilder);
 
 	void getUserAllDetailsById(long id, ApiResponseDtoBuilder apiResponseDtoBuilder);
+
+	void updateUser(@Valid UserUpdateRequestDto userRequestDto, long id, ApiResponseDtoBuilder apiResponseDtoBuilder);
+
+	void updateUserAddress(@Valid String address, long userAddressId,
+			ApiResponseDtoBuilder apiResponseDtoBuilder);
+	
+	void addUserProfileImage(@Valid ProfileImageRequestDto profileImageRequestDto,
+			ApiResponseDtoBuilder apiResponseDtoBuilder);
+
+	void getCustomerListByFilterWithPagination(UserFilterWithPaginationDto filterWithPagination,
+			ApiResponseDtoBuilder apiResponseDtoBuilder);
 
 }

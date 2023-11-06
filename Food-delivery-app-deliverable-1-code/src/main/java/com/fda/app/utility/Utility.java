@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +23,8 @@ public class Utility {
 		String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String Small_chars = "abcdefghijklmnopqrstuvwxyz";
 		String numbers = "0123456789";
-		String symbols = "!@#$%^&*_=+-/.?<>)";
 
-		String values = Capital_chars + Small_chars + numbers + symbols;
+		String values = Capital_chars + Small_chars + numbers ;
 
 		Random rndm_method = new Random();
 
@@ -80,6 +77,14 @@ public class Utility {
 		}
 		return condition;
 	}
+	
+	public static String addOR(boolean flag) {
+		String condition = "";
+		if (flag) {
+			condition = " OR";
+		}
+		return condition;
+	}
 
 	public static String addWhere(boolean flag) {
 		String condition = "";
@@ -109,24 +114,24 @@ public class Utility {
 		}
 	}
 
-	public static Boolean isValidAadhaarNumber(String str) {
-
-		String regex = "^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$";
-		Pattern p = Pattern.compile(regex);
-		if (str == null) {
-			return false;
-		}
-		Matcher m = p.matcher(str);
-		return m.matches();
-	}
-
-	public static boolean isValidGSTNo(String str) {
-		String regex = "^[0-9]{2}[A-Z]{5}[0-9]{4}" + "[A-Z]{1}[1-9A-Z]{1}" + "Z[0-9A-Z]{1}$";
-		Pattern p = Pattern.compile(regex);
-		if (str == null) {
-			return false;
-		}
-		Matcher m = p.matcher(str);
-		return m.matches();
-	}
+//	public static Boolean isValidAadhaarNumber(String str) {
+//
+//		String regex = "^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$";
+//		Pattern p = Pattern.compile(regex);
+//		if (str == null) {
+//			return false;
+//		}
+//		Matcher m = p.matcher(str);
+//		return m.matches();
+//	}
+//
+//	public static boolean isValidGSTNo(String str) {
+//		String regex = "^[0-9]{2}[A-Z]{5}[0-9]{4}" + "[A-Z]{1}[1-9A-Z]{1}" + "Z[0-9A-Z]{1}$";
+//		Pattern p = Pattern.compile(regex);
+//		if (str == null) {
+//			return false;
+//		}
+//		Matcher m = p.matcher(str);
+//		return m.matches();
+//	}
 }
