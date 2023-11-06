@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fda.app.constants.Constants;
 import com.fda.app.dto.PaginationDataDto;
 import com.fda.app.dto.PaginationDto;
 import com.fda.app.dto.UserFilterWithPaginationDto;
@@ -28,21 +29,10 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 	private CustomMapper customMapper;
 
 	@Override
-	public PaginationDto getUserListByFilterWithPagination(UserFilterWithPaginationDto filterWithPagination) {
-		String countQuery = "SELECT count(*) from user_details t";
-		String query = "SELECT t.* from user_details t";
-		String addableQuery = " where t.role != 0";
-		boolean flag = true;
-		boolean whereFlag = false;
-		if (filterWithPagination.getFilter().getKeyword() != null
-				&& !filterWithPagination.getFilter().getKeyword().isEmpty()) {
-			addableQuery += Utility.addWhere(whereFlag) + Utility.addANDOrOR(flag) + " t.full_name like '%"
-					+ filterWithPagination.getFilter().getKeyword() + "%' or t.mobile_number like '%"
-					+ filterWithPagination.getFilter().getKeyword() + "%'";
-			flag = true;
-			whereFlag = false;
-		}
-
+	public PaginationDto getCustomerListByFilterWithPagination(UserFilterWithPaginationDto filterWithPagination) {
+		String countQuery = "SELECT count(*) from " + Constants.USER_TABLE_NAME + " t";
+		String query = "SELECT t.* from " + Constants.USER_TABLE_NAME + " t";
+		String addableQuery = " where t.role = 1";
 		Query queryString = entityManager.createNativeQuery(countQuery + addableQuery);
 		int totalCounts = ((Number) queryString.getSingleResult()).intValue();
 		PaginationDataDto paginationDataDto = Utility.getPaginationData(totalCounts,

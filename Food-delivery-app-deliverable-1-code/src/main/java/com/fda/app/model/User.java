@@ -52,8 +52,26 @@ public class User implements Serializable {
 	private String mobileNumber;
 	private String address;
 	private Integer role;
+	private String stripeUserId;
+	private String profileImage;
 	private Boolean active = Boolean.TRUE;
 	private Boolean verify = Boolean.FALSE;
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	public String getStripeUserId() {
+		return stripeUserId;
+	}
+
+	public void setStripeUserId(String stripeUserId) {
+		this.stripeUserId = stripeUserId;
+	}
 
 	public Long getId() {
 		return id;

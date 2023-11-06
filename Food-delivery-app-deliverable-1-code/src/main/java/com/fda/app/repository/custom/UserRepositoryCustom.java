@@ -4,5 +4,6 @@ import com.fda.app.dto.PaginationDto;
 import com.fda.app.dto.UserFilterWithPaginationDto;
 
 public interface UserRepositoryCustom {
-	PaginationDto getUserListByFilterWithPagination(UserFilterWithPaginationDto filterWithPagination);
+
+	PaginationDto getCustomerListByFilterWithPagination(UserFilterWithPaginationDto filterWithPagination);
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,9 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fda.app.constants.Constants;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
 import com.fda.app.dto.PaginationDto;
+import com.fda.app.dto.ProfileImageRequestDto;
 import com.fda.app.dto.UserFilterWithPaginationDto;
 import com.fda.app.dto.UserRequestDto;
 import com.fda.app.dto.UserResponseDto;
+import com.fda.app.dto.UserUpdateRequestDto;
 import com.fda.app.mapper.CustomMapper;
 import com.fda.app.model.User;
 import com.fda.app.repository.UserRepository;
@@ -32,6 +35,10 @@ import com.fda.app.service.IEmailService;
 import com.fda.app.service.IUserService;
 import com.fda.app.service.IVerificationTokenService;
 import com.fda.app.utility.Utility;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
+import com.stripe.param.CustomerCreateParams;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService, UserDetailsService {
@@ -39,6 +46,8 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Value("${stripe.api.key}")
+	private String stripeApiKey;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -79,15 +88,33 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 			apiResponseDtoBuilder.withMessage(Constants.EMAIL_ALREADY_EXISTS).withStatus(HttpStatus.ALREADY_REPORTED);
 			return;
 		}
-		User user = customMapper.userRequestDtoToUser(userRequestDto);
-		String newPasswordEncodedString = bCryptPasswordEncoder.encode(user.getPassword());
-		user.setPassword(newPasswordEncodedString);
-		user.setCreatedAt(new Date());
-		save(user);
-		apiResponseDtoBuilder.withMessage(Constants.USER_ADD_SUCCESS).withStatus(HttpStatus.OK).withData(user);
-		new Thread(() -> {
-			verificationTokenService.sendVerificationToken(user);
-		}).start();
+		Stripe.apiKey = stripeApiKey;
+		CustomerCreateParams params = CustomerCreateParams.builder().setEmail(userRequestDto.getEmail())
+				.setName(userRequestDto.getFullName())
+				.setShipping(CustomerCreateParams.Shipping.builder()
+						.setAddress(CustomerCreateParams.Shipping.Address.builder()
+								.setLine1(userRequestDto.getAddress()).build())
+						.setName(userRequestDto.getFullName()).build())
+				.setAddress(CustomerCreateParams.Address.builder().setLine1(userRequestDto.getAddress()).build())
+				.build();
+		try {
+			Customer customer = Customer.create(params);
+
+			User user = customMapper.userRequestDtoToUser(userRequestDto);
+			user.setStripeUserId(customer.getId());
+			String newPasswordEncodedString = bCryptPasswordEncoder.encode(user.getPassword());
+			user.setPassword(newPasswordEncodedString);
+			user.setCreatedAt(new Date());
+			user.setRole(1);
+			save(user);
+			apiResponseDtoBuilder.withMessage(Constants.USER_ADD_SUCCESS).withStatus(HttpStatus.OK).withData(user);
+			new Thread(() -> {
+				verificationTokenService.sendVerificationToken(user);
+			}).start();
+		} catch (StripeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -199,10 +226,10 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	}
 
 	@Override
-	public void isActiveUser(long id, boolean active, ApiResponseDtoBuilder apiResponseDtoBuilder) {
+	public void isActiveUser(long id, ApiResponseDtoBuilder apiResponseDtoBuilder) {
 		Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
-			user.get().setActive(active);
+			user.get().setActive(true);
 			save(user.get());
 			apiResponseDtoBuilder.withMessage(Constants.USER_ACTIVE_SUCCESS).withStatus(HttpStatus.OK);
 		} else {
@@ -212,19 +239,26 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	}
 
 	@Override
-	public void updateUser(@Valid User user, ApiResponseDtoBuilder apiResponseDtoBuilder) {
-		Optional<User> userDb = userRepository.findById(user.getId());
-		if (userDb.isPresent()) {
-			userDb.get().setFullName(user.getFullName());
-			userDb.get().setEmail(user.getEmail());
-			userDb.get().setMobileNumber(user.getMobileNumber());
-			userDb.get().setUpdatedAt(new Date());
-			save(userDb.get());
-			apiResponseDtoBuilder.withMessage(Constants.USER_UPDATED_SUCCESSFULLY).withStatus(HttpStatus.OK)
-					.withData(user);
+	public void updateUser(@Valid UserUpdateRequestDto userUpdateRequestDto, long id,
+			ApiResponseDtoBuilder apiResponseDtoBuilder) {
+		User currentUser = Utility.getSessionUser(userRepository);
+		if (currentUser.getRole() == 1 || currentUser.getRole() == 0) {
+			Optional<User> userDb = userRepository.findById(id);
+			if (userDb.isPresent()) {
+				userDb.get().setFullName(userUpdateRequestDto.getFullName());
+				userDb.get().setEmail(userUpdateRequestDto.getEmail());
+				userDb.get().setMobileNumber(userUpdateRequestDto.getMobileNumber());
+				userDb.get().setUpdatedAt(new Date());
+				save(userDb.get());
+				apiResponseDtoBuilder.withMessage(Constants.USER_UPDATED_SUCCESSFULLY).withStatus(HttpStatus.OK)
+						.withData(userDb);
+			} else {
+				apiResponseDtoBuilder.withMessage(Constants.USER_NOT_FOUND).withStatus(HttpStatus.NOT_FOUND);
+			}
 		} else {
-			apiResponseDtoBuilder.withMessage(Constants.USER_NOT_FOUND).withStatus(HttpStatus.NOT_FOUND);
+			apiResponseDtoBuilder.withMessage(Constants.UNAUTHORIZED).withStatus(HttpStatus.UNAUTHORIZED);
 		}
+
 	}
 
 	@Override
@@ -245,30 +279,18 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	}
 
 	@Override
-	public void referFriendByEmail(String email, ApiResponseDtoBuilder apiResponseDtoBuilder) {
-		User user = getSessionUser();
-		new Thread(() -> {
-			String subject = "Refer Friend";
-			String body = "Hi " + email.split("@")[0] + "<br>your friend " + user.getFullName()
-					+ " has invited to check our fda delivery application. Please install and try it out.<br><br>Kind Regards<br>Team fda Delivery Share";
-			emailService.sendEmail(email, subject, body, "", null, null);
-		}).start();
-		apiResponseDtoBuilder.withMessage(Constants.REFERED).withStatus(HttpStatus.OK);
-	}
-
-	@Override
-	public void getUserListByFilterWithPagination(UserFilterWithPaginationDto filterWithPagination,
+	public void getCustomerListByFilterWithPagination(UserFilterWithPaginationDto filterWithPagination,
 			ApiResponseDtoBuilder apiResponseDtoBuilder) {
-		PaginationDto pagination = userRepositoryCustom.getUserListByFilterWithPagination(filterWithPagination);
+		PaginationDto pagination = userRepositoryCustom.getCustomerListByFilterWithPagination(filterWithPagination);
 		apiResponseDtoBuilder.withMessage(Constants.DATA_LIST).withStatus(HttpStatus.OK).withData(pagination);
 
 	}
 
 	@Override
-	public void isInactiveUser(long id, boolean inActive, ApiResponseDtoBuilder apiResponseDtoBuilder) {
+	public void isInactiveUser(long id, ApiResponseDtoBuilder apiResponseDtoBuilder) {
 		Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
-			user.get().setActive(inActive);
+			user.get().setActive(false);
 			save(user.get());
 			apiResponseDtoBuilder.withMessage(Constants.USER_DEACTIVE_SUCCESS).withStatus(HttpStatus.OK);
 		} else {
@@ -286,6 +308,42 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 			apiResponseDtoBuilder.withMessage(Constants.USER_NOT_FOUND).withStatus(HttpStatus.NOT_FOUND);
 		}
 
+	}
+
+	@Override
+	public void addUserProfileImage(@Valid ProfileImageRequestDto profileImageRequestDto,
+			ApiResponseDtoBuilder apiResponseDtoBuilder) {
+		Optional<User> userDb = userRepository.findById(profileImageRequestDto.getUserId());
+		if (userDb.isPresent()) {
+			userDb.get().setProfileImage(profileImageRequestDto.getProfileImageUrl());
+			userRepository.save(userDb.get());
+
+			apiResponseDtoBuilder.withMessage(Constants.IMAGE_ADD_SUCCESSFULLY).withStatus(HttpStatus.OK)
+					.withData(userDb);
+		} else {
+			apiResponseDtoBuilder.withMessage(Constants.USER_NOT_FOUND).withStatus(HttpStatus.NOT_FOUND);
+		}
+
+	}
+
+	@Override
+	public void updateUserAddress(@Valid String address, long userId, ApiResponseDtoBuilder apiResponseDtoBuilder) {
+		User currentUser = Utility.getSessionUser(userRepository);
+		if (currentUser.getRole() == 1 || currentUser.getRole() == 0) {
+			Optional<User> user = userRepository.findById(userId);
+			if (user.isPresent()) {
+				user.get().setAddress(address);
+				user.get().setUpdatedAt(new Date());
+				userRepository.save(user.get());
+
+				apiResponseDtoBuilder.withMessage(Constants.USER_UPDATED_SUCCESSFULLY).withStatus(HttpStatus.OK)
+						.withData(user.get());
+			} else {
+				apiResponseDtoBuilder.withMessage(Constants.USER_NOT_FOUND).withStatus(HttpStatus.NOT_FOUND);
+			}
+		} else {
+			apiResponseDtoBuilder.withMessage(Constants.UNAUTHORIZED).withStatus(HttpStatus.UNAUTHORIZED);
+		}
 	}
 
 }
