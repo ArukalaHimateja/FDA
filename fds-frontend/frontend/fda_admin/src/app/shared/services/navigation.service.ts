@@ -31,7 +31,15 @@ export class NavigationService {
                 this.navbar.push({
                     title: 'Users',
                     icon: 'person',
-                    link: '/user/list',
+                    link: '/user',
+                    type: 'link'
+                });
+            }
+            if (this.sessionUser.role === 0) {
+                this.navbar.push({
+                    title: 'Restaurant',
+                    icon: 'restaurant',
+                    link: '/restaurant',
                     type: 'link'
                 });
             }
@@ -39,8 +47,8 @@ export class NavigationService {
             if (this.sessionUser.role === 0) {
                 this.navbar.push({
                     title: 'Menu',
-                    icon: 'person',
-                    link: '/menu/list',
+                    icon: 'restaurant_menu',
+                    link: '/menu',
                     type: 'link'
                 });
             }
@@ -49,7 +57,7 @@ export class NavigationService {
                 this.navbar.push({
                     title: 'Order',
                     icon: 'person',
-                    link: '/order/list',
+                    link: '/order',
                     type: 'link'
                 });
             }
@@ -57,8 +65,8 @@ export class NavigationService {
             if (this.sessionUser.role === 0) {
                 this.navbar.push({
                     title: 'Contact',
-                    icon: 'person',
-                    link: '/contact/list',
+                    icon: 'contacts',
+                    link: '/contact',
                     type: 'link'
                 });
             }
@@ -66,8 +74,8 @@ export class NavigationService {
             if (this.sessionUser.role === 0) {
                 this.navbar.push({
                     title: 'Feedback',
-                    icon: 'person',
-                    link: '/feedback/list',
+                    icon: 'feedback',
+                    link: '/feedback',
                     type: 'link'
                 });
             }
