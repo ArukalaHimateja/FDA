@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment.prod';
 import { ConstantService } from './constant.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Pagination } from '../interfaces/pagination.interface';
+import { config } from '../config/config';
 
 @Injectable({
     providedIn: 'root'
@@ -78,7 +79,7 @@ export class UtilityService {
        * @param type 
        */
     getFileUrl(file: any, type?: any): any {
-        let url = this.apiUrl + 'file/get/';
+        let url = this.apiUrl + 'file/';
         if (file && file !== '') {
             url += file;
         } else if (type && type === 'user') {
