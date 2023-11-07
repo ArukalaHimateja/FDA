@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.fda.app.constants.Constants;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
+import com.fda.app.dto.ContactDto;
+import com.fda.app.model.RestaurantRequest;
 import com.fda.app.model.User;
 import com.fda.app.model.VerificationToken;
 import com.fda.app.repository.VerificationTokenRepository;
@@ -25,6 +29,7 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 	public static final String TOKEN_EXPIRED = "expired";
 	public static final String TOKEN_VALID = "valid";
 	@Autowired
+	Environment ev;	@Autowired
 	Environment ev;
 	@Autowired
 	private VerificationTokenRepository verificationTokenRepository;
@@ -101,6 +106,7 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 		String url = environment.getProperty(Constants.SERVER_DOMAIN_URL) + Constants.API_BASE_URL
 				+ "/registrationConfirm?token=" + token.getToken();
 		System.out.println(url);
+		System.out.println(url);
 		return url;
 	}
 
@@ -116,4 +122,58 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 		return vToken;
 	}
 
+	@Override
+	public void sendRestaurantRandomPasswordAndVerificationToken(Restaurant restaurant, String randomPassword) {
+		new Thread(() -> {
+			String subject = "FDA Account Verification";
+			String body = createRandomPasswordEmailBody(restaurant.getRestaurantName(), randomPassword,
+					registrationConfirmUrl(restaurant.getUserId()));
+			emailService.sendEmail(restaurant.getRestaurantEmail(), subject, body, "", null, null);
+		}).start();
+
+	}
+
+	private String createRandomPasswordEmailBody(String restaurantName, String randomPassword, String url) {
+		final String body = "<html><body><h3>Hello " + restaurantName.toUpperCase() + "</h3>"
+				+ "<p>Your restaurant approval request is accepted.<b>" + "</b>, your password is " + randomPassword
+				+ "</p>" + "<p>You registered an account on FDA<b>"
+				+ "</b>, before being able to use your account you need to verify that this is your email verification by </p>"
+				+ "<a href=\"" + url + "\">Clicking Here </a>" + "<br><br><p>Kind Regards,<br>Team FDA</body></html>";
+
+		return body;
+	}
+
+	@Override
+	public void sendRejectRestaurantRequestEmail(RestaurantRequest restaurant) {
+		new Thread(() -> {
+			String subject = "FDA Restaurant Account Request Rejected";
+			String body = createRejectRestaurantEmailBody(restaurant.getRestaurantName());
+			emailService.sendEmail(restaurant.getEmail(), subject, body, "", null, null);
+		}).start();
+
+	}
+
+	private String createRejectRestaurantEmailBody(String restaurantName) {
+		final String body = "<html><body><h3>Hello " + restaurantName.toUpperCase() + "</h3>"
+				+ "<p>your restaurant approval Request Rejected.</p>"
+				+ "<br><br><p>Kind Regards,<br>Team FDA</body></html>";
+		return body;
+	}
+
+	@Override
+	public void sendContectEmail(@Valid ContactDto contactDto) {
+		new Thread(() -> {
+			String subject = "Contact Enquiry";
+			String body = createContactEmailBody(contactDto);
+			emailService.sendEmail(ev.getProperty("support.email"), subject, body, "", null, null);
+		}).start();
+
+	}
+
+	private String createContactEmailBody(@Valid ContactDto contactDto) {
+		final String body = "<html><body><h3>Hello Admin</h3>" + "<p>contact us on " + contactDto.getEmail() + "</p>"
+				+ "<p>contact me on " + contactDto.getEmail() + "</p>"
+				+ "<br><br><p>Kind Regards,<br>Team FDA</body></html>";
+		return body;
+	}
 }
