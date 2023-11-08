@@ -22,7 +22,9 @@ import com.fda.app.constants.AuthorizationConstants;
 import com.fda.app.constants.Constants;
 import com.fda.app.dto.ApiResponseDto;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
+import com.fda.app.dto.LoginResponseDto;
 import com.fda.app.dto.LoginUser;
+import com.fda.app.mapper.CustomMapper;
 import com.fda.app.model.User;
 import com.fda.app.service.IUserService;
 
@@ -43,6 +45,8 @@ public class AuthenticationController {
 	private UserDetailsService userDetailsService;
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private CustomMapper customMapper;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ApiResponseDto userlogin(@RequestBody LoginUser loginUser) throws AuthenticationException {
@@ -53,25 +57,28 @@ public class AuthenticationController {
 			apiResponseDtoBuilder.withStatus(HttpStatus.UNAUTHORIZED).withMessage(Constants.NO_Mobile_EXISTS);
 			return apiResponseDtoBuilder.build();
 		}
-		if(!checkUser.getVerify()) {
+		if (!checkUser.getVerify() && checkUser.getRole() != 0) {
 			apiResponseDtoBuilder.withStatus(HttpStatus.UNAUTHORIZED).withMessage(Constants.ACCOUNT_NOT_VERIFIED);
-			return apiResponseDtoBuilder.build();	
+			return apiResponseDtoBuilder.build();
 		}
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
 		final UserDetails user = userDetailsService.loadUserByUsername(loginUser.getUsername());
 		final String token = jwtTokenUtil.generateToken(user);
-		Map<String, Object> response = setTokenDetails(user, token, checkUser);
+
+		LoginResponseDto loginResponseDto = customMapper.userToLoginResponseDto(checkUser);
+		Map<String, Object> response = setTokenDetails(user, token, loginResponseDto);
 		apiResponseDtoBuilder.withStatus(HttpStatus.OK).withMessage(AuthorizationConstants.LOGIN_SUCESSFULL)
 				.withData(response);
 		return apiResponseDtoBuilder.build();
 	}
 
-	private Map<String, Object> setTokenDetails(final UserDetails user, final String token, final User userDetails) {
+	private Map<String, Object> setTokenDetails(final UserDetails user, final String token,
+			final LoginResponseDto loginResponseDto) {
 		Map<String, Object> response = new HashMap<>();
 		response.put(USER, user);
 		response.put(TOKEN, token);
-		response.put(LOGINEDUSER, userDetails);
+		response.put(LOGINEDUSER, loginResponseDto);
 		return response;
 	}
 }

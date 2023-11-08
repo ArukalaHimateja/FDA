@@ -9,16 +9,16 @@ import { Router } from '@angular/router';
 export class FooterComponent {
   isLoginPage: boolean = false;
   constructor(
-    private router: Router,
-  ){
+    public router: Router,
+  ) {
     router.events.subscribe((url: any) => {
-    if(url && url.url){
-      if(url.url.includes("login") || url.url.includes("registration")){
-        this.isLoginPage = true;
-      }else{
-        this.isLoginPage = false;
+      if (url && url.url) {
+        if (url.url.includes("signin") || url.url.includes("signup") || url.url.includes("partner")) {
+          this.isLoginPage = true;
+        } else {
+          this.isLoginPage = false;
+        }
       }
-  }
-  });
+    });
   }
 }

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Pagination } from '../shared/interfaces/pagination.interface';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UtilityService {
+    pagination: Pagination = { totalPages: 0, totalCount: 0, currentPage: 1, perPage: 25, data: [] };
     defaultUrlImage: string = '/assets/images/dummy/user.png';
     defaultUrlLogo: string = '/assets/images/dummy/logo.png';
     defaultUrlProduct: string = '/assets/images/dummy/product.png';

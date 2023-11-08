@@ -27,9 +27,9 @@
                     <input [formControl]="search_bar" type="text"
                         placeholder="Search For Restaurant, cuisine, or a dish" aria-label="Search Bar" matInput
                         [matAutocomplete]="search" (input)="onInputProduct()">
-                    <mat-autocomplete autoActiveFirstOption #search="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions" [value]="option.foodName">
-                            {{option.foodName}}
+                    <mat-autocomplete autoActiveFirstOption #search="matAutocomplete" (optionSelected)='searchProductByName($event.option.value)'>
+                        <mat-option *ngFor="let option of FoodList" [value]="option.productName">
+                            {{option.productName}}
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
@@ -53,7 +53,7 @@
             </ng-container>
         </mat-menu>
     </mat-toolbar-row>
-    <mat-toolbar-row class="second_row" *ngIf="!isLoginPage && !isContactUsPage">
+    <!-- <mat-toolbar-row class="second_row" *ngIf="!isLoginPage && !isContactUsPage">
         <button fxLayout="row" fxLayoutAlign="center center">
             <img alt="delivery" src="assets/images/motorcycle-delivery-food-isolated-icon-vector.jpg" />
             Delivery
@@ -66,18 +66,18 @@
             <img alt="delivery" src="assets/images/nightlife.jpg" />
             Night Life
         </button>
-    </mat-toolbar-row>
-    <mat-toolbar-row class="third_row" [class.fixed]="isThirdRowFixed" [class.third-row]="!isThirdRowFixed"
+    </mat-toolbar-row> -->
+    <!-- <mat-toolbar-row class="third_row" [class.fixed]="isThirdRowFixed" [class.third-row]="!isThirdRowFixed"
         *ngIf="!isLoginPage && !isContactUsPage">
-        <button [mat-menu-trigger-for]="filter_by_type"><mat-icon>filter_list</mat-icon>Filter</button>
+        <button (click)="openDialogForFilter()"><mat-icon>filter_list</mat-icon>Filter</button>
         <button>Rating<span matSuffix>4.0 +</span></button>
         <button>Rure veg</button>
         <button>Cuisines<mat-icon matSuffix>arrow_drop_down</mat-icon></button>
-    </mat-toolbar-row>
+    </mat-toolbar-row> -->
 </mat-toolbar>
 
-<mat-menu #filter_by_type>
+<!-- <mat-menu #filter_by_type>
         <mat-option *ngFor="let option of foodVarietyList">
             {{option}}
         </mat-option>
-</mat-menu>
+</mat-menu> -->

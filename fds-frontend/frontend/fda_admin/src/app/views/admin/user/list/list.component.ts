@@ -55,9 +55,10 @@ export class ListComponent {
    */
   getDataList() {
     let json = {
+      filter: {},
       pagination: this.pagination
     }
-    this._userService.getListByFilterWithPagination(json).then((response: any) => {
+    this._userService.getCustomerListByFilterWithPagination(json).then((response: any) => {
       this.pagination = response.body.data;
       this.dataSource = new MatTableDataSource(this.pagination.data);
     })

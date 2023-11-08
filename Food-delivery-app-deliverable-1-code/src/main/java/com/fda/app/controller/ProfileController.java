@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fda.app.constants.Constants;
 import com.fda.app.dto.ApiResponseDto;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
-import com.fda.app.model.User;
+import com.fda.app.dto.ProfileImageRequestDto;
+import com.fda.app.dto.UserUpdateRequestDto;
 import com.fda.app.service.IUserService;
 
 @CrossOrigin(origins = "*", maxAge = 36000000)
@@ -40,16 +41,28 @@ public class ProfileController {
 		return apiResponseDtoBuilder.build();
 	}
 
-	@RequestMapping(value = "/user/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public ApiResponseDto updateUser(@Valid @RequestBody User user) {
+	@RequestMapping(value = "/customer/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	public ApiResponseDto updateUser(@Valid @RequestBody UserUpdateRequestDto userUpdateRequestDto,@PathVariable(required = true) long id) {
 		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-		userService.updateUser(user, apiResponseDtoBuilder);
+		userService.updateUser(userUpdateRequestDto,id, apiResponseDtoBuilder);
+		return apiResponseDtoBuilder.build();
+	}
+	@RequestMapping(value = "/user/address/update", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	public ApiResponseDto updateUserAddress(@RequestParam(required = true) String address,@RequestParam(required = true) long userId) {
+		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
+		userService.updateUserAddress(address,userId, apiResponseDtoBuilder);
 		return apiResponseDtoBuilder.build();
 	}
 	@RequestMapping(value = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public ApiResponseDto getUserDetailsById(@PathVariable(required = true) long id) {
 		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
 		userService.getUserDetailsById(id, apiResponseDtoBuilder);
+		return apiResponseDtoBuilder.build();
+	}
+	@RequestMapping(value = "/add/profile/image",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	public ApiResponseDto addUserProfileImage(@Valid @RequestBody ProfileImageRequestDto profileImageRequestDto) {
+		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
+		userService.addUserProfileImage(profileImageRequestDto, apiResponseDtoBuilder);
 		return apiResponseDtoBuilder.build();
 	}
 }

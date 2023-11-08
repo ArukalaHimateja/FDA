@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 
 import com.fda.app.constants.Constants;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
+
 import com.fda.app.dto.ContactDto;
 import com.fda.app.model.Restaurant;
 import com.fda.app.model.RestaurantRequest;
+
 import com.fda.app.model.User;
 import com.fda.app.model.VerificationToken;
 import com.fda.app.repository.VerificationTokenRepository;
@@ -121,6 +123,7 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 		return vToken;
 	}
 
+
 	@Override
 	public void sendRestaurantRandomPasswordAndVerificationToken(Restaurant restaurant, String randomPassword) {
 		new Thread(() -> {
@@ -175,4 +178,5 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 				+ "<br><br><p>Kind Regards,<br>Team FDA</body></html>";
 		return body;
 	}
+
 }

@@ -1,4 +1,4 @@
-<footer [class.login_footer]="isLoginPage">
+<footer *ngIf="!isLoginPage">
     <!-- <div class="first_row" fxLayout="row" fxLayoutAlign=" center">
         <h1>FDA</h1>
         <span class="spacer"></span>
