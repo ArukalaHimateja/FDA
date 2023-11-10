@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodListItemType } from 'src/app/shared/shared/interfaces/pagination.interface';
-import { UserService } from '../user/user.service';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { UserService } from '../user/User.service';
 
 @Component({
   selector: 'app-popular-food',
@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class PopularFoodComponent implements OnInit {
   constructor(
-    private _userService: UserService,
+    public _userService: UserService,
     private _productService: ProductService,
   ) {
 
@@ -22,20 +22,25 @@ export class PopularFoodComponent implements OnInit {
   FoodList: FoodListItemType[] = []
 
   ngOnInit() {
-    this._productService.foodData$.subscribe((data: any) => {
+    this._productService.searchProduct("");
+    this._productService.foodList.subscribe((data: any) => {
       console.log('data', data.length)
       if (data.length !== 0) {
         this.FoodList = data;
         console.log('Data is available:', this.FoodList);
       } else {
-        // Handle the case where data is null
-        this._userService.allFoodList().then((response: any) => {
-          this.FoodList = response.body.data;
-          this._productService.sendData(this.FoodList);
-        })
-        console.log('Data is null');
+        // this._userService.allFoodList().then((response: any) => {
+        //   console.log("data1",response.body.data)
+        //   this.FoodList = response.body.data;
+        //   this._productService.sendData(this.FoodList);
+        // })
+        // console.log('Data is null');
       }
     });
   }
+
+  // getImage(name: string){
+  //   this._userService.getImage(name);
+  // }
 
 }
