@@ -13,7 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
-
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -32,7 +32,8 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDialogModule,
   ],
   exports: [
     CommonModule,

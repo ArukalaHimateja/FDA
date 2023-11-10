@@ -7,34 +7,21 @@ import { FoodListItemType } from '../shared/interfaces/pagination.interface';
   providedIn: 'root'
 })
 export class ProductService {
-  foodVarietyList: string[] = [];
+  foodList = new BehaviorSubject<FoodListItemType[]>([]);
+  searchKeyword = new BehaviorSubject<String | null>(null);
+
   constructor(
-    private _apiUrl: ApiService,
-  ) {
-    this.handleFoodDataChange(this.searchedFoodList)
-   }
+    private _apiService: ApiService,
+  ) {}
 
-  handleFoodDataChange(data: BehaviorSubject<FoodListItemType[]>): void {
-    this.foodData$.pipe(
-      map((data: FoodListItemType[]) => data.map(item => item.foodName))
-    ).subscribe((foodVarieties: string[]) => {
-      this.foodVarietyList = foodVarieties;
-      console.log('hi', this.foodVarietyList);
-    });
+  searchProduct(data: any) {
+    return this._apiService.post(data,`product/search`)
+  }
+  getAllCategories(data: any){
+    return this._apiService.post(data, `category/pagination/filter`);
   }
 
-
-  searchProduct(keyword: any) {
-    return this._apiUrl.get(`menu/search/${keyword}`)
-  }
-
-
-  // share search data with popular-food
-  private searchedFoodList = new BehaviorSubject<FoodListItemType[]>([]);
-  foodData$ = this.searchedFoodList.asObservable();
-
-  sendData(data: FoodListItemType[]) {
-    this.searchedFoodList.next(data);
-    this.handleFoodDataChange(this.searchedFoodList);
+  getProductByCategoryId(data: any){
+    return this._apiService.post(data, 'product/pagination/filter');
   }
 }

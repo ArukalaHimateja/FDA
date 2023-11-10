@@ -56,32 +56,23 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/active", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public ApiResponseDto isActiveUser(@RequestParam(required = true) long id,
-			@RequestParam(required = true) boolean active) {
+	public ApiResponseDto isActiveUser(@RequestParam(required = true) long id) {
 		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-		userService.isActiveUser(id, active, apiResponseDtoBuilder);
+		userService.isActiveUser(id, apiResponseDtoBuilder);
 		return apiResponseDtoBuilder.build();
 	}
 	@RequestMapping(value = "/user/inactive", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public ApiResponseDto isInactiveUser(@RequestParam(required = true) long id,
-			@RequestParam(required = true) boolean inActive) {
+	public ApiResponseDto isInactiveUser(@RequestParam(required = true) long id) {
 		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-		userService.isInactiveUser(id, inActive, apiResponseDtoBuilder);
+		userService.isInactiveUser(id, apiResponseDtoBuilder);
 		return apiResponseDtoBuilder.build();
 	}
 
-	@RequestMapping(value = "/user/pagination/filter", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public ApiResponseDto getUserListByFilterWithPagination(
+	@RequestMapping(value = "/customer/pagination/filter", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	public ApiResponseDto getCustomerListByFilterWithPagination(
 			@RequestBody UserFilterWithPaginationDto filterWithPagination) {
 		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-		userService.getUserListByFilterWithPagination(filterWithPagination, apiResponseDtoBuilder);
-		return apiResponseDtoBuilder.build();
-	}
-
-	@RequestMapping(value = "/user/refer", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public ApiResponseDto referFriendByEmail(@RequestParam(required = true) String email) {
-		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-		userService.referFriendByEmail(email, apiResponseDtoBuilder);
+		userService.getCustomerListByFilterWithPagination(filterWithPagination, apiResponseDtoBuilder);
 		return apiResponseDtoBuilder.build();
 	}
 }

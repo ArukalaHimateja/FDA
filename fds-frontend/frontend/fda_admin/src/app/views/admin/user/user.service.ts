@@ -20,9 +20,14 @@ export class UserService implements Resolve<any>{
     data: any = null;
     routeParams: any = null;
     state: string = "";
-    displayedColumns: string[] = ['no', 'image', 'name', 'email', 'mobileNumber', 'createdAt', 'action'];
+    displayedColumns: string[] = ["id","fullName", "email","mobileNumber","role","createdAt", "active" ,"verify"];
     customerDisplayedColumns: string[] = ['no', 'image', 'name', 'email', 'mobileNumber', 'createdAt'];
 
+    REQUEST_STATUS: any[] = [
+        { key: 0, value: 'Pending', color: 'primary' },
+        { key: 1, value: 'Accepted', color: 'warn' },
+        { key: 2, value: 'Rejected', color: 'acent' }
+    ]
     /**
      * Constructor
      *
@@ -186,18 +191,18 @@ export class UserService implements Resolve<any>{
      * 
      * @param data 
      */
-    getListWithPagination(data: any) {
-        return this._apiService.post(data, 'user/getUserListWithPagination');
-    }
+    // getListWithPagination(data: any) {
+    //     return this._apiService.post(data, '/customer/pagination/filter');
+    // }
 
     /**
      * Get data list by filter with pagination
      * 
      * @param data 
      */
-    getListByFilterWithPagination(data: any) {
-        return this._apiService.post(data, 'retailer/pagination/filter');
-    }
+    // getListByFilterWithPagination(data: any) {
+    //     return this._apiService.post(data, 'retailer/pagination/filter');
+    // }
 
     /**
      * Get data list by filter with pagination
@@ -240,7 +245,7 @@ export class UserService implements Resolve<any>{
         this._apiService.post(formData, `user/changeStatus`).then((response: any) => {
             this._loadingService.loading.next(false);
             if (response && response.statusText === 'OK') {
-                this.getListByFilterWithPagination(json);
+                this.getCustomerListByFilterWithPagination(json);
                 this._utilityService.successMessage(response.body.message, response.status);
             } else {
                 this._utilityService.errorMessage(response.body.message, response.status);
@@ -325,7 +330,7 @@ export class UserService implements Resolve<any>{
         this._apiService.delete(`user/deleteById/${id}`).then((response: any) => {
             this._loadingService.loading.next(false);
             if (response && response.body.status === 'OK') {
-                this.getListByFilterWithPagination(json);
+                this.getCustomerListByFilterWithPagination(json);
                 this._utilityService.successMessage(response.body.message, response.body.status);
             } else {
                 this._utilityService.errorMessage(response.body.message, response.body.status);
@@ -341,6 +346,8 @@ export class UserService implements Resolve<any>{
         });
     }
 
+
+
     /**
     * Get User Role
     * 
@@ -355,6 +362,34 @@ export class UserService implements Resolve<any>{
         }
     }
 
+
+    getRequestColor(key: any) {
+        if (key === 0) {
+            return 'blue';
+        } else if (key === 1) {
+            return 'green';
+        } else if (key === 2) {
+            return 'red';
+        } else {
+            return 'blue';
+        }
+    }
+
+    /**
+     * Get Color
+     * 
+     * @param key 
+     */
+    getStatus(key: any) {
+        let element = this.REQUEST_STATUS.find(item => item.key === key);
+        if (element) {
+            return element.value;
+        } else {
+            return 'Pending';
+        }
+    }
+
+
     /**
      * Get Color
      * 
@@ -367,5 +402,45 @@ export class UserService implements Resolve<any>{
         } else {
             return 'primary';
         }
+    }
+
+    /**
+     * Approvel Request
+     * 
+     * @param id 
+     * @returns 
+     */
+    approveRequest(id: any) {
+        return this._apiService.get(`admin/Approved/restaurant/request/${id}`);
+    }
+
+    /**
+     * Reject Request
+     * 
+     * @param id
+     * @returns 
+     */
+    rejectRequest(id: any) {
+        return this._apiService.get(`admin/reject/restaurant/request/${id}`);
+    }
+
+    /**
+     * Active
+     * 
+     * @param id 
+     * @returns 
+     */
+    active(id: any) {
+        return this._apiService.post(null, `user/${id}/active`);
+    }
+
+    /**
+     * Inactive
+     * 
+     * @param id 
+     * @returns 
+     */
+    inactive(id: any) {
+        return this._apiService.post(null, `user/${id}/inactive`);
     }
 }
