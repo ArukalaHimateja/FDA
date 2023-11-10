@@ -2,10 +2,9 @@
     <div class="round_section_first">
         <p class="section_heading">Inspiration for your first order</p>
         <div class="slider-container" fxLayout="row" fxLayoutAlign="space-between start">
-            <ng-container *ngFor="let element of foodList">
-                <div class="slide" fxLayout="column" fxLayoutAlign="center center">
-                    <!-- [style.transform]="'translateX(' + slidePosition + 'px)'"> -->
-                    <img [className]="element.name" alt="thail" [src]="'assets/images/' + element.path" />
+            <ng-container *ngFor="let element of foodCategories; let i = index">
+                <div class="slide" fxLayout="column" fxLayoutAlign="center center" (click)="getProductByCategoryId(element.id)">
+                    <img [className]="element.name" alt="thail" [src]="_userService.getImage(element.image)" />
                     <p>{{element.name}}</p>
                 </div>
             </ng-container>
@@ -27,4 +26,31 @@
         <button class="next" (click)="nextSlide()"><mat-icon>arrow_forward_ios</mat-icon></button>
     </div> -->
 </div>
-<app-popular-food></app-popular-food>
+<!-- <app-popular-food></app-popular-food> -->
+<div>
+    <div class="cards_section">
+        <p class="section_heading">Inspiration for your first order</p>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+            <ng-container *ngFor="let element of FoodList">
+                <mat-card class="card" [routerLink]="'foodDetail/'+element.id">
+                    <img mat-card-image alt="sweets" [src]="element.productImage? _userService.getImage(element.productImage): image" [alt]="element.productImage">
+                    <!-- <p class="offers">{{offers}}</p> -->
+                    <mat-card-content>
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <p class="name">{{element.productName}}</p>
+                            <p class="rating" fxLayout="row" fxLayoutAlign=" center">{{rating}} <mat-icon>star</mat-icon></p>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <p class="items">{{element.categoryName}} by {{element.restaurantName}}</p>
+                            <p class="pricing">₹{{element.price}}</p>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <p></p>
+                            <p class="timing">{{timing}}</p>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </ng-container>
+        </div>
+    </div>
+</div>
