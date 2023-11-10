@@ -1,6 +1,10 @@
 .order_history > div{
     gap: 20px;
 }
+.order_history > h1{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
 
 .spacer{
     flex: 1 1 100%;
@@ -29,8 +33,12 @@ button{
     color: #EF4F5F;
     border: 1px solid #EF4F5F;
     border-radius: 5px;
-    font-weight: 600;
+    font-weight: 500;
     padding: 10px 20px;
     font-size: 16px;
     background-color: transparent;
+    &:hover{
+        background-color: #EF4F5F;
+        color: white;
+    }
 }
