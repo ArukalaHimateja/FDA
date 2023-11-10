@@ -1,0 +1,53 @@
+.spacer {
+    flex: 1 1 100%;
+}
+.mat-toolbar-row{
+    padding: 30px;
+}
+
+.profileJumbotron {
+    width: 100%;
+    color: white;
+    margin-bottom: 40px;
+
+    .spacer {
+        flex: 1 1 100%;
+    }
+
+    >div {
+        height: 220px;
+        width: 100%;
+        padding: 20px;
+        background: url('/assets/images/profile_jumbotron.avif');
+        // background-size:cover ;
+        background-size: 100% 100%;
+
+        img {
+            height: 150px;
+            width: 150px;
+            border-radius: 100%;
+            border: 4px solid white;
+            backdrop-filter: blur(20px);
+        }
+    }
+}
+
+.formField {
+    padding: 0 20px;
+    form{
+        gap: 25px;
+    }
+    .edit_btn {
+        background-color: #EF4F5F;
+        border-radius: 5px;
+        color: white;
+        text-transform: capitalize;
+        padding: 10px 15px;
+        border: none;
+        // align-items: center;
+        // display: flex;
+        // gap: 8px;
+        width: 150px;
+        align-self: flex-end;
+    }
+}

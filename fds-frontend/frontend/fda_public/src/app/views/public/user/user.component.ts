@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UtilityService } from 'src/app/shared/services/utility.service';
+import { ProfileComponent } from './profile/profile.component';
+import { style } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -8,27 +12,26 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
 })
 export class UserComponent {
   sessionUser: any;
+  selectedOptionValue: string = 'order-history';
   constructor(
     private _utilityService: UtilityService,
-  ){
+    private dialog: MatDialog,
+    private router: Router
+  ) {
+    router.navigateByUrl('user/order/history');
     this.sessionUser = this._utilityService.getAuthUser();
   }
-  ngOnInit(){
-  }
 
-  onClick(){
-    console.log("hi");
-  }
-  selectedOptionValue!: string;
 
   onSelectionChange(event: any) {
-    // Handle the selection change here
-    // You can access the selected option using event.source.selectedOptions.selected[0].value
     if (event.source.selectedOptions.selected.length > 0) {
       this.selectedOptionValue = event.source.selectedOptions.selected[0].value;
       console.log(this.selectedOptionValue)
     } else {
       this.selectedOptionValue = 'None';
     }
+  }
+  editProfile() {
+    this.dialog.open(ProfileComponent, { height: '100vh', width: '500px' });
   }
 }
