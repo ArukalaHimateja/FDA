@@ -1,0 +1,8 @@
+
+::ng-deep .mdc-data-table__cell, .mat-mdc-header-cell{
+    text-align: center !important;
+    text-transform: capitalize;
+}
+::ng-deep .mat-column-email{
+    text-transform: lowercase;
+}

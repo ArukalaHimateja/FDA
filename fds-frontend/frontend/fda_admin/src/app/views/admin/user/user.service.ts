@@ -20,7 +20,7 @@ export class UserService implements Resolve<any>{
     data: any = null;
     routeParams: any = null;
     state: string = "";
-    displayedColumns: string[] = ["id","fullName", "email","mobileNumber","role","createdAt", "active" ,"verify"];
+    displayedColumns: string[] = ["no","fullName", "email","mobileNumber","role","createdAt", "active" ,"verify"];
     customerDisplayedColumns: string[] = ['no', 'image', 'name', 'email', 'mobileNumber', 'createdAt'];
 
     REQUEST_STATUS: any[] = [
@@ -411,7 +411,7 @@ export class UserService implements Resolve<any>{
      * @returns 
      */
     approveRequest(id: any) {
-        return this._apiService.get(`admin/Approved/restaurant/request/${id}`);
+        return this._apiService.get(`admin/approved/restaurant/request/${id}`);
     }
 
     /**
