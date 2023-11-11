@@ -8,7 +8,9 @@ const routes: Routes = [
   { path: 'feedback', loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule) },
   { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule) },
   { path: 'menu', loadChildren: () => import('./menu/menu.module').then(m => m.MenuModule) },
-  { path: 'restaurant', loadChildren: () => import('./restaurant/restaurant.module').then(m => m.RestaurantModule) }
+  { path: 'restaurant', loadChildren: () => import('./restaurant/restaurant.module').then(m => m.RestaurantModule) },
+  { path: 'category', loadChildren: () => import('./category/category.module').then(m => m.CategoryModule) },
+  { path: 'promo/code', loadChildren: () => import('./promo-code/promo-code.module').then(m => m.PromoCodeModule) },
 ];
 
 @NgModule({

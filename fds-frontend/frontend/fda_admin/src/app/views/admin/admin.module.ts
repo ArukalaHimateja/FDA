@@ -14,6 +14,7 @@ import { SharedComponentsModule } from '../../shared/shared-components/shared-co
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatDialogModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    MatSelectModule
   ]
 })
 export class AdminModule { }
