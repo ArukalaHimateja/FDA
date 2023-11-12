@@ -1,0 +1,65 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h1 class="header_heading">{{this.data.type === 'add' ? 'Add Category' : 'Update Category'}}</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="partner-section">
+    <div class="wrapper">
+        <form [formGroup]="addCategoryForm" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+            <!-- Category fName -->
+            <mat-form-field fxFlex="45%">
+                <mat-label>Category Name</mat-label>
+                <input matInput placeholder="Enter category Name" formControlName="name">
+                <mat-error
+                    *ngIf="addCategoryForm.controls['name'].invalid && (addCategoryForm.controls['name'].dirty || addCategoryForm.controls['name'].touched)">
+                    <ng-container *ngIf="addCategoryForm.controls['name'].errors?.['required']">
+                        Category name is required.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <div fxFlex="45%">
+                <h3><b>Image</b></h3>
+                <img [src]="_fileUploadService.getFileUrl(image,'logo')" alt=""
+                    style="width: 145px; height: 145px;" class="img-thumbnail">
+                <br>
+                <ng-container *ngIf="image && image !== ''">
+                    <a mat-raised-button color="accent" class="lh-custom"
+                        [href]="_fileUploadService.getFileUrl(image,'logo')" target="_blank">
+                        <mat-icon>visibility</mat-icon>
+                    </a>
+                    &nbsp;&nbsp;
+                    <button type="button" mat-raised-button color="warn" class="lh-custom" (click)="removeLogoImage()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </ng-container>
+                <input *ngIf="!image" type="file" (change)="onSelectFile($event)"
+                    accept="image/x-png,image/gif,image/jpeg">
+            </div>
+
+            <!-- description -->
+            <mat-form-field fxFlex="45%">
+                <mat-label>description</mat-label>
+                <input matInput placeholder="Enter description" formControlName="description">
+                <mat-error
+                    *ngIf="addCategoryForm.controls['description'].invalid && (addCategoryForm.controls['description'].dirty || addCategoryForm.controls['description'].touched)">
+                    <ng-container *ngIf="addCategoryForm.controls['description'].errors?.['required']">
+                        description is required.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <div fxFlex="100%" fxLayoutAlign="end center">
+                <button mat-button [disabled]="addCategoryForm.invalid" (click)="onSubmit()">
+                    <mat-icon>build</mat-icon> Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
