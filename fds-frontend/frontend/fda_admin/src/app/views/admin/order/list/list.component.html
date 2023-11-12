@@ -18,54 +18,59 @@
                 </td>
             </ng-container>
 
-            <!-- Full name -->
-            <ng-container matColumnDef="fullName">
-                <th mat-header-cell *matHeaderCellDef> full Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
-            </ng-container>
-
-            <!-- Email -->
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef> Email </th>
-                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
-
-            <!-- Mobile Number -->
-            <ng-container matColumnDef="mobileNumber">
-                <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
-                <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
-            </ng-container>
-
-            <!-- role -->
-            <ng-container matColumnDef="role">
-                <th mat-header-cell *matHeaderCellDef> Role </th>
-                <td mat-cell *matCellDef="let element">
-                    {{element.role}} </td>
-            </ng-container>
-
-            <!-- Created At -->
+            <!-- created At -->
             <ng-container matColumnDef="createdAt">
-                <th mat-header-cell *matHeaderCellDef> Created At </th>
+                <th mat-header-cell *matHeaderCellDef> full Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
+            </ng-container>
+
+            <!-- customerId -->
+            <ng-container matColumnDef="customerId">
+                <th mat-header-cell *matHeaderCellDef> customer Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.customerId}} </td>
+            </ng-container>
+
+            <!-- productName -->
+            <ng-container matColumnDef="productName">
+                <th mat-header-cell *matHeaderCellDef> product Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+            </ng-container>
+
+            <!-- productQuantity -->
+            <ng-container matColumnDef="productQuantity">
+                <th mat-header-cell *matHeaderCellDef> product Quantity </th>
                 <td mat-cell *matCellDef="let element">
-                    {{element.createdAt}}
+                    {{element.productQuantity}} </td>
+            </ng-container>
+
+            <!-- totalPayPrice -->
+            <ng-container matColumnDef="totalPayPrice">
+                <th mat-header-cell *matHeaderCellDef> total Pay Price </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.totalPayPrice}}
                 </td>
             </ng-container>
 
-            <!-- Verify Column -->
-            <ng-container matColumnDef="verify">
-                <th mat-header-cell *matHeaderCellDef> Email Verify </th>
-                <td mat-cell *matCellDef="let element" [ngStyle]="{'color' : element.verify ? 'green':'red'}">
-                    {{element.verify ? 'Yes' : 'No'}} </td>
+            <!-- payStatus Column -->
+            <ng-container matColumnDef="payStatus">
+                <th mat-header-cell *matHeaderCellDef> pay Status </th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'color' : element.payStatus !==0 ? 'green':'red'}">
+                    {{element.payStatus !==0 ? 'Yes' : 'No'}} </td>
+            </ng-container>
+
+            <!-- deliveryAddress Column -->
+            <ng-container matColumnDef="deliveryAddress">
+                <th mat-header-cell *matHeaderCellDef> delivery Address </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.deliveryAddress}}
+                </td>
             </ng-container>
 
             <!-- Action Column -->
-            <ng-container matColumnDef="active">
-                <th mat-header-cell *matHeaderCellDef class="text-right"> Active </th>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="text-right"> action </th>
                 <td mat-cell *matCellDef="let element" class="text-right">
-                    <!-- <button mat-icon-button>
-                        <mat-icon>more_vert</mat-icon>
-                    </button> -->
-                    {{element.active}}
+                    <button mat-button (click)="generateReceipt(element)">generate receipt</button>
                 </td>
             </ng-container>
 
