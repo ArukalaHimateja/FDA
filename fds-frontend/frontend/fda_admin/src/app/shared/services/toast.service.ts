@@ -37,4 +37,11 @@ export class ToastService {
             horizontalPosition: 'center',
         });
     }
+
+    success(text: any) {
+        this._matSnackBar.open(text, 'OK', { duration: 5000 });
+    }
+    error(text: any) {
+        this._matSnackBar.open(text, 'OK', { duration: 5000 });
+    }
 }
