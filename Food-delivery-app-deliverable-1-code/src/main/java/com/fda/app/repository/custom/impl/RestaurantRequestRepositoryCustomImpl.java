@@ -24,10 +24,13 @@ public class RestaurantRequestRepositoryCustomImpl implements RestaurantRequestR
 	@Override
 	public PaginationDto getRestaurantRequestListByFilterWithPagination(
 			RestaurantRequestFilterWithPaginationDto restaurantRequestFilterWithPaginationDto) {
-		String countQuery = "SELECT count(*) from "+Constants.RESTAURANT_REQUEST_TABLE_NAME+" t";
-		String query = "SELECT t.* from "+Constants.RESTAURANT_REQUEST_TABLE_NAME+" t";
-		String addableQuery = " where t.status = "
-				+ restaurantRequestFilterWithPaginationDto.getRestaurantRequestFilterDto().getStatus();
+		String countQuery = "SELECT count(*) from " + Constants.RESTAURANT_REQUEST_TABLE_NAME + " t";
+		String query = "SELECT t.* from " + Constants.RESTAURANT_REQUEST_TABLE_NAME + " t";
+		String addableQuery = "";
+		if (restaurantRequestFilterWithPaginationDto.getRestaurantRequestFilterDto().getStatus() != -1) {
+			addableQuery = " where t.status = "
+					+ restaurantRequestFilterWithPaginationDto.getRestaurantRequestFilterDto().getStatus();
+		}
 		Query queryString = entityManager.createNativeQuery(countQuery + addableQuery);
 		int totalCounts = ((Number) queryString.getSingleResult()).intValue();
 		PaginationDataDto paginationDataDto = Utility.getPaginationData(totalCounts,
