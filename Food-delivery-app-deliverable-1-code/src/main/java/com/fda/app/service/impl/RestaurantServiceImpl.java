@@ -153,8 +153,6 @@ public class RestaurantServiceImpl implements IRestaurantService {
 		Optional<Restaurant> restaurant = restaurantRepository.findById(id);
 		if (restaurant.isPresent()) {
 			apiResponseDtoBuilder.withMessage(Constants.SUCCESS).withStatus(HttpStatus.OK).withData(restaurant);
-		} else if (restaurant.get().getStatus() == 0) {
-			apiResponseDtoBuilder.withMessage(Constants.REQUEST_IN_PROCESS).withStatus(HttpStatus.OK);
 		} else {
 
 			apiResponseDtoBuilder.withMessage(Constants.FAIL).withStatus(HttpStatus.NOT_FOUND);
@@ -272,9 +270,9 @@ public class RestaurantServiceImpl implements IRestaurantService {
 				e.printStackTrace();
 			}
 
-			RestaurantDocument restaurantDocument = restaurantDocumentRepository
+			List<RestaurantDocument> listOfRestaurantDocument = restaurantDocumentRepository
 					.findByRestaurantRequestId(restaurantRequest.get().getId());
-			if (restaurantDocument != null) {
+			for (RestaurantDocument restaurantDocument : listOfRestaurantDocument) {
 				restaurantDocument.setRestaurantId(restaurant.getId());
 				restaurantDocumentRepository.save(restaurantDocument);
 			}
@@ -299,7 +297,6 @@ public class RestaurantServiceImpl implements IRestaurantService {
 		}
 		Optional<RestaurantRequest> restaurantRequest = restaurantRequestRepository.findById(id);
 		if (restaurantRequest.isPresent()) {
-
 			restaurantRequest.get().setStatus(2);
 			restaurantRequestRepository.save(restaurantRequest.get());
 			apiResponseDtoBuilder.withMessage(Constants.RESTAURANT_REQUEST_REJECT).withStatus(HttpStatus.OK)
@@ -314,9 +311,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	}
 
 	@Override
-	public void getRestaurantDocumentById(long id, ApiResponseDtoBuilder apiResponseDtoBuilder) {
-		Optional<RestaurantDocument> restaurantDocument = restaurantDocumentRepository.findById(id);
-		if (restaurantDocument.isPresent()) {
+	public void getRestaurantDocumentByRestaurantRequestId(long restaurantRequestId, ApiResponseDtoBuilder apiResponseDtoBuilder) {
+		List<RestaurantDocument> restaurantDocument = restaurantDocumentRepository
+				.findByRestaurantRequestId(restaurantRequestId);
+		if (restaurantDocument != null) {
 			apiResponseDtoBuilder.withMessage(Constants.SUCCESS).withStatus(HttpStatus.OK).withData(restaurantDocument);
 		} else {
 
@@ -378,5 +376,29 @@ public class RestaurantServiceImpl implements IRestaurantService {
 		apiResponseDtoBuilder.withMessage(Constants.DATA_LIST).withStatus(HttpStatus.OK).withData(pagination);
 
 	}
+
+	@Override
+	public void getRestaurantRequestById(long id, ApiResponseDtoBuilder apiResponseDtoBuilder) {
+		Optional<RestaurantRequest> restaurant = restaurantRequestRepository.findById(id);
+		if (restaurant.isPresent()) {
+			apiResponseDtoBuilder.withMessage(Constants.SUCCESS).withStatus(HttpStatus.OK).withData(restaurant);
+		} else {
+			apiResponseDtoBuilder.withMessage(Constants.FAIL).withStatus(HttpStatus.NOT_FOUND);
+		}
+
+	}
+
+	@Override
+	public void getRestaurantRequestDocumentById(long id, ApiResponseDtoBuilder apiResponseDtoBuilder) {
+		Optional<RestaurantDocument> restaurantDocument = restaurantDocumentRepository.findById(id);
+		if (restaurantDocument != null) {
+			apiResponseDtoBuilder.withMessage(Constants.SUCCESS).withStatus(HttpStatus.OK).withData(restaurantDocument);
+		} else {
+
+			apiResponseDtoBuilder.withMessage(Constants.FAIL).withStatus(HttpStatus.NOT_FOUND);
+		}
+
+	}
+
 
 }

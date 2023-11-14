@@ -77,8 +77,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	}
 
 	@Override
-	public void addUser(UserRequestDto userRequestDto, ApiResponseDtoBuilder apiResponseDtoBuilder,
-			HttpServletRequest request) {
+	public void addUser(UserRequestDto userRequestDto, ApiResponseDtoBuilder apiResponseDtoBuilder) {
 		if (userRepository.existsByMobileNumber(userRequestDto.getMobileNumber())) {
 			apiResponseDtoBuilder.withMessage(Constants.MOBILE_NUMBER_ALREADY_EXISTS)
 					.withStatus(HttpStatus.ALREADY_REPORTED);
@@ -97,24 +96,30 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 						.setName(userRequestDto.getFullName()).build())
 				.setAddress(CustomerCreateParams.Address.builder().setLine1(userRequestDto.getAddress()).build())
 				.build();
-		try {
-			Customer customer = Customer.create(params);
 
-			User user = customMapper.userRequestDtoToUser(userRequestDto);
-			user.setStripeUserId(customer.getId());
-			String newPasswordEncodedString = bCryptPasswordEncoder.encode(user.getPassword());
-			user.setPassword(newPasswordEncodedString);
-			user.setCreatedAt(new Date());
-			user.setRole(1);
-			save(user);
-			apiResponseDtoBuilder.withMessage(Constants.USER_ADD_SUCCESS).withStatus(HttpStatus.OK).withData(user);
-			new Thread(() -> {
-				verificationTokenService.sendVerificationToken(user);
-			}).start();
+		Customer customer = null;
+		try {
+			customer = Customer.create(params);
 		} catch (StripeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		User user = customMapper.userRequestDtoToUser(userRequestDto);
+		if (customer != null) {
+			user.setStripeUserId(customer.getId());
+		}
+		String newPasswordEncodedString = bCryptPasswordEncoder.encode(user.getPassword());
+		user.setPassword(newPasswordEncodedString);
+		user.setCreatedAt(new Date());
+		user.setRole(1);
+		save(user);
+
+		new Thread(() -> {
+			verificationTokenService.sendVerificationToken(user);
+		}).start();
+
+		apiResponseDtoBuilder.withMessage(Constants.USER_ADD_SUCCESS).withStatus(HttpStatus.OK).withData(user);
 	}
 
 	@Override
