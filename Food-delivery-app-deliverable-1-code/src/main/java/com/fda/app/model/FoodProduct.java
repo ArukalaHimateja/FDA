@@ -44,7 +44,7 @@ public class FoodProduct {
 	@JsonDeserialize(using = CustomDateAndTimeDeserialize.class)
 	private Date updatedAt;
 
-	private Long price;
+	private Double price;
 	private String productSize;
 	private Long restaurantId;
 	private String restaurantName;
@@ -149,11 +149,11 @@ public class FoodProduct {
 		this.restaurantId = restaurantId;
 	}
 
-	public Long getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
