@@ -1,1 +1,108 @@
-<p>add works!</p>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h1 class="header_heading">{{data.type === 'add' ? 'Add Menu' : 'Update Menu'}}</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="partner-section">
+    <div class="wrapper">
+        <form [formGroup]="addMenuForm" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+
+            <div fxFlex="45%">
+                <!-- Category Id -->
+                <mat-form-field *ngIf="data.type !== 'update'">
+                    <mat-label>category Id</mat-label>
+                    <mat-select formControlName="categoryId">
+                        <mat-option *ngFor="let categroy of categoryList" [value]="categroy.id">
+                          {{categroy.name}}
+                        </mat-option>
+                      </mat-select>
+
+                    <mat-error
+                        *ngIf="addMenuForm.controls['categoryId'].invalid && (addMenuForm.controls['categoryId'].dirty || addMenuForm.controls['categoryId'].touched)">
+                        <ng-container *ngIf="addMenuForm.controls['categoryId'].errors?.['required']">
+                            Owner name is required.
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- product Name -->
+                <mat-form-field>
+                    <mat-label>product name</mat-label>
+                    <input matInput placeholder="Enter product name" formControlName="productName">
+                    <mat-error
+                        *ngIf="addMenuForm.controls['productName'].invalid && (addMenuForm.controls['productName'].dirty || addMenuForm.controls['productName'].touched)">
+                        <ng-container *ngIf="addMenuForm.controls['productName'].errors?.['required']">
+                            Restaurant Name is required.
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- price -->
+                <mat-form-field>
+                    <mat-label>price</mat-label>
+                    <input matInput placeholder="Enter price" formControlName="price">
+                    <mat-error
+                        *ngIf="addMenuForm.controls['price'].invalid && (addMenuForm.controls['price'].dirty || addMenuForm.controls['price'].touched)">
+                        <ng-container *ngIf="addMenuForm.controls['price'].errors?.['required']">
+                            price is required.
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- productSize -->
+                <mat-form-field>
+                    <mat-label>product Size</mat-label>
+                    <input matInput placeholder="Enter productSize" formControlName="productSize">
+                    <mat-error
+                        *ngIf="addMenuForm.controls['productSize'].invalid && (addMenuForm.controls['productSize'].dirty || addMenuForm.controls['productSize'].touched)">
+                        <ng-container *ngIf="addMenuForm.controls['productSize'].errors?.['required']">
+                            product Size is required.
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="45%">
+                <h3><b>Image</b></h3>
+                <img [src]="_fileUploadService.getFileUrl(image,'logo')" alt="" style="width: 145px; height: 145px;"
+                    class="img-thumbnail">
+                <br>
+                <ng-container *ngIf="image && image !== ''">
+                    <a mat-raised-button color="accent" class="lh-custom"
+                        [href]="_fileUploadService.getFileUrl(image,'logo')" target="_blank">
+                        <mat-icon>visibility</mat-icon>
+                    </a>
+                    &nbsp;&nbsp;
+                    <button type="button" mat-raised-button color="warn" class="lh-custom" (click)="removeLogoImage()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </ng-container>
+                <input *ngIf="!image" type="file" (change)="onSelectFile($event)"
+                    accept="image/x-png,image/gif,image/jpeg">
+            </div>
+            <!-- description -->
+            <mat-form-field fxFlex="100%">
+                <mat-label>description</mat-label>
+                <textarea matInput placeholder="Enter description" formControlName="description"></textarea>
+                <mat-error
+                    *ngIf="addMenuForm.controls['description'].invalid && (addMenuForm.controls['description'].dirty || addMenuForm.controls['description'].touched)">
+                    <ng-container *ngIf="addMenuForm.controls['description'].errors?.['required']">
+                        description is required.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <div fxFlex="100%" fxLayoutAlign="end center">
+                <button mat-button [disabled]="addMenuForm.invalid" (click)="onSubmit()">
+                    <mat-icon>build</mat-icon> Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
