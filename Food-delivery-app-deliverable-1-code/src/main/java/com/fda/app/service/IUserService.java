@@ -16,8 +16,7 @@ import com.fda.app.model.User;
 @Service
 public interface IUserService {
 
-	void addUser(UserRequestDto userRequestDto, ApiResponseDtoBuilder apiResponseDtoBuilder,
-			HttpServletRequest request);
+	void addUser(UserRequestDto userRequestDto, ApiResponseDtoBuilder apiResponseDtoBuilder);
 
 	User findByMobileNumber(String username);
 

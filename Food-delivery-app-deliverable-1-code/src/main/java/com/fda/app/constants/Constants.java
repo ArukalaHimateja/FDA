@@ -7,7 +7,7 @@ public class Constants {
 
 	// Tables
 	public static final String USER_TABLE_NAME = "user_details";
-	public static final String PRODUCT_TABLE_NAME = "PRODUCT_details";
+	public static final String PRODUCT_TABLE_NAME = "product_details";
 	public static final String PROMO_CODE_TABLE_NAME = "promo_code_details";
 	public static final String RESTAURANT_DOCUMENT_TABLE_NAME = "restaurant_document_details";
 	public static final String RESTAURANT_REQUEST_TABLE_NAME = "restaurant_request_details";
@@ -18,7 +18,7 @@ public class Constants {
 	public static final String CATEGORY_TABLE_NAME = "category_details";
 	public static final String RESTAURANT_TABLE_NAME = "restaurant_details";
 	public static final String PAYMENT_TABLE_NAME = "payment_details";
-	public static final String RATING_TABLE_NAME = "rating_details";
+	public static final String RATING_AND_REVIEW_TABLE_NAME = "rating_review_details";
 	public static final String REPORT_TABLE_NAME = "report_details";
 	public static final String USER_ADDRESS_TABLE_NAME = "user_addess_details";
 	public static final String FEEDBACK_TABLE_NAME = "feedback_details";
@@ -37,7 +37,7 @@ public class Constants {
 	public static final String SUPPORT_EMAIL = "support.email";
 //report
 	public static final String REPORT_NOT_FOUND = "Report not found.";
-	public static final String CONTACT_REQUEST_SUCCESS="Contact request successfully sent to admin.";
+	public static final String CONTACT_REQUEST_SUCCESS = "Contact request successfully sent to admin.";
 	// Feedback
 	public static final String FEEDBACK_SENT_SUCCESSFULLY = "Feedback sent successfully";
 	public static final String FEEDBACK_NOT_FOUND = "Feedback not found";
@@ -152,8 +152,8 @@ public class Constants {
 	// restaurant
 	public static final String RESTAURANT_ADD_SUCCESSFULLY = "Restaurant add successfully";
 	public static final String RESTAURANT_ID_NOT_FOUND = "Restaurant id not found.";
-	public static final String RESTAURANT_DEACTIVE_SUCCESS="Restaurant deactivated successfully";
-	public static final String RESTAURANT_ACTIVE_SUCCESS="Restaurant activated successfully";
+	public static final String RESTAURANT_DEACTIVE_SUCCESS = "Restaurant deactivated successfully";
+	public static final String RESTAURANT_ACTIVE_SUCCESS = "Restaurant activated successfully";
 	public static final String RESTAURANT_DELETE_SUCCESSFULLY = "Restaurant delete successfully";
 	public static final String RESTAURANT_UPDATED = "Restaurant updated successfully";
 	public static final String REQUEST_IN_PROCESS = "Your request in pending";
@@ -163,6 +163,7 @@ public class Constants {
 	public static final String RESTAURANT_EMAIL_ALREADY_EXISTS = "Restaurant email already exists.";
 	public static final String RESTAURANT_REQUEST_ALREADY_EXISTS = "You are already sent request to admin for approval.";
 	public static final String RESTAURANT_REQUEST_REJECT = "Restaurant request rejected.";
+	public static final String RESTAURANT_REQUEST_ALL_READY_ACCEPTED = "Restaurant request allready accepted.you can not reject restaurant";
 	// Your restaurant request accepted,you acccount random Password sent on email.
 
 	// product product updated
@@ -180,5 +181,6 @@ public class Constants {
 	public static final String PROMO_CODE_EXPIRED = "Promo code expired.";
 	public static final String PROMO_CODE_LIST = "Promo code list";
 	public static final String PROMO_CODE_NOT_ASSOCIATED = "retailer not associated with promocode.";
+	public static final String PAYMENT_SESSION_NOT_CREATE = "payment session not create.";
 
 }
