@@ -12,6 +12,9 @@ import {
   ApexFill,
   ApexTooltip
 } from "ng-apexcharts";
+import { DashboardDataType } from 'src/app/shared/interfaces/pagination.interface';
+import { DashboardService } from 'src/app/shared/services/dashboard.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -32,16 +35,25 @@ export type ChartOptions = {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  sessionUser: any;
+
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions> | any;
-  dashboardData: any = {
-    totalRestaurant: 10,
-    totalEmployee: 10,
-    totalCustomer: 10,
-    totalOrder: 10
-  };
+  dashboardData: DashboardDataType = {
+    totalUser: null,
+    totalRestaurant: null,
+    totalOrder: null,
+    totalEmployee: null,
+    totalOrderDelivered: null,
+    totalPendingOrder: null,
+    totalRevenue: null,
+  }
 
-  constructor() {
+
+  constructor(
+    private _dashboardService: DashboardService,
+    private _utilityService: UtilityService,
+  ) {
     this.chartOptions = {
       series: [
         {
@@ -103,6 +115,12 @@ export class DashboardComponent {
         }
       }
     };
+
+    this._dashboardService.getDashboard().then((response: any) => {
+      this.dashboardData = response.body.data;
+    })
+
+    this.sessionUser = this._utilityService.getAuthUser();
   }
 }
 
