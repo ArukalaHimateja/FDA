@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AddComponent } from '../add/add.component';
 
 @Component({
   selector: 'app-view',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent {
+
+  restaurantDtl: any;
+
+  constructor(
+    public matDialogRef: MatDialogRef<AddComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+  }
 
 }
