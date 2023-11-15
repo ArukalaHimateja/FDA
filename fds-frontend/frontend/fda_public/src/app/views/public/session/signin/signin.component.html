@@ -9,10 +9,8 @@
                 <input type="password" formControlName="password" placeholder="Password">
             </div>
             <div class="remember-forgot">
-                <label>
-                    <input type="checkbox">Remember me
-                </label>
-                <a [routerLink]="'/'">Forgot password?</a>
+                <button mat-button [routerLink]="'/session/partner'">become a partner</button>
+                <button mat-button [routerLink]="'/'">Forgot password?</button>
             </div>
             <button class="btn" type="submit" [disabled]="signinForm.invalid">Login</button>
 

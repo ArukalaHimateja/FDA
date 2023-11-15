@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UtilityService } from '../../shared/services/utility.service';
 import { NavigationService } from '../../shared/services/navigation.service';
 import { config } from 'src/app/shared/config/config';
+import { MustMatch } from 'src/app/shared/validators/must-match';
 
 @Injectable({
     providedIn: 'root'
@@ -46,13 +47,14 @@ export class AuthService {
 
     login(data: any) {
         this._apiService.post(data, 'auth/login').then((response: any) => {
-            if (response && response.status === 200) {
+            if (response && response.body.status === "OK") {
                 localStorage.setItem(`${config.appShortName}UserToken`, response.body.data.token);
                 let user = {
                     id: response.body.data.user_details.id,
                     email: response.body.data.user_details.email,
                     name: response.body.data.user_details.fullName,
                     role: response.body.data.user_details.role,
+                    restaurantId: response.body.data.user_details.restaurantId,
                     profileImage: null
                 };
                 localStorage.setItem(`${config.appShortName}User`, JSON.stringify(user));
@@ -79,6 +81,7 @@ export class AuthService {
                     email: response.body.data.body.email,
                     name: response.body.data.body.name,
                     role: response.body.data.body.role,
+                    restaurantId: response.body.data.user_details.restaurantId,
                     profileImage: null
                 };
                 localStorage.setItem('user', JSON.stringify(user));
@@ -133,4 +136,57 @@ export class AuthService {
         return !this._jwtHelper.isTokenExpired(token);
     }
 
+
+
+    /**
+     * Create Forgot Password Form
+     * 
+     * @returns 
+     */
+    createFrogotPasswordFrom(){
+        return this._formBuilder.group({
+            username: [null, [Validators.required, Validators.email]]
+        })
+    }
+
+    /**
+     * Forgot Password
+     * 
+     * @param email 
+     * @returns 
+     */
+    forgotPassword(email: any){
+        return this._apiService.post(email, 'user/password/forgot').then((response: any) => {
+            if (response && response.body.status === 'OK') {
+                this._utilityService.successMessage(response.body.message, response.statusText);
+                this._router.navigate(['/session/signin']);
+            } else {
+                this._utilityService.errorMessage(response.body.message, response.statusText);
+            };
+        })
+    }
+
+    /**
+    * Change Password Form
+    */
+  createChangePasswordForm(): FormGroup {
+    return this._formBuilder.group({
+      oldPassword: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\W).{8,}$")]],
+      confirmPassword: [null, [Validators.required]]
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
+    })
+  }
+
+  changePassword(formData: any) {
+    return this._apiService.post(formData, 'changePassword').then((response: any) => {
+      console.log(response, response.body.message, response.body.data);
+      if (response.body.status === 'OK') {
+        this._utilityService.successMessage(response.body.message, response.body.status);
+      } else {
+        this._utilityService.errorMessage(response.body.message, response.body.status);
+      }
+    })
+  }
 }

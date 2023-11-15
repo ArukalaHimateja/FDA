@@ -2,6 +2,7 @@ package com.fda.app.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.naming.AuthenticationException;
 
@@ -25,7 +26,9 @@ import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
 import com.fda.app.dto.LoginResponseDto;
 import com.fda.app.dto.LoginUser;
 import com.fda.app.mapper.CustomMapper;
+import com.fda.app.model.Restaurant;
 import com.fda.app.model.User;
+import com.fda.app.repository.RestaurantRepository;
 import com.fda.app.service.IUserService;
 
 @CrossOrigin(origins = "*", maxAge = 360000000)
@@ -47,6 +50,8 @@ public class AuthenticationController {
 	private IUserService userService;
 	@Autowired
 	private CustomMapper customMapper;
+	@Autowired
+	private RestaurantRepository restaurantRepository;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ApiResponseDto userlogin(@RequestBody LoginUser loginUser) throws AuthenticationException {
@@ -67,6 +72,10 @@ public class AuthenticationController {
 		final String token = jwtTokenUtil.generateToken(user);
 
 		LoginResponseDto loginResponseDto = customMapper.userToLoginResponseDto(checkUser);
+		Optional<Restaurant> restaurant = restaurantRepository.findByUserId(loginResponseDto.getId());
+		if (restaurant.isPresent()) {
+			loginResponseDto.setRestaurantId(restaurant.get().getId());
+		}
 		Map<String, Object> response = setTokenDetails(user, token, loginResponseDto);
 		apiResponseDtoBuilder.withStatus(HttpStatus.OK).withMessage(AuthorizationConstants.LOGIN_SUCESSFULL)
 				.withData(response);

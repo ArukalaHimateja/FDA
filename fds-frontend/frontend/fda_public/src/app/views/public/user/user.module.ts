@@ -13,6 +13,13 @@ import { AddressComponent } from './address/address.component';
 import { PhotosComponent } from './photos/photos.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { MatButtonModule } from '@angular/material/button';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 @NgModule({
   declarations: [
     UserComponent,
@@ -21,6 +28,8 @@ import { MatButtonModule } from '@angular/material/button';
     AddressComponent,
     PhotosComponent,
     ReviewsComponent,
+    ChangePasswordComponent,
+    OrderDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +39,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatListModule,
     MatCardModule,
     MatButtonModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatDialogModule
   ]
 })
 export class UserModule { }

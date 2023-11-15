@@ -4,11 +4,16 @@ import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ApiService } from './api.service';
+import { config } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
+
+  defaultUserImage: string = '/assets/images/dummy/user.png';
+  defaultLogoImage: string = '/assets/images/dummy/logo.png';
+  defaultBannerImage: string = '/assets/images/dummy/product.png';
 
   constructor(
     private _httpClient: HttpClient,
@@ -51,7 +56,7 @@ export class FileUploadService {
    * Delete File
    * 
    * */
-  delete(file:any) {
+  delete(file: any) {
     return new Promise((resolve, reject) => {
       this._httpClient.delete(`${environment.apiUrl}file/delete/${file}`)
         .subscribe((response: any) => {
@@ -88,5 +93,27 @@ export class FileUploadService {
    */
   downloadFile(type: any, file: any) {
     return this._apiService.get(`file/downloadFile/${type}/${file}`);
+  }
+
+  /**
+  * Get File Url
+  * 
+  * @param file 
+  * @param type 
+  */
+  getFileUrl(file: any, type?: any): any {
+    let url = config.apiUrl + 'file/';
+    if (file && file !== '') {
+      url += file;
+    } else if (type && type === 'user') {
+      url = this.defaultUserImage;
+    } else if (type && type === 'logo') {
+      url = this.defaultLogoImage;
+    } else if (type && type === 'banner') {
+      url = this.defaultBannerImage;
+    } else {
+      url = this.defaultLogoImage;
+    }
+    return url;
   }
 }

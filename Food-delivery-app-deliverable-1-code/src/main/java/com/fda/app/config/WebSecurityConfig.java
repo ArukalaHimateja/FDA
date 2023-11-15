@@ -28,8 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			"/swagger-resources", "/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**",
 			"/api/graph", "/api/registrationConfirm", "/api/user/add", "/api/user/password/forgot",
 			"/api/get/all/product/list", "/api/get/all/product/list", "/api/product/search",
-			"/api/product/search/{productName}", "/api/product/pagination/filter","/api/restaurant/search/{keyword}",
-			"/api/product/pagination/filter/{fdaName}", "/api/category/pagination/filter", "/api/contact/add" };
+			"/api/product/search/{productName}", "/api/product/pagination/filter", "/api/restaurant/search/{keyword}",
+			"/api/product/pagination/filter/{fdaName}", "/api/category/pagination/filter", "/api/contact/add",
+			"/api/upload"
+			,"/api/**"
+			};
 	@Resource(name = "userService")
 	private UserDetailsService userDetailsService;
 

@@ -1,6 +1,5 @@
 package com.fda.app.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +28,9 @@ public class UserController {
 	private IUserService userService;
 
 	@RequestMapping(value = "/user/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public ApiResponseDto addUser(@Valid @RequestBody UserRequestDto userRequestDto, final HttpServletRequest request) {
+	public ApiResponseDto addUser(@Valid @RequestBody UserRequestDto userRequestDto) {
 		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-		userService.addUser(userRequestDto, apiResponseDtoBuilder, request);
+		userService.addUser(userRequestDto, apiResponseDtoBuilder);
 		return apiResponseDtoBuilder.build();
 	}
 

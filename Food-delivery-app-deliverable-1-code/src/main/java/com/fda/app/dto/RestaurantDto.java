@@ -4,12 +4,28 @@ public class RestaurantDto {
 
 	private String restaurantName;
 	private String restaurantAddress;
-	private String restaurantGstNo;
-	private String ownerAadharNumber;
 	private String restaurantEmail;
+	private String restaurantLicenseNumber;
+	private String restaurantMobileNumber;
+
+	public String getRestaurantMobileNumber() {
+		return restaurantMobileNumber;
+	}
+
+	public void setRestaurantMobileNumber(String restaurantMobileNumber) {
+		this.restaurantMobileNumber = restaurantMobileNumber;
+	}
 
 	public String getRestaurantEmail() {
 		return restaurantEmail;
+	}
+
+	public String getRestaurantLicenseNumber() {
+		return restaurantLicenseNumber;
+	}
+
+	public void setRestaurantLicenseNumber(String restaurantLicenseNumber) {
+		this.restaurantLicenseNumber = restaurantLicenseNumber;
 	}
 
 	public void setRestaurantEmail(String restaurantEmail) {
@@ -30,22 +46,6 @@ public class RestaurantDto {
 
 	public void setRestaurantAddress(String restaurantAddress) {
 		this.restaurantAddress = restaurantAddress;
-	}
-
-	public String getRestaurantGstNo() {
-		return restaurantGstNo;
-	}
-
-	public void setRestaurantGstNo(String restaurantGstNo) {
-		this.restaurantGstNo = restaurantGstNo;
-	}
-
-	public String getOwnerAadharNumber() {
-		return ownerAadharNumber;
-	}
-
-	public void setOwnerAadharNumber(String ownerAadharNumber) {
-		this.ownerAadharNumber = ownerAadharNumber;
 	}
 
 }
