@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SharedComponentsModule } from 'src/app/shared/shared-components/shared-components.module';
 import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatPaginatorModule,
     SharedComponentsModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule
   ]
 })
 export class OrderModule { }
