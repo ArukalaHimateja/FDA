@@ -1,1 +1,55 @@
-<p>view works!</p>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h1 class="header_heading">{{data?.element.productName}}</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div>
+    <div class="profile-side">
+        <div fxLayout="column" fxFlex="60%">
+            <div fxLayout="row">
+                <strong fxFlex="45%">Category name:</strong>
+                <p class="user-mail" fxFlex="55%">{{data?.element.categoryName}}</p>
+            </div>
+            <div fxLayout="row">
+                <strong fxFlex="45%">price:</strong>
+                <p class="user-mail" fxFlex="55%">${{data?.element.price}}</p>
+            </div>
+            <div fxLayout="row"><strong fxFlex="45%">productSize:</strong>
+                <p class="user-mail" fxFlex="55%">{{data?.element.productSize}}</p>
+            </div>
+
+            <div fxLayout="row">
+                <strong fxFlex="45%">active:</strong>
+                <p class="user-mail" fxFlex="55%"> {{data?.element.active ? "Active" : "Deactive"}}</p>
+            </div>
+        </div>
+        <div fxFlex="40%">
+            <app-show-image [image]="data?.element.productImage" classes="img-circle" type="user" width="200px"
+                height="200px">
+            </app-show-image>
+        </div>
+    </div>
+    <div class="profile-side">
+        <div fxLayout="row">
+            <strong>description:</strong>
+            <p class="user-mail">{{data?.element.description}}</p>
+        </div>
+        <div fxLayout="row">
+            <p class="user-mail" fxFlex="50%"><strong>Created at:</strong> {{data?.element.createdAt}}
+            </p>
+            <ng-container *ngIf="data?.element.updatedAt">
+                <p class="user-mail" fxFlex="50%"><strong>Updated at:</strong> {{data?.element.updatedAt}}</p>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="profile-btn">
+        <button class="chatbtn" id="chatBtn"><i class="fa fa-download"></i> Download Image</button>
+    </div> -->
