@@ -14,5 +14,4 @@ public interface IVerificationTokenService {
 
 	void sendVerificationToken(User user);
 
-
 }
