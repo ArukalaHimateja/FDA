@@ -6,7 +6,8 @@ import { AuthService } from '../../session/auth.service';
   providedIn: 'root'
 })
 export class OrderService {
-  displayedColumns: string[] = ['no', 'image', 'name', 'email', 'mobileNumber', 'createdAt', 'action'];
+  displayedColumns: string[] = ['id','createdAt','customerId','productName','productQuantity','totalPayPrice','payStatus','deliveryAddress', 'action']
+
   sessionUser: any;
 
   constructor(
@@ -16,10 +17,11 @@ export class OrderService {
     this.sessionUser = this._authService.getAuthUser();
   }
 
-  getAllOrderWithPaginationByRestaurantId(){
-    return this._apiService.get(`get/all/order/restaurant/${this.sessionUser.id}`);
+  getAllOrderWithPaginationByRestaurantId() {
+    return this._apiService.get(`get/all/order/restaurant/${this.sessionUser.restaurantId}`);
   }
 
-
-
+  getUserDetailById(customerId: any){
+    return this._apiService.get(`user/${customerId}`);
+  }
 }
