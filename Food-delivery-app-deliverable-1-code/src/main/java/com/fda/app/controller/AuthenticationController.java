@@ -73,8 +73,7 @@ public class AuthenticationController {
 		return apiResponseDtoBuilder.build();
 	}
 
-	private Map<String, Object> setTokenDetails(final UserDetails user, final String token,
-			final LoginResponseDto loginResponseDto) {
+	private Map<String, Object> setTokenDetails(final UserDetails user, final String token, final LoginResponseDto loginResponseDto) {
 		Map<String, Object> response = new HashMap<>();
 		response.put(USER, user);
 		response.put(TOKEN, token);
