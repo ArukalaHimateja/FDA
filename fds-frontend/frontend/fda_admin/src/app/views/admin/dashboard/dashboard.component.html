@@ -3,62 +3,86 @@
 </mat-toolbar>
 
 <div class="row">
-    <div class="col-lg-3 col-sm-6">
+    <div *ngIf="sessionUser.role === 0" class="col-lg-3 col-sm-6">
         <mat-card class="example-card">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image">
                     <i class="fa fa-users fa-fw fa-3x"></i>
                 </div>
-                <mat-card-title>{{dashboardData?.totalRestaurant}}</mat-card-title>
+                <mat-card-title>{{dashboardData.totalRestaurant}}</mat-card-title>
                 <mat-card-subtitle>Total Restaurant</mat-card-subtitle>
             </mat-card-header>
-            <button mat-raised-button color="primary" [routerLink]="'/'">More detais click here..</button>
+            <!-- <button mat-raised-button color="primary" [routerLink]="'/'">More detais click here..</button> -->
         </mat-card>
     </div>
 
-    <div class="col-lg-3 col-sm-6">
+    <div *ngIf="sessionUser.role === 0" class="col-lg-3 col-sm-6">
         <mat-card class="example-card">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image">
                     <i class="fa fa-users fa-fw fa-3x"></i>
                 </div>
-                <mat-card-title>{{dashboardData?.totalEmployee}}</mat-card-title>
-                <mat-card-subtitle>Total Employee</mat-card-subtitle>
-            </mat-card-header>
-            <button mat-raised-button color="primary" [routerLink]="'/'">More detais click here..</button>
-        </mat-card>
-    </div>
-
-    <div class="col-lg-3 col-sm-6">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <div mat-card-avatar class="example-header-image">
-                    <i class="fa fa-users fa-fw fa-3x"></i>
-                </div>
-                <mat-card-title>{{dashboardData?.totalCustomer}}</mat-card-title>
+                <mat-card-title>{{dashboardData.totalUser}}</mat-card-title>
                 <mat-card-subtitle>Total Customer</mat-card-subtitle>
             </mat-card-header>
-            <button mat-raised-button color="primary">More detais click here..</button>
+            <!-- <button mat-raised-button color="primary">More detais click here..</button> -->
         </mat-card>
     </div>
 
-    <div class="col-lg-3 col-sm-6">
+    <div *ngIf="sessionUser.role === 0 || sessionUser.role === 2" class="col-lg-3 col-sm-6">
         <mat-card class="example-card">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image">
                     <i class="fa fa-users fa-fw fa-3x"></i>
                 </div>
-                <mat-card-title>{{dashboardData?.totalOrder}}</mat-card-title>
+                <mat-card-title>{{dashboardData.totalOrder}}</mat-card-title>
                 <mat-card-subtitle>Total Order</mat-card-subtitle>
             </mat-card-header>
-            <button mat-raised-button color="primary">More detais click here..</button>
+            <!-- <button mat-raised-button color="primary">More detais click here..</button> -->
+        </mat-card>
+    </div>
+    <div *ngIf="sessionUser.role === 2" class="col-lg-3 col-sm-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                    <i class="fa fa-users fa-fw fa-3x"></i>
+                </div>
+                <mat-card-title>{{dashboardData.totalOrderDelivered}}</mat-card-title>
+                <mat-card-subtitle>Total Order Delivered</mat-card-subtitle>
+            </mat-card-header>
+            <!-- <button mat-raised-button color="primary">More detais click here..</button> -->
+        </mat-card>
+    </div>
+    <div *ngIf="sessionUser.role === 2" class="col-lg-3 col-sm-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                    <i class="fa fa-users fa-fw fa-3x"></i>
+                </div>
+                <mat-card-title>{{dashboardData.totalPendingOrder}}</mat-card-title>
+                <mat-card-subtitle>Total Pending Order</mat-card-subtitle>
+            </mat-card-header>
+            <!-- <button mat-raised-button color="primary">More detais click here..</button> -->
+        </mat-card>
+    </div>
+    
+    <div *ngIf="sessionUser.role === 0 || sessionUser.role === 2" class="col-lg-3 col-sm-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                    <i class="fa fa-users fa-fw fa-3x"></i>
+                </div>
+                <mat-card-title>{{dashboardData.totalRevenue}}</mat-card-title>
+                <mat-card-subtitle>Total Revenue</mat-card-subtitle>
+            </mat-card-header>
+            <!-- <button mat-raised-button color="primary">More detais click here..</button> -->
         </mat-card>
     </div>
 </div>
 
-<div id="chart">
+<!-- <div id="chart">
     <apx-chart style="width: 90%;" [series]="chartOptions.series" [chart]="chartOptions.chart"
         [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions" [yaxis]="chartOptions.yaxis"
         [legend]="chartOptions.legend" [fill]="chartOptions.fill" [stroke]="chartOptions.stroke"
         [tooltip]="chartOptions.tooltip" [xaxis]="chartOptions.xaxis"></apx-chart>
-</div>
+</div> -->
