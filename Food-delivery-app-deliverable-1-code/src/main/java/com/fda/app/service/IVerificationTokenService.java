@@ -19,10 +19,12 @@ public interface IVerificationTokenService {
 
 	void sendVerificationToken(User user);
 
+
 	void sendRejectRestaurantRequestEmail(RestaurantRequest restaurant);
 
 	void sendRestaurantRandomPasswordAndVerificationToken(Restaurant restaurant, String randomPassword);
 
 	void sendContectEmail(@Valid ContactDto contactDto);
+
 
 }
