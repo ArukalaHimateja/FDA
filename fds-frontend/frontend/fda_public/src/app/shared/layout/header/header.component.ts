@@ -39,7 +39,8 @@ export class HeaderComponent {
     this.pagination = _utilityService.pagination;
     router.events.subscribe((url: any) => {
       if (url && url.url) {
-        if (url.url.includes("signin") || url.url.includes("signup") || url.url.includes("partner")) {
+        //if (url.url.includes("signin") || url.url.includes("signup") || url.url.includes("partner")) {
+        if (url.url.includes("session")) {
           this.isLoginPage = true;
         }
         else if (url.url.includes("contact") || url.url.includes("user/")) {

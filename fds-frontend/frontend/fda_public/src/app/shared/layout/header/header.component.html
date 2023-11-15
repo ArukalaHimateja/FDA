@@ -38,6 +38,7 @@
         <span class="spacer"></span>
 
         <button mat-button aria-label="Singup" [routerLink]="'/contact'">Contact Us</button>
+        <button mat-button aria-label="Cart" [routerLink]="'/cart'">Cart</button>
         <button mat-button aria-label="Logout" [routerLink]="'/session/signin'" *ngIf="!sessionUser">Login</button>
         <button class="profile_icon_access" mat-button [matMenuTriggerFor]="profileMenu" *ngIf="sessionUser" (menuOpened)="onMenuOpenforProfileMenu()" (menuClosed)="onMenuClosedforProfileMenu()">
             <span matPrefix><img alt="profileIcon" src="assets/images/user.png" /></span>
