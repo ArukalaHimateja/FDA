@@ -13,7 +13,8 @@ export class FooterComponent {
   ) {
     router.events.subscribe((url: any) => {
       if (url && url.url) {
-        if (url.url.includes("signin") || url.url.includes("signup") || url.url.includes("partner")) {
+        //if (url.url.includes("signin") || url.url.includes("signup") || url.url.includes("partner")) {
+        if (url.url.includes("session")) {
           this.isLoginPage = true;
         } else {
           this.isLoginPage = false;

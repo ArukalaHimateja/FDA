@@ -43,8 +43,25 @@ export class NavigationService {
                     type: 'link'
                 });
             }
-
             if (this.sessionUser.role === 0) {
+                this.navbar.push({
+                    title: 'Promo Code',
+                    icon: 'card_giftcard',
+                    link: '/promo/code',
+                    type: 'link'
+                });
+            }
+
+            if (this.sessionUser.role === 2) {
+                this.navbar.push({
+                    title: 'Category',
+                    icon: 'restaurant_menu',
+                    link: '/category',
+                    type: 'link'
+                });
+            }
+
+            if (this.sessionUser.role === 2) {
                 this.navbar.push({
                     title: 'Menu',
                     icon: 'restaurant_menu',
@@ -53,7 +70,7 @@ export class NavigationService {
                 });
             }
 
-            if (this.sessionUser.role === 0) {
+            if (this.sessionUser.role === 2) {
                 this.navbar.push({
                     title: 'Order',
                     icon: 'person',
@@ -62,14 +79,14 @@ export class NavigationService {
                 });
             }
 
-            if (this.sessionUser.role === 0) {
-                this.navbar.push({
-                    title: 'Contact',
-                    icon: 'contacts',
-                    link: '/contact',
-                    type: 'link'
-                });
-            }
+            // if (this.sessionUser.role === 0) {
+            //     this.navbar.push({
+            //         title: 'Contact',
+            //         icon: 'contacts',
+            //         link: '/contact',
+            //         type: 'link'
+            //     });
+            // }
 
             if (this.sessionUser.role === 0) {
                 this.navbar.push({

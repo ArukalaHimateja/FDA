@@ -1,5 +1,5 @@
 <section class="profile_section">
-    <div class="jumbotron" fxLayout="row" fxLayoutAlign="center center">
+    <div class="profileJumbotron" fxLayout="row" fxLayoutAlign="center center">
         <div fxLayout="row">
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="30%">
                 <img alt="profile_icon" src="assets/images/user.png" />
@@ -7,7 +7,7 @@
             </div>
             <span class="spacer"></span>
             <div fxLayout="column" fxLayoutAlign="center end" fxFlex="30%">
-                <button class="edit_btn" mat-raised-button><mat-icon matPrefix>edit</mat-icon> Edit Profile</button>
+                <button class="edit_btn" (click)="editProfile()" mat-raised-button><mat-icon matPrefix>edit</mat-icon> Edit Profile</button>
                 <div class="dtl-view" fxLayout="row" fxLayoutAlign="center center">
                     <div fxLayout="column" fxLayoutAlign="center center">
                         <h2>0</h2>
@@ -32,16 +32,30 @@
         <mat-selection-list fxFlex="30%" #activity [multiple]="false" (selectionChange)="onSelectionChange($event)">
             <div fxLayout="column" class="side-bar">
 
-                <div class="activity">
+                <!-- <div class="activity">
                     <h3>Activity</h3>
-                    <mat-list-option [routerLink]="'reviews'">Reviews</mat-list-option>
-                    <mat-list-option [routerLink]="'photos'">Photos</mat-list-option>
-                </div>
+                    <mat-list-option [ngClass]="{'selected': selectedOptionValue === 'reviews'}" value="reviews" [routerLink]="'reviews'">
+                        Reviews
+                    </mat-list-option>
+                    <mat-list-option [ngClass]="{'selected': selectedOptionValue === 'photos'}" value="photos" [routerLink]="'photos'">
+                        Photos
+                    </mat-list-option>
+                </div> -->
 
                 <div class="online_ordering">
                     <h3>Online Ordering</h3>
-                    <mat-list-option [routerLink]="'order/history'">Order history</mat-list-option>
-                    <mat-list-option [routerLink]="'address'">my addresses</mat-list-option>
+                    <mat-list-option [ngClass]="{'selected': selectedOptionValue === 'order-history'}" value="order-history" [routerLink]="'order/history'">
+                        Order history
+                    </mat-list-option>
+                    <mat-list-option [ngClass]="{'selected': selectedOptionValue === 'address'}" value="address" [routerLink]="'address'">
+                        my addresses
+                    </mat-list-option>
+                </div>
+                <div class="setting">
+                    <h3>Edit Profile</h3>
+                    <mat-list-option [ngClass]="{'selected': selectedOptionValue === 'reset-password'}" value="reset-password" [routerLink]="'change/password'">
+                        Reset password
+                    </mat-list-option>
                 </div>
             </div>
         </mat-selection-list>

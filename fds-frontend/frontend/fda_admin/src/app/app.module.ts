@@ -12,6 +12,7 @@ import { AuthGuardService } from './views/session/auth/auth-guard.service';
 import { JwtInterceptor } from './views/session/jwt.interceptor';
 import { MatMenuModule } from '@angular/material/menu';
 import { ToastService } from './shared/services/toast.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function tokenGetter() {
   return localStorage.getItem(`${config.appShortName}UserToken`);
@@ -28,6 +29,7 @@ export function tokenGetter() {
     HttpClientModule,
     MatSnackBarModule,
     MatMenuModule,
+    MatDialogModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter

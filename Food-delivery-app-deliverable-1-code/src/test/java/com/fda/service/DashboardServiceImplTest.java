@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
 import com.fda.app.mapper.CustomMapper;
 import com.fda.app.model.User;
+import com.fda.app.repository.RestaurantRepository;
 import com.fda.app.repository.UserRepository;
 import com.fda.app.service.impl.DashboardServiceImpl;
 import com.fda.app.utility.Utility;
@@ -30,6 +31,8 @@ public class DashboardServiceImplTest {
 	UserRepository userRepository;
 	@Mock
 	CustomMapper customMapper;
+	@Mock
+	RestaurantRepository restaurantRepository;
 
 	@BeforeEach
 	public void init() {
@@ -54,6 +57,7 @@ public class DashboardServiceImplTest {
 		long totalEmployee = 10;
 		when(userRepository.countByRole(3)).thenReturn(totalEmployee);
 		when(userRepository.countByRole(1)).thenReturn(totalEmployee);
+		when(restaurantRepository.count()).thenReturn(totalEmployee);
 		dashboardServiceImpl.getAllDetails(apiResponseDtoBuilder);
 		assertTrue(apiResponseDtoBuilder.getMessage().equals("success"));
 

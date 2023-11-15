@@ -13,6 +13,20 @@
     background: url("/assets/images/login_bg.avif") no-repeat;
     background-size: cover;
     background-position: center;
+
+
+    .mat-mdc-button {
+        color: white;
+        // font-family: 'grotesk' !important;
+        // letter-spacing: 1px;
+        font-size: 14px;
+        align-self: center;
+        text-transform: capitalize;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .wrapper {

@@ -30,7 +30,7 @@ import com.google.maps.model.GeocodingResult;
 @Service
 public class GoogleLocationServiceImpl implements IGoogleLocationService {
 
-	@Value("${google.Api.Key}")
+	@Value("${google.api.Key}")
 	private String googleApiKey;
 
 	private GeoApiContext context;

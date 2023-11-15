@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../views/session/auth.service';
 import { UtilityService } from '../../services/utility.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangePasswordComponent } from 'src/app/views/session/change-password/change-password.component';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +16,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,
-    public _utilityService: UtilityService
+    public _utilityService: UtilityService,
+    private _matDialog: MatDialog
   ) {
     this.sessionUser = _authService.getAuthUser();
   }
@@ -24,5 +27,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this._authService.logout();
+  }
+
+  changePassword(){
+    this._matDialog.open(ChangePasswordComponent, {disableClose:true, width: '600px'});
   }
 }

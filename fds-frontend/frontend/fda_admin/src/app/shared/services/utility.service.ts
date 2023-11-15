@@ -93,4 +93,9 @@ export class UtilityService {
         }
         return url;
     }
+
+    getAuthUser(): any {
+        let user = localStorage.getItem(`${config.appShortName}User`);
+        return user ? JSON.parse(user) : null;
+    }
 }

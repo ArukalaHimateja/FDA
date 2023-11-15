@@ -1,0 +1,30 @@
+.cart-section{
+    padding: 20px 120px;
+
+    .whenListIsEmpty{
+        height: 100%;
+        h1{
+            text-transform: capitalize;
+        }
+    }
+
+    .text-area{
+        padding: 0px 40px;
+
+        .mat-mdc-button{
+            font-size: 20px;
+            padding: 15px;
+            border-radius: 20px;
+            margin-top: 20px;
+            width: 100%;
+            color: white;
+            text-transform: capitalize;
+        }
+        #promocodebtn{
+            background-color: lightcoral;
+        }
+        #checkoutbtn{
+            background-color: #FF1493;
+        }
+    }
+}

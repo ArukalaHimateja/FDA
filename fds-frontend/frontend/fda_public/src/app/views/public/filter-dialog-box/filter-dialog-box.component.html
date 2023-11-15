@@ -1,0 +1,92 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h1>Filters</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="closeDialog()"><mat-icon>close</mat-icon></button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-drawer-container class="side_drawer">
+    <mat-drawer mode="side" opened>
+        <mat-selection-list #filterDialogComponents [multiple]="false">
+            <mat-list-option (click)="selectOptionforFilterBox('sortBy')"
+                [ngClass]="{'selected': selectedOption === 'sortBy'}" [value]="'sortBy'" [selected]="true">
+                Sort by
+            </mat-list-option>
+            <mat-list-option (click)="selectOptionforFilterBox('cuisines')"
+                [ngClass]="{'selected': selectedOption === 'cuisines'}" [value]="'cuisines'">
+                Cuisines
+            </mat-list-option>
+            <mat-list-option (click)="selectOptionforFilterBox('rating')"
+                [ngClass]="{'selected': selectedOption === 'rating'}" [value]="'rating'">
+                Rating
+            </mat-list-option>
+            <mat-list-option (click)="selectOptionforFilterBox('costPerPerson')"
+                [ngClass]="{'selected': selectedOption === 'costPerPerson'}" [value]="'costPerPerson'">
+                Cost per person
+            </mat-list-option>
+            <mat-list-option (click)="selectOptionforFilterBox('moreFilters')"
+                [ngClass]="{'selected': selectedOption === 'moreFilters'}" [value]="'moreFilters'">
+                More filters
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <ng-container *ngIf="filterDialogComponents.selectedOptions.hasValue()">
+            <ng-container *ngIf="filterDialogComponents.selectedOptions.selected[0].value === 'sortBy'">
+                <!-- <app-sort-by></app-sort-by> -->
+                <mat-selection-list #sortBy [multiple]="false">
+                    <mat-list-option>Popularity</mat-list-option>
+                    <mat-list-option>Rating: High to Low</mat-list-option>
+                    <mat-list-option>Delivery Time</mat-list-option>
+                    <mat-list-option>Cost: Low to high</mat-list-option>
+                    <mat-list-option>Cost High to Low</mat-list-option>
+                </mat-selection-list>
+            </ng-container>
+            <ng-container *ngIf="filterDialogComponents.selectedOptions.selected[0].value === 'cuisines'">
+                <mat-selection-list fxLayout="row wrap" fxLayoutAlign="center" #cuisine [multiple]="true">
+                    <mat-list-option fxFlex="50%" *ngFor="let cuisine of cuisines">{{cuisine}}</mat-list-option>
+                </mat-selection-list>
+            </ng-container>
+            <ng-container *ngIf="filterDialogComponents.selectedOptions.selected[0].value === 'rating'">
+                <p>Rating</p>
+                <h2>₹{{preRatingValue === 1 ? 'Any' : (preRatingValue === 2 ? 3.5 : (preRatingValue === 3 ? 4.0 : 4.5)) }} - ₹5.0</h2>
+                <mat-slider min="1" max="5" step="1" showTickMarks>
+                    <input value="1" matSliderThumb [(ngModel)]="preRatingValue">
+                    <!-- <input value="5" matSliderEndThumb [(ngModel)]="postRatingValue"> -->
+                </mat-slider>
+                <div class="slider-label">
+                    <div class="start-label">Any</div>
+                    <div class="start-label">3.5</div>
+                    <div class="start-label">4.0</div>
+                    <div class="start-label">4.5</div>
+                    <div class="end-label">5.0</div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="filterDialogComponents.selectedOptions.selected[0].value === 'costPerPerson'">
+                <p>cost Per Person</p>
+                <h2>{{'₹'+preCostValue}} - {{postCostValue===1600 ? 'Any' : '₹'+postCostValue}}</h2>
+                <div fxLayout="row" fxLayoutAlign="center center"  [ngStyle]="{'height': '80%'}">
+                    <mat-slider min="0" max="1600" step="200" showTickMarks discrete [displayWith]="formatLabel">
+                        <input value="0" matSliderStartThumb [(ngModel)]="preCostValue" #preCost>
+                        <input value="1600" matSliderEndThumb [(ngModel)]="postCostValue" #postCost>
+                    </mat-slider>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="filterDialogComponents.selectedOptions.selected[0].value === 'moreFilters'">
+                <!-- <app-sort-by></app-sort-by> -->
+                <!-- <app-more-filters></app-more-filters> -->
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!filterDialogComponents.selectedOptions.hasValue()">None</ng-container>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+<footer>
+    <button mat-button id="clearAll">
+        Clear All
+    </button>
+    <button mat-raised-button id="apply">
+        Apply
+    </button>
+</footer>
