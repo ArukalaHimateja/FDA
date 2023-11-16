@@ -1,0 +1,15 @@
+.restaurantSection{
+    .mat-mdc-form-field{
+        width: 300px;
+    }
+}
+
+
+::ng-deep .mdc-data-table__cell, .mat-mdc-header-cell{
+    text-align: center !important;
+    text-transform: capitalize;
+}
+::ng-deep .mat-column-restaurantEmail{
+    text-transform: lowercase;
+}
+
