@@ -1,0 +1,46 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <h1 class="header_heading">{{restaurantDtl?.restaurantName}}</h1>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- <div class="profileJumbotron" fxLayout="row" fxLayoutAlign="center center">
+      <div fxLayout="row">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="30%">
+              <img alt="profile_icon" src="assets/images/user.png" />
+          </div>
+      </div>
+  </div> -->
+
+<ng-container *ngIf="restaurantDtl && restaurantDtl !== null; else noData;">
+  <!-- <p>Restaurant Owner: {{restaurantDtl.ownerName}}</p>
+    <p>Email: {{restaurantDtl.email}}</p>
+    <p>Mobile Number: {{restaurantDtl.mobileNumber}}</p>
+    <p>Restaurant Address: {{restaurantDtl.restaurantAddress}}</p>
+    <p>Restaurant License Number: {{restaurantDtl.restaurantLicenseNumber}}</p>
+    <p>Restaurant License Number: {{restaurantDtl.status === 0 ? "Pending" : (restaurantDtl.status === 1 ? "Active" :
+      "Rejeted")}}</p> -->
+
+  <div class="profile-side">
+    <div fxLayout="row">
+    <p fxFlex="40%" class="mobile-no"><i class="fa fa-phone"></i> {{restaurantDtl.mobileNumber}}</p>
+    <p fxFlex="60%" class="user-mail"><i class="fa fa-envelope"></i> {{restaurantDtl.email}}</p>
+  </div>
+    <div class="user-bio">
+      <!-- <h3>{{restaurantDtl?.restaurantName}}</h3> -->
+      <p class="bio"><i class="fa fa-map-marker"></i> {{restaurantDtl.restaurantAddress}}
+      </p>
+    </div>
+    <div class="profile-btn">
+      <button class="chatbtn" id="chatBtn" (click)="viewDocument()"><i class="fa fa-download"></i> View Document</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noData>
+  <app-no-data></app-no-data>
+</ng-template>
