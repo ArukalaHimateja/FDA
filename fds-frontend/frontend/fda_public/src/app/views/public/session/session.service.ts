@@ -27,7 +27,7 @@ export class SessionService {
      */
     createForm(): FormGroup {
         return this._formBuilder.group({
-            username: [null, Validators.required],
+            username: [null, [Validators.required, Validators.email]],
             password: [null, Validators.required]
         })
     }
@@ -100,6 +100,21 @@ export class SessionService {
             restaurantAddress: [null, [Validators.required]],
             restaurantLicenseNumber: [null, [Validators.required]],
             documents: [],
+        })
+    }
+    createFrogotPasswordFrom(){
+        return this._formBuilder.group({
+            username: [null, [Validators.required, Validators.email]]
+        })
+    }
+
+    forgotPassword(email: any){
+        return this._apiService.post(email, 'user/password/forgot').then((response: any) => {
+            if (response && response.body.status === 'OK') {
+                this._utilityService.successMessage(response.body.message, response.statusText);                
+            } else {
+                this._utilityService.errorMessage(response.body.message, response.statusText);
+            };
         })
     }
 

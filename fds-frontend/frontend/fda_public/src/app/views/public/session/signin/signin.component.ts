@@ -41,4 +41,12 @@ export class SigninComponent {
       htmlElement.style.display = "none";
     }
   }
+
+  forgotPassword(){
+    if(this.signinForm.controls['username'].valid){
+      const formData = new FormData();
+      formData.append('email', this.signinForm.controls['username'].value);
+      this._sessionService.forgotPassword(formData);
+    }
+  }
 }
