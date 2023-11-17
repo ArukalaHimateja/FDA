@@ -33,12 +33,13 @@ export class SignupComponent {
     this._userService.addUser(signupData, 'add').then((response: any) => {
       if (response && response.body.status === 'OK') {
         this._utilityService.successMessage(response.body.message, response.body.status);
-        this._router.navigateByUrl(`/login`);
+        this._router.navigateByUrl(`/session/signin`);
       } else {
         this._utilityService.successMessage(response.body.message, response.body.status);
       }
     }, (error: any) => {
 
     })
+
   }
 }

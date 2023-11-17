@@ -29,7 +29,7 @@ export class BecomeAPartnerComponent {
         this._utilityService.successMessage(response.body.message, response.body.status);
         this._router.navigateByUrl(`/session/signin`);
       } else {
-        this._utilityService.successMessage(response.body.message, response.body.status);
+        this._utilityService.errorMessage(response.body.message, response.body.status);
       }
     }, (error: any) => {
 
