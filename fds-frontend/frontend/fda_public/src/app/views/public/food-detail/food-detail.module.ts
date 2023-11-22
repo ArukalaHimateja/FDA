@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { FoodByCategoryComponent } from './food-by-category/food-by-category.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatCardModule,
     MatIconModule,
+    MatButtonModule,
   ]
 })
 export class FoodDetailModule { }
