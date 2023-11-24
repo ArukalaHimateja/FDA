@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { UserService } from '../user/User.service';
 import { Pagination, FoodCategoryType } from 'src/app/shared/shared/interfaces/pagination.interface';
 import { UtilityService } from 'src/app/shared/services/utility.service';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -60,6 +61,7 @@ export class HomeComponent {
     private _productService: ProductService,
     public _userService: UserService,
     private _utilityService: UtilityService,
+    private _cartService:CartService
   ) {
     this.pagination = this._utilityService.pagination;
     this.products("");
@@ -120,6 +122,18 @@ export class HomeComponent {
       this.pagination = response.body.data;
       this.FoodList = this.pagination.data;
     });
+  }
+
+  addToCart(element: any){
+    let json = {
+      id:element.id,
+      name : element.productName,
+      image:element.productImage,
+      restaurantName: element.restaurantName,
+      quantity:1,
+      price: element.price
+    }
+    this._cartService.addToCart(json);
   }
 
 }
