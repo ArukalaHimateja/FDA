@@ -1,15 +1,15 @@
 export interface FoodListItemType {
-    id: string,
-    productImage: string,
-    productName: string,
-    description: string,
-    price: string,
-    productSize: string,
-    restaurantId: string,
-    restaurantName: string,
-    restaurantAddress: string,
-    categoryId: string,
-    categoryName: string,
+    id: any,
+    productImage: any,
+    productName: any,
+    description: any,
+    price: any,
+    productSize: any,
+    restaurantId: any,
+    restaurantName: any,
+    restaurantAddress: any,
+    categoryId: any,
+    categoryName: any,
 }
 
 export interface RestroResponseType {

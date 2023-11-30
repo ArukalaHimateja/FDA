@@ -11,9 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FeedbackControllerComponent } from './feedback-controller/feedback-controller.component';
+import { ReportControllerComponent } from './report-controller/report-controller.component';
 @NgModule({
   declarations: [
-    ContactComponent
+    ContactComponent,
+    FeedbackControllerComponent,
+    ReportControllerComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ]
 })
 export class ContactModule { }

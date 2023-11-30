@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FoodListItemType, RestroResponseType } from 'src/app/shared/shared/interfaces/pagination.interface';
 import { UserService } from '../user/User.service';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
   selector: 'app-food-detail',
@@ -9,19 +11,20 @@ import { UserService } from '../user/User.service';
   styleUrls: ['./food-detail.component.scss']
 })
 export class FoodDetailComponent {
-  itemDetail: FoodListItemType = {
-    id: '',
-    productImage: '',
-    productName: '',
-    description: '',
+  itemDetail= {
+    productId: '',
     price: '',
     productSize: '',
     restaurantId: '',
     restaurantName: '',
     restaurantAddress: '',
+    active: '',
     categoryId: '',
     categoryName: '',
-  };
+    productName: '',
+    productImage: '',
+    description: '',
+  }
   categoryList!: RestroResponseType[];
   itemId: any = null;
   selectedOptionValue!: number;
@@ -31,6 +34,8 @@ export class FoodDetailComponent {
     public router: Router,
     public _activatedRoute: ActivatedRoute,
     public _userService: UserService,
+    public _productService: ProductService,
+    private _cartService:CartService
   ) {
     this.itemId = _activatedRoute.snapshot.params['id'];
     if (this.itemId) {
@@ -47,7 +52,6 @@ export class FoodDetailComponent {
         })
       })
     }
-
   }
 
   onSelectionChange(event: any) {
@@ -58,5 +62,7 @@ export class FoodDetailComponent {
       this.selectedOptionValue = 0;
     }
   }
-
+  addToCart(productid: any){
+    this._cartService.addToCart(productid);
+  }
 }

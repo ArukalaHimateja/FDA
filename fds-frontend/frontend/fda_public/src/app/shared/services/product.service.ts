@@ -9,7 +9,8 @@ import { FoodListItemType } from '../shared/interfaces/pagination.interface';
 export class ProductService {
   foodList = new BehaviorSubject<FoodListItemType[]>([]);
   searchKeyword = new BehaviorSubject<String | null>(null);
-
+  cartProductList = new BehaviorSubject<any[]>([]);
+  
   constructor(
     private _apiService: ApiService,
   ) {}
@@ -24,4 +25,5 @@ export class ProductService {
   getProductByCategoryId(data: any){
     return this._apiService.post(data, 'product/pagination/filter');
   }
+
 }

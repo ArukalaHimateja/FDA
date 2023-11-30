@@ -1,8 +1,8 @@
 <mat-toolbar class="bg-none">
     <span>Restaurant</span>
     <span class="spacer"></span>
-    <button mat-raised-button color="primary" class="float-right" [routerLink]="'/admin/property/add'">
-        <mat-icon>add_circle</mat-icon> Add Property
+    <button mat-raised-button color="primary" class="float-right" (click)="addMenu()">
+        <mat-icon>add_circle</mat-icon> Add Menu
     </button>
 </mat-toolbar>
 <hr>
@@ -35,9 +35,9 @@
             </ng-container>
 
             <!-- Mobile Number Column -->
-            <ng-container matColumnDef="categoryId">
-                <th mat-header-cell *matHeaderCellDef> category Id </th>
-                <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+            <ng-container matColumnDef="categoryName">
+                <th mat-header-cell *matHeaderCellDef> category Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
             </ng-container>
 
             <!-- CreatedAt Column -->
@@ -62,7 +62,19 @@
                     <!-- <button mat-button color="warn" [ngStyle]="{'color' : _userService.getRequestColor(element.active)}">
                         {{_userService.getStatus(element.active)}}
                     </button> -->
-                    <mat-slide-toggle [(ngModel)]="element.active"></mat-slide-toggle>
+                    <mat-slide-toggle [checked]="element.active" (change)="updateProductState(element, $event)"></mat-slide-toggle>
+                </td>
+            </ng-container>
+            <!-- action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button [matMenuTriggerFor]="action"
+                        aria-label="action Menu"><mat-icon>more_vert</mat-icon></button>
+                    <mat-menu #action="matMenu">
+                        <button mat-menu-item (click)="viewProduct(element)">View</button>
+                        <button mat-menu-item (click)="updateMenu(element)">Update</button>
+                    </mat-menu>
                 </td>
             </ng-container>
 

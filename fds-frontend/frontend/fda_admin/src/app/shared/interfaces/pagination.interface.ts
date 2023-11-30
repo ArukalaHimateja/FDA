@@ -31,4 +31,34 @@ export interface DashboardDataType {
     totalOrderDelivered: any,
     totalPendingOrder: any,
     totalRevenue: any,
+    totalRestaurantRevenue: any,
+}
+
+
+export interface OrderProductDetailType {
+    id: any,
+    createdAt: any,
+    updatedAt: any,
+    customerId: any,
+    productId: any,
+    productName: any,
+    productQuantity: any,
+    totalPayPrice: any,
+    perQuantityPrice: any,
+    payStatus: any,
+    status: any,
+    restaurantId: any,
+    deliveryAddress: any,
+    restaurantName: any,
+}
+export interface OrderDetailType {
+    id: any,
+    createdAt: any,
+    promoCode: any,
+    payPriceWithoutPromoCode: any,
+    payPriceWithPromoCode: any,
+    payStatus: any,
+    status: any,
+    deliveryAddress: any,
+    subTotalPrice: any,
 }

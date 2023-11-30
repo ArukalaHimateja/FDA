@@ -51,5 +51,19 @@ In this architecture, the MVC pattern helps separate concerns within the present
 Communication flows from the presentation layer, where user interactions occur, to the application layer, which routes requests to the service layer for processing. The service layer interacts with the data access layer to retrieve or update data from the database. 
 
 
+**Application of Design patterns on Food Delivery System.**
+
+Creational - Singleton Pattern 
+We have used the Singleton pattern, implemented with java beans creation. When a bean is configured in Spring with the @Component annotation (or its specialized versions like @Service, @Repository, or @Controller)
+
+Creational – Builder Pattern 
+In a Spring Boot project, the Builder pattern can be used to create complex objects such as DTOs (Data Transfer Objects) or entities, which may have a large number of fields or configurations. 
+
+Behavioral - Observer pattern 
+Here Observer patterns we have used to create schedulers or events like email triggers on an event. The observer design pattern enables a subscriber to register with and receive notifications from a provider.
+ 
+Structural - Composite Pattern 
+We have used a Composite pattern that follows the parent and child structure. We have used services as interface and child classes.
+
 
 

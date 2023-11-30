@@ -7,6 +7,9 @@ import { AuthService } from '../../session/auth.service';
 import { UserService } from '../user/user.service';
 import { RestaurantService } from './restaurant.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewDetailsComponent } from './view-details/view-details.component';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-restaurant',
@@ -19,7 +22,14 @@ export class RestaurantComponent {
   pagination: Pagination;
   dialogRef: any;
   sessionUser: any;
-
+  restaurantStatus = 0;
+  // filterModel: any = {
+  //   stars: '0',
+  //   category: 'all',
+  //   active: 'all',
+  //   status: 'all',
+  //   keyword: null
+  // }
   constructor(
     public _utilityService: UtilityService,
     public _restaurantService: RestaurantService,
@@ -27,6 +37,7 @@ export class RestaurantComponent {
     private _authService: AuthService,
     public _userService: UserService,
     private _toastService: ToastService,
+    private _matDialog: MatDialog
   ) {
     this.displayedColumns = _restaurantService.displayedColumns;
     this.pagination = _utilityService.pagination;
@@ -53,7 +64,7 @@ export class RestaurantComponent {
   getDataList() {
     let json = {
       restaurantRequestFilterDto: {
-        status: 0
+        status: this.restaurantStatus
       },
       pagination: this.pagination
     }
@@ -122,4 +133,8 @@ export class RestaurantComponent {
     }
   }
 
+
+  viewDetails(id: any){
+    this._matDialog.open(ViewDetailsComponent, {disableClose: true, width: '600px', data: id});
+  }
 }

@@ -32,12 +32,12 @@
         <p class="section_heading">Inspiration for your first order</p>
         <div fxLayout="row wrap" fxLayoutAlign="space-between">
             <ng-container *ngFor="let element of FoodList">
-                <mat-card class="card" [routerLink]="'foodDetail/'+element.id">
-                    <img mat-card-image alt="sweets" [src]="element.productImage? _userService.getImage(element.productImage): image" [alt]="element.productImage">
+                <mat-card class="card">
+                    <img mat-card-image alt="sweets" [routerLink]="'foodDetail/'+element.id" [src]="element.productImage? _userService.getImage(element.productImage): image" [alt]="element.productImage">
                     <!-- <p class="offers">{{offers}}</p> -->
                     <mat-card-content>
                         <div fxLayout="row" fxLayoutAlign="space-between center">
-                            <p class="name">{{element.productName}}</p>
+                            <p class="name" [routerLink]="'foodDetail/'+element.id">{{element.productName}}</p>
                             <p class="rating" fxLayout="row" fxLayoutAlign=" center">{{rating}} <mat-icon>star</mat-icon></p>
                         </div>
                         <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -48,6 +48,7 @@
                             <p></p>
                             <p class="timing">{{timing}}</p>
                         </div>
+                        <button mat-button (click)="addToCart(element)">Add to cart <mat-icon>add_shopping_cart</mat-icon></button>
                     </mat-card-content>
                 </mat-card>
             </ng-container>

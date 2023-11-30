@@ -12,11 +12,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedComponentsModule } from 'src/app/shared/shared-components/shared-components.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { ViewDetailsComponent } from './view-details/view-details.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
   declarations: [
-    RestaurantComponent
+    RestaurantComponent,
+    ViewDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +37,11 @@ import { MatButtonModule } from '@angular/material/button';
     SharedComponentsModule,
     MatTableModule,
     MatButtonModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatDialogModule,
+    FlexLayoutModule,
   ]
 })
 export class RestaurantModule { }

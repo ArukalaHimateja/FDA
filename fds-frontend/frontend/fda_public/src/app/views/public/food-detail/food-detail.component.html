@@ -12,6 +12,8 @@
                 <!-- <h4>{{itemDetail.restaurantName}}</h4> -->
                 <p>price - {{itemDetail.price}}</p>
                 <p>category Name - {{itemDetail.categoryName}}</p>
+
+                <button mat-button (click)="addToCart(itemDetail.productId)">Add to cart <mat-icon>add_shopping_cart</mat-icon></button>
             </dvi>
         </div>
     </section>
