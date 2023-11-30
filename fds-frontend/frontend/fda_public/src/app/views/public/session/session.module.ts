@@ -12,13 +12,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BecomeAPartnerComponent } from './become-apartner/become-apartner.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
     SessionComponent,
     SigninComponent,
     SignupComponent,
-    BecomeAPartnerComponent
+    BecomeAPartnerComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,

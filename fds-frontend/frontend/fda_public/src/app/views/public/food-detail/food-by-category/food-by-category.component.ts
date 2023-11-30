@@ -26,10 +26,10 @@ export class FoodByCategoryComponent {
     public _utilityService: UtilityService,
   ) {
     this.pagination = this._utilityService.pagination;
-    this.categoryId = _activatedRoute.snapshot.params['categoryId'];
-    if (this.categoryId) {
+    this._activatedRoute.params.subscribe(routeParams => {
+      this.categoryId = routeParams['categoryId'];
       this.getProdctByCategoryId(this.categoryId);
-    }
+    });
   }
 
   getProdctByCategoryId(categoryId: any){

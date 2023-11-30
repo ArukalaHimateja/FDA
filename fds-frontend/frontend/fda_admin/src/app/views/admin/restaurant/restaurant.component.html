@@ -1,9 +1,25 @@
-<mat-toolbar class="bg-none">
+<mat-toolbar class="bg-none restaurantSection">
     <span>Restaurant</span>
     <span class="spacer"></span>
-    <button mat-raised-button color="primary" class="float-right" [routerLink]="'/admin/property/add'">
-        <mat-icon>add_circle</mat-icon> Add Property
+    <!-- <button mat-raised-button color="primary" class="float-right" [matMenuTriggerFor]="status">
+        <mat-icon>add_circle</mat-icon> Status
     </button>
+    <mat-menu #status="matMenu">
+        <button mat-menu-item>Approved</button>
+        <button mat-menu-item>pending</button>
+        <button mat-menu-item>Rejected</button>
+    </mat-menu> -->
+    <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select placeholder="Choose status" [(ngModel)]="restaurantStatus" (ngModelChange)="getDataList()">
+            <mat-option [value]="-1">All</mat-option>
+            <ng-container *ngFor="let element of _userService.REQUEST_STATUS; let i = index">
+                <mat-option [value]="element.key">
+                    {{element.value}}
+                </mat-option>
+            </ng-container>
+        </mat-select>
+    </mat-form-field>
 </mat-toolbar>
 <hr>
 
@@ -88,9 +104,7 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef class="text-right"> Action </th>
                 <td mat-cell *matCellDef="let element" class="text-right">
-                    <button mat-icon-button>
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
+                    <button mat-button (click)="viewDetails(element.id)">view</button>
                 </td>
             </ng-container>
 

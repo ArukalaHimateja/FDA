@@ -43,7 +43,7 @@ public class AuthenticationControllerTest {
 		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.postForEntity(url, request,
 				ApiResponseDtoBuilder.class);
 
-		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+		assertEquals(HttpStatus.UNAUTHORIZED, responseEntity.getStatusCode());
 
 	}
 }
