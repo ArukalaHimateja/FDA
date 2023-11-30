@@ -32,15 +32,6 @@ import com.fda.app.model.User;
 public interface CustomMapper {
 
 	User userRequestDtoToUser(UserRequestDto userRequestDto);
-
-	FoodProduct fdaDtoTofda(@Valid ProductDto fdaDto);
-
-	Restaurant restaurantDtoToRestaurant(@Valid RestaurantDto restaurantDto);
-
-	Feedback feedbackRequestDtoToFeedback(@Valid FeedbackRequestDto feedbackRequestDto);
-
-	RatingAndReview ratingRequestDtoToRating(@Valid RatingAndReviewRequestDto ratingRequestDto);
-
 	List<UserListResponseDto> userListToUserListResponseDtoList(List<User> userList);
 
 	Category categoryRequestDtoToCategory(@Valid CategoryRequestDto categoryRequestDto);
