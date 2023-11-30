@@ -43,20 +43,11 @@ export class NavigationService {
                     type: 'link'
                 });
             }
-            if (this.sessionUser.role === 0) {
+            if (this.sessionUser.role === 2) {
                 this.navbar.push({
                     title: 'Promo Code',
                     icon: 'card_giftcard',
                     link: '/promo/code',
-                    type: 'link'
-                });
-            }
-
-            if (this.sessionUser.role === 2) {
-                this.navbar.push({
-                    title: 'Category',
-                    icon: 'restaurant_menu',
-                    link: '/category',
                     type: 'link'
                 });
             }
@@ -72,9 +63,18 @@ export class NavigationService {
 
             if (this.sessionUser.role === 2) {
                 this.navbar.push({
-                    title: 'Order',
-                    icon: 'person',
+                    title: 'Orders',
+                    icon: 'shopping_basket',
                     link: '/order',
+                    type: 'link'
+                });
+            }
+
+            if (this.sessionUser.role === 2) {
+                this.navbar.push({
+                    title: 'Category',
+                    icon: 'restaurant',
+                    link: '/category',
                     type: 'link'
                 });
             }
