@@ -11,12 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.fda.app.constants.Constants;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
-<<<<<<< HEAD
-=======
-import com.fda.app.dto.ContactDto;
-import com.fda.app.model.Restaurant;
-import com.fda.app.model.RestaurantRequest;
->>>>>>> d6e769532eb2fc0720d380657f9b84dfb7219f89
 import com.fda.app.model.User;
 import com.fda.app.model.VerificationToken;
 import com.fda.app.repository.VerificationTokenRepository;
@@ -122,61 +116,4 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 		return vToken;
 	}
 
-<<<<<<< HEAD
-=======
-	@Override
-	public void sendRestaurantRandomPasswordAndVerificationToken(Restaurant restaurant, String randomPassword) {
-		new Thread(() -> {
-			String subject = "FDA Account Verification";
-			String body = createRandomPasswordEmailBody(restaurant.getRestaurantName(), randomPassword,
-					registrationConfirmUrl(restaurant.getUserId()));
-			emailService.sendEmail(restaurant.getRestaurantEmail(), subject, body, "", null, null);
-		}).start();
-
-	}
-
-	private String createRandomPasswordEmailBody(String restaurantName, String randomPassword, String url) {
-		final String body = "<html><body><h3>Hello " + restaurantName.toUpperCase() + "</h3>"
-				+ "<p>Your restaurant approval request is accepted.<b>" + "</b>, your password is " + randomPassword
-				+ "</p>" + "<p>You registered an account on FDA<b>"
-				+ "</b>, before being able to use your account you need to verify that this is your email verification by </p>"
-				+ "<a href=\"" + url + "\">Clicking Here </a>" + "<br><br><p>Kind Regards,<br>Team FDA</body></html>";
-
-		return body;
-	}
-
-	@Override
-	public void sendRejectRestaurantRequestEmail(RestaurantRequest restaurant) {
-		new Thread(() -> {
-			String subject = "FDA Restaurant Account Request Rejected";
-			String body = createRejectRestaurantEmailBody(restaurant.getRestaurantName());
-			emailService.sendEmail(restaurant.getEmail(), subject, body, "", null, null);
-		}).start();
-
-	}
-
-	private String createRejectRestaurantEmailBody(String restaurantName) {
-		final String body = "<html><body><h3>Hello " + restaurantName.toUpperCase() + "</h3>"
-				+ "<p>your restaurant approval Request Rejected.</p>"
-				+ "<br><br><p>Kind Regards,<br>Team FDA</body></html>";
-		return body;
-	}
-
-	@Override
-	public void sendContectEmail(@Valid ContactDto contactDto) {
-		new Thread(() -> {
-			String subject = "Contact Enquiry";
-			String body = createContactEmailBody(contactDto);
-			emailService.sendEmail(ev.getProperty("support.email"), subject, body, "", null, null);
-		}).start();
-
-	}
-
-	private String createContactEmailBody(@Valid ContactDto contactDto) {
-		final String body = "<html><body><h3>Hello Admin</h3>" + "<p>contact us on " + contactDto.getEmail() + "</p>"
-				+ "<p>contact me on " + contactDto.getEmail() + "</p>"
-				+ "<br><br><p>Kind Regards,<br>Team FDA</body></html>";
-		return body;
-	}
->>>>>>> d6e769532eb2fc0720d380657f9b84dfb7219f89
 }
