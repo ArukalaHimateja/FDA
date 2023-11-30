@@ -39,9 +39,9 @@ export class ToastService {
     }
 
     success(text: any) {
-        this._matSnackBar.open(text, 'OK', { duration: 5000 });
+        this._matSnackBar.open(text, 'OK', { duration: 5000, verticalPosition: 'top' });
     }
     error(text: any) {
-        this._matSnackBar.open(text, 'OK', { duration: 5000 });
+        this._matSnackBar.open(text, 'OK', { duration: 5000, verticalPosition: 'top' });
     }
 }
