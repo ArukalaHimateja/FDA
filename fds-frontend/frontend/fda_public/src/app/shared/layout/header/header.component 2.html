@@ -12,7 +12,8 @@
                         *ngIf="!isAutocompleterActiveforLocation">arrow_drop_up</mat-icon>
                     <mat-icon class="postfix" matSuffix
                         *ngIf="isAutocompleterActiveforLocation">arrow_drop_down</mat-icon>
-                    <mat-autocomplete autoActiveFirstOption #locations="matAutocomplete">
+                    <mat-autocomplete autoActiveFirstOption #locations="matAutocomplete"
+                        (opened)="onAutocompleteOpenedforLocation()" (closed)="onAutocompleteClosedforLocation()">
                         <mat-option *ngFor="let option of locationOption" [value]="option">
                             {{option}}
                         </mat-option>
@@ -26,8 +27,7 @@
                     <input [formControl]="search_bar" type="text"
                         placeholder="Search For Restaurant, cuisine, or a dish" aria-label="Search Bar" matInput
                         [matAutocomplete]="search" (input)="onInputProduct()">
-                    <mat-autocomplete autoActiveFirstOption #search="matAutocomplete"
-                        (optionSelected)='searchProductByName($event.option.value)'>
+                    <mat-autocomplete autoActiveFirstOption #search="matAutocomplete" (optionSelected)='searchProductByName($event.option.value)'>
                         <mat-option *ngFor="let option of FoodList" [value]="option.productName">
                             {{option.productName}}
                         </mat-option>
@@ -40,15 +40,14 @@
         <button mat-button aria-label="Singup" [routerLink]="'/contact'">Contact Us</button>
         <button mat-button aria-label="Cart" [routerLink]="'/cart'">Cart</button>
         <button mat-button aria-label="Logout" [routerLink]="'/session/signin'" *ngIf="!sessionUser">Login</button>
-        <button class="profile_icon_access" mat-button [matMenuTriggerFor]="profileMenu" *ngIf="sessionUser"
-            (menuOpened)="onMenuOpenforProfileMenu()" (menuClosed)="onMenuClosedforProfileMenu()">
+        <button class="profile_icon_access" mat-button [matMenuTriggerFor]="profileMenu" *ngIf="sessionUser" (menuOpened)="onMenuOpenforProfileMenu()" (menuClosed)="onMenuClosedforProfileMenu()">
             <span matPrefix><img alt="profileIcon" src="assets/images/user.png" /></span>
             {{sessionUser.name}}
             <mat-icon matSuffix>{{ isProfileIconMenuActive ? 'arrow_drop_down' : 'arrow_drop_up' }}</mat-icon>
         </button>
         <mat-menu #profileMenu="matMenu">
             <ng-container *ngIf="sessionUser">
-                <button mat-menu-item aria-label="Login" [routerLink]="'/user/order/history'">Profile</button>
+                <button mat-menu-item aria-label="Login" [routerLink]="'/user/profile'">Profile</button>
             </ng-container>
             <ng-container *ngIf="sessionUser">
                 <button mat-menu-item aria-label="Logout" (click)="logout()">Logout</button>
