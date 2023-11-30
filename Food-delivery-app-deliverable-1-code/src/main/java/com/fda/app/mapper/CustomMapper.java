@@ -2,8 +2,11 @@ package com.fda.app.mapper;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.mapstruct.Mapper;
 
+import com.fda.app.dto.CategoryRequestDto;
 import com.fda.app.dto.FeedbackRequestDto;
 import com.fda.app.dto.LoginResponseDto;
 import com.fda.app.dto.ProductDto;

@@ -24,4 +24,5 @@ public interface IVerificationTokenService {
 	void sendRestaurantRandomPasswordAndVerificationToken(Restaurant restaurant, String randomPassword);
 
 	void sendContectEmail(@Valid ContactDto contactDto);
+
 }
