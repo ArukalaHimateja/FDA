@@ -8,7 +8,6 @@ import { FoodListItemType, Pagination } from '../../shared/interfaces/pagination
 import { UserService } from 'src/app/views/public/user/User.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterDialogBoxComponent } from 'src/app/views/public/filter-dialog-box/filter-dialog-box.component';
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -22,17 +21,12 @@ export class HeaderComponent {
 
   location = new FormControl('');
   search_bar = new FormControl('');
-  // isAutocompleterActiveforLocation: boolean = false;
+  isAutocompleterActiveforLocation: boolean = false;
   isProfileIconMenuActive: boolean = false;
   FoodList: FoodListItemType[] = [];
   foodVarietyList: string[] = [];
   pagination!: Pagination;
-  // locationOption!: any
-
-
-  // location: FormControl = new FormControl();
-  locationOption: string[] = [];
-  isAutocompleterActiveforLocation: boolean = false;
+  locationOption!: any
 
   constructor(
     public router: Router,
@@ -71,9 +65,6 @@ export class HeaderComponent {
       const foodVarieties: string[] = data.map(item => item.productName);
       this.foodVarietyList = foodVarieties;
     });
-
-    // this.initializeAutocomplete();
-
   }
 
   // Scroll event listener
@@ -90,6 +81,12 @@ export class HeaderComponent {
     this._sessionsService.logout();
   }
 
+  onAutocompleteOpenedforLocation() {
+    this.isAutocompleterActiveforLocation = true;
+  }
+  onAutocompleteClosedforLocation() {
+    this.isAutocompleterActiveforLocation = false;
+  }
   onMenuOpenforProfileMenu() {
     this.isProfileIconMenuActive = true;
   }
@@ -98,7 +95,7 @@ export class HeaderComponent {
   }
 
   async onInputProduct() {
-    await this.searchProductByName(this.search_bar.value);
+      await this.searchProductByName(this.search_bar.value);
   }
 
   /**
@@ -109,16 +106,13 @@ export class HeaderComponent {
   async searchProductByName(filterValue: string | null) {
     this._productService.searchKeyword.next(filterValue);
     const filterData = {
-      filter: {
-        location: '',
-        keyword: filterValue
-      },
+      filter: { keyword: filterValue },
       pagination: this.pagination,
     }
 
     await this._productService.searchProduct(filterData).then((response: any) => {
-      this.FoodList = response.body.data;
-      // this.FoodList = this.pagination.data;
+      this.pagination = response.body.data;
+      this.FoodList = this.pagination.data;
     });
   }
   openDialogForFilter() {
@@ -129,15 +123,4 @@ export class HeaderComponent {
       console.log("result", result)
     })
   }
-
-
-  // onInputLocatin() {
-  //   // const input = document.getElementById('location-input') as HTMLInputElement;
-  //   const autocomplete = new google.maps.places.SearchBox(this.location.value ? this.location.value : "");
-  //   // autocomplete.addListener('place_changed', () => {
-  //   //   const place = autocomplete.getPlace();
-  //   //   // Handle the selected place data here
-  //   // });
-  // }
-
 }
