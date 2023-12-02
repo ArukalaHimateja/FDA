@@ -48,6 +48,60 @@
             </ng-container>
         </div>
     </div>
+    <mat-divider></mat-divider>
+
+    <div>
+        <mat-list class="review_list">
+            <mat-list-item lines="3" *ngFor="let element of reviewListForProdct">
+                <div class="text_header" fxLayout="row">
+                    <span><strong>{{element.userName}}</strong></span>
+                    <span class="spacer"></span>
+                    <span>{{element.createdAt}}</span>
+                </div>
+                <div>
+                   <div fxLayout="row">
+                        <ng-container *ngIf="element.rating === 5">
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="element.rating === 4">
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="element.rating === 3">
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="element.rating === 2">
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="element.rating === 1">
+                            <mat-icon>star</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                            <mat-icon>star_border</mat-icon>
+                        </ng-container>
+                    </div>
+                    <p>{{element.comment}}</p>
+                    <mat-divider></mat-divider>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </div>
 </div>
 
 <!-- <div class="profile-btn">

@@ -48,6 +48,27 @@
     }
 }
 
+.review_list {
+    .mat-mdc-list-item{
+        padding-top: 20px;
+        .text_header{
+            padding-bottom: 16px;
+        }
+        .mat-icon{
+            color: gold;
+        }
+    }
+    strong{
+        text-transform: capitalize;
+        font-size: 18px;
+    }
+    span {
+        color: black !important;
+    }
+    p{
+        color: black !important;
+    }
+}
 
 // button.chatbtn,
 // button.createbtn {
