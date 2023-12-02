@@ -10,7 +10,6 @@ export interface FoodListItemType {
     restaurantAddress: any,
     categoryId: any,
     categoryName: any,
-    rating: any,
 }
 
 export interface RestroResponseType {
@@ -51,10 +50,9 @@ export interface OrderHistoryListType {
     perQuantityPrice: number,
     deliveryAddress: string,
     productName: string,
-    orderId: any,
 }
 
-export interface OrderProductDetailType {
+export interface OrderDetailType{
     id: any,
     createdAt: any,
     updatedAt: any,
@@ -69,15 +67,4 @@ export interface OrderProductDetailType {
     restaurantId: any,
     deliveryAddress: any,
     restaurantName: any,
-}
-export interface OrderDetailType {
-    id: any,
-    createdAt: any,
-    promoCode: any,
-    payPriceWithoutPromoCode: any,
-    payPriceWithPromoCode: any,
-    payStatus: any,
-    status: any,
-    deliveryAddress: any,
-    subTotalPrice: any,
 }

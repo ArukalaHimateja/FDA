@@ -25,8 +25,5 @@ export class ProductService {
   getProductByCategoryId(data: any){
     return this._apiService.post(data, 'product/pagination/filter');
   }
-  getProductListByFilterWithPagination(data: any){
-    return this._apiService.post(data, 'product/pagination/filter');
-  }
 
 }
