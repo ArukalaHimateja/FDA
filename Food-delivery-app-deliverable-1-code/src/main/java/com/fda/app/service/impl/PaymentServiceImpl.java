@@ -11,8 +11,10 @@ import com.fda.app.constants.Constants;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
 import com.fda.app.dto.CheckoutPayment;
 import com.fda.app.model.CombineOrder;
+import com.fda.app.model.FoodProduct;
 import com.fda.app.model.User;
 import com.fda.app.repository.CombineOrderRepository;
+import com.fda.app.repository.FoodProductRepository;
 import com.fda.app.repository.UserRepository;
 import com.fda.app.service.IPaymentService;
 import com.stripe.Stripe;
@@ -31,6 +33,10 @@ public class PaymentServiceImpl implements IPaymentService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private FoodProductRepository foodProductRepository;
+
 	@Autowired
 	private CombineOrderRepository combineOrderRepository;
 
