@@ -47,6 +47,7 @@ export class DashboardComponent {
     totalOrderDelivered: null,
     totalPendingOrder: null,
     totalRevenue: null,
+    totalRestaurantRevenue: null,
   }
 
 
