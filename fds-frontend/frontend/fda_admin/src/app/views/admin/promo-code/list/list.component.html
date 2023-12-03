@@ -3,7 +3,7 @@
         <span class="breadcrumb-heading">Promo Codes</span>
     </div>
     <span class="spacer"></span>
-    <button mat-raised-button color="primary" class="float-right" [routerLink]="'/admin/promo/code/add'">
+    <button mat-raised-button color="primary" class="float-right" [routerLink]="'/promo/code/add'">
         <mat-icon>add_circle</mat-icon> Create Promo Code
     </button>
 </mat-toolbar>
@@ -48,7 +48,7 @@
             <!-- Business email Column -->
             <ng-container matColumnDef="discount">
                 <th mat-header-cell *matHeaderCellDef> Discount </th>
-                <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.value}} </td>
             </ng-container>
 
             <!-- Business mobile number Column -->

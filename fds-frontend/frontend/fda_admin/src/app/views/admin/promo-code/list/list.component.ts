@@ -56,9 +56,11 @@ export class ListComponent implements OnInit {
    * Get Data List with pagination
    */
   getDataList() {
-    let requestBody: any = Object.assign({}, this.filterModel);
-    this._promoCodeService.search(requestBody, this.pagination.perPage, this.pagination.currentPage).then((response: any) => {
-      this.pagination = response.data;
+    let json: any = {
+      pagination: this.pagination
+    }
+    this._promoCodeService.search(json).then((response: any) => {
+      this.pagination = response.body.data;
       this.dataSource = new MatTableDataSource<any>(this.pagination.data);
     })
   }
@@ -99,3 +101,4 @@ export class ListComponent implements OnInit {
     }
   }
 }
+  

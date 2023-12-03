@@ -70,11 +70,4 @@ export class UtilityService {
         let user = localStorage.getItem("user");
         return user ? JSON.parse(user) : null;
     }
-
-    success(message: any) {
-        this._matSnackBar.open(message, 'OK', { duration: 5000, verticalPosition: 'top' });
-    }
-    error(message: any) {
-        this._matSnackBar.open(message, 'OK', { duration: 5000, verticalPosition: 'top' });
-    }
 }
