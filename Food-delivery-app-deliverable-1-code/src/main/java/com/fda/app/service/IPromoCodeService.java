@@ -21,5 +21,4 @@ public interface IPromoCodeService {
 
 	void getPromoCodesListByFilterWithPagination(PromoCodeFilterWithPaginationDto filterWithPagination,
 			ApiResponseDtoBuilder apiResponseDtoBuilder);
-
 }

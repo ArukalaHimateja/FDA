@@ -32,12 +32,6 @@ import com.fda.app.repository.UserRepository;
 import com.fda.app.repository.custom.ProductRepositoryCustom;
 import com.fda.app.service.IProductService;
 import com.fda.app.utility.Utility;
-import com.stripe.Stripe;
-import com.stripe.exception.StripeException;
-import com.stripe.model.Price;
-import com.stripe.model.Product;
-import com.stripe.param.PriceCreateParams;
-import com.stripe.param.ProductCreateParams;
 
 @Service
 public class ProductServiceImpl implements IProductService {
@@ -65,26 +59,7 @@ public class ProductServiceImpl implements IProductService {
 			return;
 		}
 		if ((user.getRole() == 0 || user.getRole() == 2)) {
-			Product product = null;
-			Price price = null;
-			try {
-				Stripe.apiKey = stripeApiKey;
-				ProductCreateParams paramsProduct = ProductCreateParams.builder().setActive(true)
-						.setName(productDto.getProductName()).build();
-				 product = Product.create(paramsProduct);
-				PriceCreateParams paramsa = PriceCreateParams.builder().setCurrency("usd")
-						.setUnitAmount(Long.parseLong(productDto.getPrice().toString())).setProduct(product.getId())
-						.build();
-
-				 price = Price.create(paramsa);
-			} catch (StripeException e) {
-
-			}
 			FoodProduct foodProduct = customMapper.fdaDtoTofda(productDto);
-			if(product!=null&&price!=null) {
-			foodProduct.setStripeProductId(product.getId());
-			foodProduct.setStripePriceId(price.getId());
-			}
 			foodProduct.setCreatedAt(new Date());
 			Optional<Category> category = categoryRepository.findById(productDto.getCategoryId());
 			if (category.isPresent()) {

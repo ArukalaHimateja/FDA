@@ -90,7 +90,7 @@ public class PromoCodeServiceImpl implements IPromoCodeService {
 		if (diffInMinutes > 0) {
 			apiResponseDtoBuilder.withMessage(Constants.PROMO_CODE_INFO).withStatus(HttpStatus.OK).withData(code);
 		} else {
-			apiResponseDtoBuilder.withMessage(Constants.PROMO_CODE_EXPIRED).withStatus(HttpStatus.OK);
+			apiResponseDtoBuilder.withMessage(Constants.PROMO_CODE_EXPIRED).withStatus(HttpStatus.NOT_FOUND);
 		}
 
 	}

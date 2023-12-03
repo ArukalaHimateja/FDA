@@ -14,6 +14,6 @@ public interface IRatingAndReviewService {
 
 	void getReviewListByUserId(long userId, ApiResponseDtoBuilder apiResponseDtoBuilder);
 
-	void getReviewListByOrderId(long productId, ApiResponseDtoBuilder apiResponseDtoBuilder);
+	void getReviewListByProductId(long productId, ApiResponseDtoBuilder apiResponseDtoBuilder);
 
 }
