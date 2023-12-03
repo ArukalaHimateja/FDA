@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { ProfileComponent } from './profile/profile.component';
 import { style } from '@angular/animations';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -16,9 +16,12 @@ export class UserComponent {
   constructor(
     private _utilityService: UtilityService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private _activatedRoute: ActivatedRoute,
   ) {
-    router.navigateByUrl('user/order/history');
+    // if(Object.keys(_activatedRoute.snapshot.params).length === 1){
+    //   router.navigateByUrl('user/order/history');
+    // }
     this.sessionUser = this._utilityService.getAuthUser();
   }
 

@@ -4,7 +4,9 @@
         <p>{{itemDetail.restaurantAddress}}</p>
         <div class="detail_container" fxLayout="row">
             <dvi class="image_container" fxFlex="60%" fxLayout="row" fxLayoutAlign="center center">
-                <img id="itemImage" [src]="itemDetail.productImage ? _userService.getImage(itemDetail.productImage) : image" alt="img" />
+                <img id="itemImage"
+                    [src]="itemDetail.productImage ? _userService.getImage(itemDetail.productImage) : image"
+                    alt="img" />
             </dvi>
             <dvi fxFlex="40%">
                 <h1>{{itemDetail.productName}}</h1>
@@ -13,7 +15,8 @@
                 <p>price - {{itemDetail.price}}</p>
                 <p>category Name - {{itemDetail.categoryName}}</p>
 
-                <button mat-button (click)="addToCart(itemDetail.productId)">Add to cart <mat-icon>add_shopping_cart</mat-icon></button>
+                <button mat-button (click)="addToCart(itemDetail)">Add to cart
+                    <mat-icon>add_shopping_cart</mat-icon></button>
             </dvi>
         </div>
     </section>

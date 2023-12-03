@@ -1,0 +1,57 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h1>Edit Porfile</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="closeDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<section>
+    <div class="profileJumbotron" fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="row">
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="30%">
+                <img alt="profile_icon" src="assets/images/user.png" />
+            </div>
+        </div>
+    </div>
+    <div class="formField">
+        <form [formGroup]="formGroup" fxLayout="column">
+            <mat-form-field>
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="fullName" />
+                <mat-error
+                    *ngIf="formGroup.controls['fullName'].invalid && (formGroup.controls['fullName'].dirty || formGroup.controls['fullName'].touched)">
+                    <ng-container *ngIf="formGroup.controls['fullName'].errors?.['required']">
+                        Name is required.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" />
+                <mat-error
+                    *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched)">
+                    <ng-container *ngIf="formGroup.controls['email'].errors?.['required']">
+                        Email is required.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Mobile Number</mat-label>
+                <input matInput formControlName="mobileNumber" />
+                <mat-error
+                    *ngIf="formGroup.controls['mobileNumber'].invalid && (formGroup.controls['mobileNumber'].dirty || formGroup.controls['mobileNumber'].touched)">
+                    <ng-container *ngIf="formGroup.controls['mobileNumber'].errors?.['required']">
+                        Mobile Number is required.
+                    </ng-container>
+                    <ng-container *ngIf="formGroup.controls['mobileNumber'].errors?.['pattern']">
+                        Mobile Number is invalid.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+            <button class="edit_btn" mat-button [disabled]="formGroup.invalid" (click)="updateProfile()">Update</button>
+        </form>
+    </div>
+</section>

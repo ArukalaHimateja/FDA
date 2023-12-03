@@ -1,7 +1,7 @@
-<div class="cart-section" fxLayout="row" fxLayoutAlign="space-between start">
+<div class="cart-section" fxLayout="row" fxLayoutAlign="space-between start"
+  *ngIf="productList.length !== 0; else emptyList">
   <div [fxFlex]="60">
-    <table *ngIf="productList.length !== 0; else emptyList" mat-table [dataSource]="productList"
-      class="mat-elevation-z8">
+    <table mat-table [dataSource]="productList" class="mat-elevation-z8">
 
       <!-- productName Column -->
       <ng-container matColumnDef="productName">
@@ -18,7 +18,15 @@
       <!-- quantity Column -->
       <ng-container matColumnDef="quantity">
         <th mat-header-cell *matHeaderCellDef> quantity </th>
-        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        <td mat-cell *matCellDef="let element">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <button mat-icon-button (click)="updateQuantity(element.id, -1)"
+              [disabled]="element.quantity <= 1 || isPromocodeApplyed"><mat-icon>remove_circle_outline</mat-icon></button>
+            {{element.quantity}}
+            <button mat-icon-button (click)="updateQuantity(element.id, 1)"
+              [disabled]="isPromocodeApplyed"><mat-icon>add_circle_outline</mat-icon></button>
+          </div>
+        </td>
       </ng-container>
 
       <!-- price column -->
@@ -30,7 +38,7 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Delete </th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <button mat-button (click)="removeItem(i)">Delete</button>
+          <button mat-button (click)="removeItem(i)" [disabled]="isPromocodeApplyed">Delete</button>
         </td>
       </ng-container>
 
@@ -38,16 +46,31 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <ng-template #emptyList>
-      <div class="whenListIsEmpty" fxLayout="row" fxLayoutAlign="center center">
-        <h1>cart is empty. please add an item</h1>
-      </div>
-    </ng-template>
   </div>
   <div class="text-area" fxLayout="column" fxLayoutAlign="start center" [fxFlex]="40">
     <h2>Basket</h2>
-    <h3>Sub Total : {{totalCost}}</h3>
-    <button id="promocodebtn" mat-button>apply promocode</button>
+    <ng-container *ngIf="!isPromocodeApplyed; else isPromocodeInvalid">
+      <h3>Sub Total : {{totalAmountWithoutPromocode}}</h3>
+      <mat-form-field class="location-field">
+        <mat-label>Search Bar</mat-label>
+        <input [formControl]="promocode" type="text" placeholder="Location" aria-label="Select your Location" matInput>
+        <mat-icon class="postfix" matSuffix>attach_money</mat-icon>
+      </mat-form-field>
+      <button id="promocodebtn" mat-button [disabled]="promocode.invalid" (click)="applyPromocode()">apply
+        promocode</button>
+    </ng-container>
+
+    <ng-template #isPromocodeInvalid>
+      <h3>Total amount without promocode = {{totalAmountWithoutPromocode}}</h3>
+      <h3>Amount after applying promo code = {{totalAmountWithPromocode}}</h3>
+    </ng-template>
+
     <button id="checkoutbtn" mat-button (click)="checkout(productList)">Checkout</button>
   </div>
 </div>
+
+<ng-template #emptyList>
+  <div class="whenListIsEmpty" fxLayout="row" fxLayoutAlign="center center">
+    <h1>cart is empty. please add an item</h1>
+  </div>
+</ng-template>
