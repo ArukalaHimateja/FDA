@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ import com.fda.app.model.User;
 import com.fda.app.repository.RatingAndReviewRepository;
 import com.fda.app.repository.UserRepository;
 import com.fda.app.service.impl.RatingAndReviewServiceImpl;
+import com.fda.app.utility.Utility;
 
 @ExtendWith(MockitoExtension.class)
 public class RatingAndReviewServiceImplTest {
@@ -54,6 +56,16 @@ public class RatingAndReviewServiceImplTest {
 		ratingRequestDto.setRating(2);
 		RatingAndReview rating = new RatingAndReview();
 		rating.setId(1l);
+		User user = new User();
+		user.setEmail("test");
+		user.setFullName("test");
+		user.setMobileNumber("123456789");
+		user.setPassword("test");
+		user.setRole(0);
+		user.setId(1l);
+		when(Utility.getSessionUser(userRepository)).thenReturn(user);
+		Optional<User> userOptional = Optional.of(user);
+		when(userRepository.findById(1l)).thenReturn(userOptional);
 		when(customMapper.ratingRequestDtoToRating(ratingRequestDto)).thenReturn(rating);
 		ratingServiceImpl.addReview(ratingRequestDto, apiResponseDtoBuilder);
 		assertTrue(apiResponseDtoBuilder.getMessage().equals(Constants.RATING_ADD_SUCCESS));
@@ -81,7 +93,7 @@ public class RatingAndReviewServiceImplTest {
 		ratingRequestDto.setRating(2);
 		List<RatingAndReview> ratings = new ArrayList<>();
 		when(ratingRepository.findByProductId(productId)).thenReturn(ratings);
-		ratingServiceImpl.getReviewListByOrderId(productId, apiResponseDtoBuilder);
+		ratingServiceImpl.getReviewListByProductId(productId, apiResponseDtoBuilder);
 		assertTrue(apiResponseDtoBuilder.getMessage().equals(Constants.SUCCESS));
 
 	}
