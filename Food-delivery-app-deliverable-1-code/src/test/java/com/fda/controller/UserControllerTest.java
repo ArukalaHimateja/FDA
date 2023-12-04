@@ -37,7 +37,7 @@ public class UserControllerTest {
 
 	private final String URL = "http://localhost:";
 
-	//@Test
+	@Test
 	public void addUser() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -59,7 +59,7 @@ public class UserControllerTest {
 
 	}
 
-	//@Test
+	@Test
 	public void forgotPassword() throws Exception {
 		String url = URL + port + "/api/user/password/forgot";
 		HttpHeaders headers = new HttpHeaders();
@@ -88,7 +88,7 @@ public class UserControllerTest {
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
 	}
 
-	//@Test
+	@Test
 	public void isActiveUser() throws Exception {
 
 		HttpHeaders headers = new HttpHeaders();
@@ -108,7 +108,7 @@ public class UserControllerTest {
 
 	}
 
-	//@Test
+	@Test
 	public void isInactiveUser() throws Exception {
 
 		HttpHeaders headers = new HttpHeaders();
@@ -128,27 +128,6 @@ public class UserControllerTest {
 
 	}
 
-	//@Test
-	public void getUserListByFilterWithPagination() throws Exception {
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-
-		UserFilterWithPaginationDto userFilterWithPaginationDto = new UserFilterWithPaginationDto();
-		UserFilterDto userFilterDto = new UserFilterDto();
-		PaginationDto PaginationDto = new PaginationDto();
-		PaginationDto.setCurrentPage(1);
-		PaginationDto.setPerPage(10);
-		userFilterWithPaginationDto.setPagination(PaginationDto);
-		userFilterWithPaginationDto.setFilter(userFilterDto);
-		String url = URL + port + "/api/customer/pagination/filter";
-		HttpEntity<UserFilterWithPaginationDto> request = new HttpEntity<>(userFilterWithPaginationDto, headers);
-
-		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.postForEntity(url, request,
-				ApiResponseDtoBuilder.class);
-
-		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-
-	}
+	
 
 }

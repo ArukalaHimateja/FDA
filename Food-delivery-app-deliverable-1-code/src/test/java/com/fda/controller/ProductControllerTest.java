@@ -64,7 +64,7 @@ public class ProductControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		long id = 1L;
-		String url = URL + port + "/api/prduct/active";
+		String url = URL + port + "/api/product/active";
 
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 		String urlTemplate = UriComponentsBuilder.fromHttpUrl(url).queryParam("id", "{id}").encode().toUriString();
@@ -74,7 +74,7 @@ public class ProductControllerTest {
 		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.exchange(urlTemplate, HttpMethod.POST,
 				entity, ApiResponseDtoBuilder.class, params);
 
-		assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
 	}
 
