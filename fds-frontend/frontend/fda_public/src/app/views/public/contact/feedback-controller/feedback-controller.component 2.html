@@ -1,0 +1,39 @@
+<div class="feedbackController">
+    <form [formGroup]="ContactusForm" (ngSubmit)="onSubmit()" fxLayout="column">
+        <!-- <mat-form-field>
+        <mat-select formControlName="query" placeholder="How can we help you?">
+            <mat-option *ngFor="let option of queryList" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field> -->
+        <!-- <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input formControlName="fullName" matInput placeholder="Full Name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input formControlName="email" matInput placeholder="Email Address">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Mobile Number</mat-label>
+        <input formControlName="mobileNumber" matInput placeholder="Mobile Number (optional)"
+            pattern="[0-9]*">
+    </mat-form-field> -->
+        <mat-form-field class="TextFieldControl">
+            <mat-label>Type Text</mat-label>
+            <textarea formControlName="text" matInput placeholder="Type text"></textarea>
+            <mat-error
+                *ngIf="ContactusForm.controls['text'].invalid && (ContactusForm.controls['text'].dirty || ContactusForm.controls['text'].touched)">
+                <ng-container *ngIf="ContactusForm.controls['text'].errors?.['required']">
+                    please fill out this field.
+                </ng-container>
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button class="FeedbackBtn" type="submit" [disabled]="ContactusForm.invalid">Submit
+            Feedback
+        </button>
+    </form>
+
+</div>

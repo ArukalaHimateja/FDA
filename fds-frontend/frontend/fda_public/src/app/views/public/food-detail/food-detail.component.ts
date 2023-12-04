@@ -11,7 +11,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
   styleUrls: ['./food-detail.component.scss']
 })
 export class FoodDetailComponent {
-  itemDetail= {
+  itemDetail = {
     productId: '',
     price: '',
     productSize: '',
@@ -35,7 +35,7 @@ export class FoodDetailComponent {
     public _activatedRoute: ActivatedRoute,
     public _userService: UserService,
     public _productService: ProductService,
-    private _cartService:CartService
+    private _cartService: CartService
   ) {
     this.itemId = _activatedRoute.snapshot.params['id'];
     if (this.itemId) {
@@ -44,7 +44,7 @@ export class FoodDetailComponent {
         this.itemDetail = MenuResponse.body.data;
         _userService.getAllCategoryByRestaurantId(MenuResponse.body.data.restaurantId).then((RestroResponse) => {
           this.categoryList = RestroResponse.body.data;
-          if(this.categoryList.length > 0){
+          if (this.categoryList.length > 0) {
             router.navigateByUrl(`foodDetail/${this.itemId}/foodByCategory/${this.categoryList[0].id}`);
             this.selectedOptionValue = this.categoryList[0].id;
           }
@@ -62,7 +62,16 @@ export class FoodDetailComponent {
       this.selectedOptionValue = 0;
     }
   }
-  addToCart(productid: any){
-    this._cartService.addToCart(productid);
+
+  addToCart(element: any) {
+    let json = {
+      id: element.productId,
+      name: element.productName,
+      image: element.productImage,
+      restaurantName: element.restaurantName,
+      quantity: 1,
+      price: element.price
+    }
+    this._cartService.addToCart(json);
   }
 }

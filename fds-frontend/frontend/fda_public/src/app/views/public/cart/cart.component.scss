@@ -1,13 +1,5 @@
 .cart-section{
     padding: 20px 120px;
-
-    .whenListIsEmpty{
-        height: 100%;
-        h1{
-            text-transform: capitalize;
-        }
-    }
-
     .text-area{
         padding: 0px 40px;
 
@@ -26,5 +18,17 @@
         #checkoutbtn{
             background-color: #FF1493;
         }
+
+        .mat-mdc-form-field{
+            width: 100%n;
+        }
+    }
+}
+
+.whenListIsEmpty{
+    // height: 100%;
+    padding: 60px;
+    h1{
+        text-transform: capitalize;
     }
 }

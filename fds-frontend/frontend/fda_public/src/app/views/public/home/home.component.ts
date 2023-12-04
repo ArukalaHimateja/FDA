@@ -12,7 +12,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
 })
 export class HomeComponent {
 
-  foodCategories!: FoodCategoryType[]; 
+  foodCategories!: FoodCategoryType[];
   // [
   //   {
   //     name: 'thali',
@@ -52,7 +52,7 @@ export class HomeComponent {
   //   },
   // ]
   slidePosition = 0;
-  FoodList!: any;
+  FoodList: any;
   image = "assets/images/sweets.jpg"
   rating = '4.3'
   timing = '34 min'
@@ -61,13 +61,13 @@ export class HomeComponent {
     private _productService: ProductService,
     public _userService: UserService,
     private _utilityService: UtilityService,
-    private _cartService:CartService
+    private _cartService: CartService
   ) {
     this.pagination = this._utilityService.pagination;
     this.products("");
     this.getCategories();
 
-    _productService.searchKeyword.subscribe((response:any)=>{
+    _productService.searchKeyword.subscribe((response: any) => {
       this.products(response);
     })
   }
@@ -82,16 +82,18 @@ export class HomeComponent {
     this.foodCategories?.unshift(this.foodCategories.pop() as FoodCategoryType);
   }
 
-  products(keyword:any) {
+  products(keyword: any) {
     const ListData = {
       filter: {
-        keyword: keyword
+        categoryId: 0,
+        keyword: keyword,
+        restaurantId: 0
       },
       pagination: this.pagination
     }
-    this._productService.searchProduct(ListData).then((response: any)=>{
+    this._productService.getProductListByFilterWithPagination(ListData).then((response: any) => {
       this.pagination = response.body.data;
-      this.FoodList = this.pagination.data; 
+      this.FoodList = this.pagination.data;
     });
   }
   getCategories() {
@@ -101,13 +103,13 @@ export class HomeComponent {
       },
       pagination: this.pagination
     }
-    this._productService.getAllCategories(ListData).then((response: any)=>{
+    this._productService.getAllCategories(ListData).then((response: any) => {
       this.pagination = response.body.data;
-      this.foodCategories = this.pagination.data; 
+      this.foodCategories = this.pagination.data;
     });
   }
 
-  getProductByCategoryId(categoryId: any){
+  getProductByCategoryId(categoryId: any) {
     console.log("Hi")
     const data = {
       filter: {
@@ -118,19 +120,19 @@ export class HomeComponent {
       pagination: this.pagination
     }
 
-    this._productService.getProductByCategoryId(data).then((response: any)=> {
+    this._productService.getProductByCategoryId(data).then((response: any) => {
       this.pagination = response.body.data;
       this.FoodList = this.pagination.data;
     });
   }
 
-  addToCart(element: any){
+  addToCart(element: any) {
     let json = {
-      id:element.id,
-      name : element.productName,
-      image:element.productImage,
+      id: element.id,
+      name: element.productName,
+      image: element.productImage,
       restaurantName: element.restaurantName,
-      quantity:1,
+      quantity: 1,
       price: element.price
     }
     this._cartService.addToCart(json);
