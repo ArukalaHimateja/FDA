@@ -22,8 +22,12 @@ import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
 import com.fda.app.dto.CheckoutPayment;
 import com.fda.app.mapper.CustomMapper;
 import com.fda.app.model.CombineOrder;
+import com.fda.app.model.FoodProduct;
+import com.fda.app.model.Order;
 import com.fda.app.model.User;
 import com.fda.app.repository.CombineOrderRepository;
+import com.fda.app.repository.FoodProductRepository;
+import com.fda.app.repository.OrderRepository;
 import com.fda.app.repository.UserRepository;
 import com.fda.app.repository.custom.UserRepositoryCustom;
 import com.fda.app.service.IEmailService;
@@ -39,12 +43,16 @@ public class PaymentServiceImplTest {
 	private PaymentServiceImpl paymentServiceImpl;
 
 	@Mock
+	private OrderRepository orderRepository;
+	@Mock
 	private UserRepository userRepository;
 	@Mock
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Mock
 	private IEmailService emailService;
+	@Mock
+	private FoodProductRepository foodProductRepository;
 	@Mock
 	private IVerificationTokenService verificationTokenService;
 	@Mock
