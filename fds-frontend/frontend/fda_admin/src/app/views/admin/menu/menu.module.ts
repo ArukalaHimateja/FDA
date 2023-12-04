@@ -19,6 +19,8 @@ import { MatInputModule } from '@angular/material/input';
 import {FlexLayoutModule} from '@angular/flex-layout'
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     FlexLayoutModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatListModule,
+    MatDividerModule
   ]
 })
 export class MenuModule { }
