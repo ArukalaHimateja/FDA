@@ -116,6 +116,6 @@ export class MenuComponent {
   }
 
   viewProduct(element: any){
-    this._dialog.open(ViewComponent, {disableClose: true ,width: '600px', data: {element: element}});
+    this._dialog.open(ViewComponent, {disableClose: true ,width: '600px', maxHeight: '95%', data: {element: element}});
   }
 }
