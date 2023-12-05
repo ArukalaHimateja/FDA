@@ -31,6 +31,9 @@ public class PaymentServiceImpl implements IPaymentService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private FoodProductRepository foodProductRepository;
 	@Autowired
 	private CombineOrderRepository combineOrderRepository;
 

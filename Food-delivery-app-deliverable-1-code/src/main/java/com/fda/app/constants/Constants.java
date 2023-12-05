@@ -6,13 +6,13 @@ public class Constants {
 	public static final String API_BASE_URL = "/api";
 
 	// Tables
-	public static final String COMBINE_ORDER_TABLE_NAME = "combine_order_details";
 	public static final String USER_TABLE_NAME = "user_details";
 	public static final String PRODUCT_TABLE_NAME = "product_details";
 	public static final String PROMO_CODE_TABLE_NAME = "promo_code_details";
 	public static final String RESTAURANT_DOCUMENT_TABLE_NAME = "restaurant_document_details";
 	public static final String RESTAURANT_REQUEST_TABLE_NAME = "restaurant_request_details";
 	public static final String ORDER_TABLE_NAME = "order_details";
+	public static final String COMBINE_ORDER_TABLE_NAME = "combine_order_details";
 	public static final String TRACK_ORDER_HISTORY_TABLE_NAME = "track_order_history_details";
 	public static final String ORDER_REVIEW_TABLE_NAME = "order_review_details";
 	public static final String BILLING_TABLE_NAME = "billing_details";

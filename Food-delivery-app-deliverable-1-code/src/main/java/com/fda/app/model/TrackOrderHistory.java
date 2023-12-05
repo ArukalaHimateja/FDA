@@ -21,10 +21,9 @@ import com.fda.app.config.CustomJsonDateSerializer;
 import com.fda.app.constants.Constants;
 
 @Entity
-@Table(name = Constants.RATING_AND_REVIEW_TABLE_NAME)
+@Table(name = Constants.TRACK_ORDER_HISTORY_TABLE_NAME)
 @JsonIgnoreProperties
-public class RatingAndReview {
-
+public class TrackOrderHistory {
 	public static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,52 +42,8 @@ public class RatingAndReview {
 	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	@JsonDeserialize(using = CustomDateAndTimeDeserialize.class)
 	private Date updatedAt;
-
-	private int rating;
-	private long userId;
-	private Long productId;
-	private String comment;
-	private String userName;
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(long productId) {
-		this.productId = productId;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-
-	public int getRating() {
-		return rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
+	private Long orderId;
+	private int status;
 
 	public Long getId() {
 		return id;
@@ -112,6 +67,22 @@ public class RatingAndReview {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public static long getSerialversionuid() {

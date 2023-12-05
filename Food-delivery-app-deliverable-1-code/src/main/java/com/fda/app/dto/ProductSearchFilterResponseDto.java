@@ -3,12 +3,20 @@ package com.fda.app.dto;
 public class ProductSearchFilterResponseDto {
 	private String restaurantAddress;
 	private String restaurantName;
-	private String product_name;
+	private String productName;
 	private Long id;
 	private String productImage;
 	private Long price;
 	private String categoryName;
 	private int rating;
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
 	public String getRestaurantAddress() {
 		return restaurantAddress;
@@ -24,14 +32,6 @@ public class ProductSearchFilterResponseDto {
 
 	public void setRestaurantName(String restaurantName) {
 		this.restaurantName = restaurantName;
-	}
-
-	public String getProduct_name() {
-		return product_name;
-	}
-
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
 	}
 
 	public Long getId() {
