@@ -34,7 +34,7 @@ public class AuthenticationControllerTest {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
 		LoginUser loginUser =new LoginUser();
-		loginUser.setUsername("string");
+		loginUser.setUsername("admin@gmail.com");
 		loginUser.setPassword("string");
 
 		String url = URL + port + "/api/auth/login";
@@ -43,7 +43,7 @@ public class AuthenticationControllerTest {
 		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.postForEntity(url, request,
 				ApiResponseDtoBuilder.class);
 
-		assertEquals(HttpStatus.UNAUTHORIZED, responseEntity.getStatusCode());
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
 	}
 }
