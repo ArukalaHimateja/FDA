@@ -29,8 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			"/api/graph", "/api/registrationConfirm", "/api/user/add", "/api/user/password/forgot",
 			"/api/get/all/product/list", "/api/get/all/product/list", "/api/product/search",
 			"/api/product/search/{productName}", "/api/product/pagination/filter", "/api/restaurant/search/{keyword}",
-			"/api/product/pagination/filter/{fdaName}", "/api/category/pagination/filter", "/api/contact/add",
-			"/api/upload"
+			"/api/product/pagination/filter", "/api/category/pagination/filter", "/api/contact/add",
+			"/api/upload","/api/get/product/{id}"
 			,"/api/**"
 			};
 	@Resource(name = "userService")
