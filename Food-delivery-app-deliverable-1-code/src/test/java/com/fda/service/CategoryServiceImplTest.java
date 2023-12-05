@@ -71,13 +71,13 @@ public class CategoryServiceImplTest {
 		user.setRole(0);
 		user.setId(1l);
 		when(Utility.getSessionUser(userRepository)).thenReturn(user);
+		Restaurant restaurant = new Restaurant();
+		restaurant.setId(1l);
+		Optional<Restaurant> restaurantOptional = Optional.of(restaurant);
+		when(restaurantRepository.findByUserId(1l)).thenReturn(restaurantOptional);
 		Category category = new Category();
 		category.setId(1l);
 		when(customMapper.categoryRequestDtoToCategory(categoryRequestDto)).thenReturn(category);
-		Restaurant restaurant=new Restaurant();
-		restaurant.setId(1l);
-		Optional<Restaurant> restaurantOptional=Optional.of(restaurant) ;
-		when(restaurantRepository.findByUserId(1l)).thenReturn(restaurantOptional);
 		categoryServiceImpl.addCategory(categoryRequestDto, apiResponseDtoBuilder);
 		assertTrue(apiResponseDtoBuilder.getMessage().equals(Constants.ADD_CATEGORY_SUCCESS));
 
@@ -149,10 +149,15 @@ public class CategoryServiceImplTest {
 	@Test
 	public void updateCategory() {
 		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-		CategoryRequestDto category = new CategoryRequestDto();
-		category.setDescription("test");
-		categoryServiceImpl.updateCategory(category, 1l, apiResponseDtoBuilder);
-		assertTrue(apiResponseDtoBuilder.getMessage().equals(Constants.CATEGORY_NOT_FOUND));
+		Category category = new Category();
+		Optional<Category> categoryOptional = Optional.of(category);
+		when(categoryRepository.findById(1l)).thenReturn(categoryOptional);
+		CategoryRequestDto categoryRequestDto=new CategoryRequestDto();
+		categoryRequestDto.setDescription("test");
+		categoryRequestDto.setImage("test");
+		categoryRequestDto.setName("test");
+		categoryServiceImpl.updateCategory(categoryRequestDto, 1l, apiResponseDtoBuilder);
+		assertTrue(apiResponseDtoBuilder.getMessage().equals(Constants.UPDATE_CATEGORY_SUCCESS));
 
 	}
 

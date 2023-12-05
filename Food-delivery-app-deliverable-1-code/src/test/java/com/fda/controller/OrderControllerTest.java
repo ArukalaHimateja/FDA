@@ -3,8 +3,8 @@ package com.fda.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fda.app.FoodDeriveryAppApplication;
 import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
-import com.fda.app.dto.ProductDto;
+import com.fda.app.dto.OrderDto;
+import com.fda.app.dto.OrderListDto;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = FoodDeriveryAppApplication.class)
-public class ProductControllerTest {
+public class OrderControllerTest {
 	@LocalServerPort
 	private int port;
 
@@ -34,21 +35,20 @@ public class ProductControllerTest {
 	private final String URL = "http://localhost:";
 
 	@Test
-	public void addProduct() throws Exception {
+	public void addOrder() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
-		ProductDto productDto = new ProductDto();
-		productDto.setCategoryId(1l);
-		productDto.setDescription("test");
-		productDto.setPrice(1.0);
-		productDto.setProductImage("/test/image");
-		productDto.setProductName("test");
-		productDto.setProductSize("full");
-		productDto.setRestaurantId(1l);
-
-		String url = URL + port + "/api/product/add";
-		HttpEntity<ProductDto> request = new HttpEntity<>(productDto, headers);
+		OrderDto orderDto = new OrderDto();
+		OrderListDto orderListDto = new OrderListDto();
+		orderListDto.setProductId(1l);
+		orderListDto.setProductQuantity(1l);
+		List<OrderListDto>listOfOrder=new ArrayList<>();
+		listOfOrder.add(orderListDto);
+		orderDto.setOrderListDto(listOfOrder);
+		
+		String url = URL + port + "/api/order/add";
+		HttpEntity<OrderDto> request = new HttpEntity<>(orderDto, headers);
 
 		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.postForEntity(url, request,
 				ApiResponseDtoBuilder.class);
@@ -57,53 +57,36 @@ public class ProductControllerTest {
 
 	}
 
+	@Test
+	public void getOrderById() throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		String url = URL + port + "/api/get/order/" + 1l;
+		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.getForEntity(url,
+				ApiResponseDtoBuilder.class);
+
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+	}
 
 	@Test
-	public void isActiveProduct() throws Exception {
+	public void orderPendingStatusByOrderId() throws Exception {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		long id = 1L;
-		String url = URL + port + "/api/product/active";
-
-		HttpEntity<?> entity = new HttpEntity<>(headers);
-		String urlTemplate = UriComponentsBuilder.fromHttpUrl(url).queryParam("id", "{id}").encode().toUriString();
-		Map<String, Object> params = new HashMap<>();
-		params.put("id", id);
-
-		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.exchange(urlTemplate, HttpMethod.POST,
-				entity, ApiResponseDtoBuilder.class, params);
+		String url = URL + port + "/api/order/pending/status/" + 1l;
+		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.getForEntity(url,
+				ApiResponseDtoBuilder.class);
 
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
 	}
 
 	@Test
-	public void isInactiveProduct() throws Exception {
+	public void orderAcceptedStatusByOrderId() throws Exception {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		long id = 1L;
-		String url = URL + port + "/api/product/inactive";
-
-		HttpEntity<?> entity = new HttpEntity<>(headers);
-		String urlTemplate = UriComponentsBuilder.fromHttpUrl(url).queryParam("id", "{id}").encode().toUriString();
-		Map<String, Object> params = new HashMap<>();
-		params.put("id", id);
-
-		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.exchange(urlTemplate, HttpMethod.POST,
-				entity, ApiResponseDtoBuilder.class, params);
-
-		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-
-	}
-
-	@Test
-	public void getProductById() throws Exception {
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		String url = URL + port + "/api/get/product/" + 1l;
+		String url = URL + port + "/api/order/accepted/status/" + 1l;
 		ResponseEntity<ApiResponseDtoBuilder> responseEntity = restTemplate.getForEntity(url,
 				ApiResponseDtoBuilder.class);
 
