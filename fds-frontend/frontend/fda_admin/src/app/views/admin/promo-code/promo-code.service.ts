@@ -9,6 +9,7 @@ import { Pagination } from '../../../shared/interfaces/pagination.interface';
 import { ConstantService } from '../../../shared/services/constant.service';
 import { PromoCodeRequest } from './promo-code-request.model';
 import { ToastService } from '../../../shared/services/toast.service';
+import { AuthService } from '../../session/auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -20,8 +21,8 @@ export class PromoCodeService implements Resolve<any>{
     data: any = null;
     routeParams: any = null;
     state: string = "";
-    displayedColumns: string[] = ['no', 'promoCode', 'startDate', 'endDate', 'discount', 'createdAt', 'status', 'action'];
-
+    displayedColumns: string[] = ['no', 'promoCode', 'startDate', 'endDate', 'discount', 'createdAt'];
+    sessionUser: any;
     /**
      * Constructor
      *
@@ -35,11 +36,13 @@ export class PromoCodeService implements Resolve<any>{
         private _loadingService: LoadingService,
         private _router: Router,
         private _constantService: ConstantService,
-        private _toastService: ToastService
+        private _toastService: ToastService,
+        private _authService: AuthService,
     ) {
         // Set the defaults
         this.onDataChanged = new BehaviorSubject({});
         this.onDataListChanged = new BehaviorSubject<Pagination>(_utilityService.pagination);
+        this.sessionUser = this._authService.getAuthUser();
     }
 
     /**
@@ -90,11 +93,12 @@ export class PromoCodeService implements Resolve<any>{
      */
     createForm(element: PromoCodeRequest): FormGroup {
         return this._formBuilder.group({
-            propertyId: [element ? element.propertyId : null],
+            id: [element ? element.id : null],
+            restaurantId: [this.sessionUser.restaurantId, [Validators.required]],
             promoCode: [element ? element.promoCode : null, [Validators.required]],
             startDate: [element ? element.startDate : null, [Validators.required]],
             endDate: [element ? element.endDate : null, [Validators.required]],
-            discount: [element ? element.discount : null, [Validators.required]],
+            value: [element ? element.value : null, [Validators.required]],
             description: [element ? element.description : null, [Validators.required]]
         })
     }
@@ -108,13 +112,13 @@ export class PromoCodeService implements Resolve<any>{
     addOrUpdateData(data: any, id: any) {
         this._loadingService.loading.next(true);
         this._apiService.post(data, !id ? 'promoCode/add' : `promoCode/${id}/update`).then((response: any) => {
-            if (response && response.status === 'OK') {
+            if (response && response.body.status === 'OK') {
                 this._loadingService.loading.next(false);
-                this._toastService.success(response.message);
-                this._router.navigateByUrl("/admin/promo/code/list");
+                this._toastService.success(response.body.message);
+                this._router.navigateByUrl("/promo/code/list");
             } else {
                 this._loadingService.loading.next(false);
-                this._toastService.error(response.message);
+                this._toastService.error(response.body.message);
             }
         }, error => {
             this._loadingService.loading.next(false);
@@ -150,8 +154,8 @@ export class PromoCodeService implements Resolve<any>{
     * 
     * @param data 
     */
-    search(data: any, limit: any, page: any) {
-        return this._apiService.post(data, `promocode/search?limit=${limit}&page=${page}`);
+    search(data: any) {
+        return this._apiService.post(data, `promoCodes/pagination/filter`);
     }
 
     /**
