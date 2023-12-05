@@ -1,9 +1,17 @@
-<mat-toolbar class="bg-none">
-    <span>Users</span>
+<mat-toolbar class="bg-none orderSection">
+    <span>Order</span>
     <span class="spacer"></span>
-    <button mat-raised-button color="primary" class="float-right" [routerLink]="'/user/add'">
-        <mat-icon>add_circle</mat-icon> Create User
-    </button>
+    <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select placeholder="Choose status" [(ngModel)]="orderStatus" (ngModelChange)="getDataList()">
+            <!-- <mat-option [value]="-1">All</mat-option> -->
+            <ng-container *ngFor="let element of _orderService.REQUEST_STATUS; let i = index">
+                <mat-option [value]="element.key">
+                    {{element.value}}
+                </mat-option>
+            </ng-container>
+        </mat-select>
+    </mat-form-field>
 </mat-toolbar>
 <hr>
 <ng-container *ngIf="dataSource?.filteredData?.length > 0; else noData;">
@@ -18,36 +26,25 @@
                 </td>
             </ng-container>
 
-            <!-- created At -->
-            <ng-container matColumnDef="createdAt">
-                <th mat-header-cell *matHeaderCellDef> full Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
-            </ng-container>
-
             <!-- customerId -->
             <ng-container matColumnDef="customerId">
                 <th mat-header-cell *matHeaderCellDef> customer Id </th>
                 <td mat-cell *matCellDef="let element"> {{element.customerId}} </td>
             </ng-container>
 
-            <!-- productName -->
-            <ng-container matColumnDef="productName">
-                <th mat-header-cell *matHeaderCellDef> product Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+            <!-- promoCode -->
+            <ng-container matColumnDef="promoCode">
+                <th mat-header-cell *matHeaderCellDef> promocode </th>
+                <td mat-cell *matCellDef="let element"
+                    [ngStyle]="element.promoCode ? {'color': 'black'} : {'color': 'rgb(239, 79, 95)'}">
+                    {{element.promoCode ? element.promoCode : "Not applied."}} </td>
             </ng-container>
 
-            <!-- productQuantity -->
-            <ng-container matColumnDef="productQuantity">
-                <th mat-header-cell *matHeaderCellDef> product Quantity </th>
+            <!-- subTotalPrice -->
+            <ng-container matColumnDef="subTotalPrice">
+                <th mat-header-cell *matHeaderCellDef> Total Pay Price </th>
                 <td mat-cell *matCellDef="let element">
-                    {{element.productQuantity}} </td>
-            </ng-container>
-
-            <!-- totalPayPrice -->
-            <ng-container matColumnDef="totalPayPrice">
-                <th mat-header-cell *matHeaderCellDef> total Pay Price </th>
-                <td mat-cell *matCellDef="let element">
-                    {{element.totalPayPrice}}
+                    {{element.subTotalPrice}}
                 </td>
             </ng-container>
 
@@ -55,7 +52,7 @@
             <ng-container matColumnDef="payStatus">
                 <th mat-header-cell *matHeaderCellDef> pay Status </th>
                 <td mat-cell *matCellDef="let element" [ngStyle]="{'color' : element.payStatus !==0 ? 'green':'red'}">
-                    {{element.payStatus !==0 ? 'Yes' : 'No'}} </td>
+                    {{element.payStatus !==0 ? 'Payed' : 'Unpayed'}} </td>
             </ng-container>
 
             <!-- deliveryAddress Column -->
@@ -66,11 +63,46 @@
                 </td>
             </ng-container>
 
+            <!-- createdAt Column -->
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef> Created At </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.createdAt}}
+                </td>
+            </ng-container>
+            
+            <!-- view Column -->
+            <ng-container matColumnDef="view">
+                <th mat-header-cell *matHeaderCellDef> view </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button (click)="viewOrderDetail(element.id)">view</button>
+                </td>
+            </ng-container>
+
             <!-- Action Column -->
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef class="text-right"> action </th>
                 <td mat-cell *matCellDef="let element" class="text-right">
-                    <button mat-button (click)="generateReceipt(element)">generate receipt</button>
+                    <ng-container *ngIf="element.status === 0">
+                        <button mat-button color="warn" [matMenuTriggerFor]="menuStatus"
+                            [ngStyle]="{'color' : _orderService.getRequestColor(element.status)}">
+                            {{_orderService.getStatus(element.status)}}
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menuStatus="matMenu">
+                            <button mat-menu-item (click)="approveRequest(element.id)">
+                                <mat-icon>check</mat-icon> Accept
+                            </button>
+                            <button mat-menu-item (click)="rejectRequest(element.id)">
+                                <mat-icon>close</mat-icon> Reject
+                            </button>
+
+                        </mat-menu>
+                    </ng-container>
+                    <ng-container *ngIf="element.status === 1">
+                        <!-- <p><mat-icon>refresh</mat-icon> Processing </p> -->
+                        <button mat-button (click)="generateReceipt(element)">generate receipt</button>
+                    </ng-container>
                 </td>
             </ng-container>
 

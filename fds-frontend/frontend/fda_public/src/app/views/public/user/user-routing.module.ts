@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'address', component: AddressComponent },
   { path: 'change/password', component: ChangePasswordComponent },
   { path: 'order/detail/:orderId', component: OrderDetailComponent },
+  { path: 'order/detail/:orderId/:type', component: OrderDetailComponent },
 ];
 
 @NgModule({

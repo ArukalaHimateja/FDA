@@ -16,9 +16,11 @@ import {MatSidenavModule} from '@angular/material/sidenav'
 import { MatButtonModule } from '@angular/material/button';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { CartComponent } from './cart/cart.component';
+import {MatTableModule} from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     PublicComponent,
@@ -26,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     PopularFoodComponent,
     FoodComponent,
     FilterDialogBoxComponent,
+    CartComponent,
   ],
   imports: [
     CommonModule,
@@ -40,8 +43,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatSliderModule,
     MatFormFieldModule,
-    FormsModule,  
+    FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,  
+    MatTableModule,
+    MatInputModule
   ]
 })
 export class PublicModule { }

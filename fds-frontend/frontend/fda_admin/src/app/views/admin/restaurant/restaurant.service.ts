@@ -28,7 +28,7 @@ export class RestaurantService {
     }
 
     /**
-     * Get data by id
+     * Get Restaurant data by id
      * 
      * @param id 
      */

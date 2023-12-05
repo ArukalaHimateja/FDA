@@ -1,1 +1,90 @@
-<p>view works!</p>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h1>Filters</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="dialogRef.close()"><mat-icon>close</mat-icon></button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div fxLayout="column" fxLayoutGap="20px">
+    <ng-container *ngFor="let orderDetail of orderProductDetailList">
+        <mat-card fxFlex="100%">
+            <mat-card-header>
+                <img mat-card-avatar alt="" src="assets/images/user.png" />
+                <mat-card-title>{{orderDetail.productName}}</mat-card-title>
+                <mat-card-subtitle>{{orderDetail.deliveryAddress}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between start">
+                <div fxFlex="48%">
+                    <p class="content_heading">order number</p>
+                    <p class="content_dtl">{{orderDetail.id}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">restaurant name</p>
+                    <p class="content_dtl">{{orderDetail.restaurantName}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">product quantity</p>
+                    <p class="content_dtl">{{orderDetail.productQuantity}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">per Quantity Price</p>
+                    <p class="content_dtl">₹{{orderDetail.perQuantityPrice}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">Total Amout</p>
+                    <p class="content_dtl">₹{{orderDetail.totalPayPrice}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">Items</p>
+                    <p class="content_dtl">{{orderDetail.productId}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">ordered on</p>
+                    <p class="content_dtl">{{orderDetail.createdAt}}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="orderDetail">
+        <mat-card fxFlex="100%">
+            <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between start">
+                <div fxFlex="48%">
+                    <p class="content_heading">order number</p>
+                    <p class="content_dtl">{{orderDetail.id}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">Promocode</p>
+                    <p class="content_dtl"
+                        [ngStyle]="orderDetail.promoCode ? {'color': 'black'} : {'color': 'rgb(239, 79, 95)'}">
+                        {{orderDetail.promoCode ? orderDetail.promoCode : "No promo code applied."}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">Pay Status</p>
+                    <p class="content_dtl">{{orderDetail.payStatus === 1 ? 'Payed' : 'Unpayed'}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">Order status</p>
+                    <p class="content_dtl">{{orderDetail.status === 0 ? 'pending' :
+                        (orderDetail.status === 1 ? 'accepted' :
+                        (orderDetail.status === 2 ? 'processing' :
+                        (orderDetail.status === 3 ? 'cancel' : 'delivered')))}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">Total Amout</p>
+                    <p class="content_dtl">${{orderDetail.subTotalPrice}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">Delivery Address</p>
+                    <p class="content_dtl">{{orderDetail.deliveryAddress}}</p>
+                </div>
+                <div fxFlex="48%">
+                    <p class="content_heading">ordered on</p>
+                    <p class="content_dtl">{{orderDetail.createdAt}}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+</div>

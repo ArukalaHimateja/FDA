@@ -14,14 +14,14 @@
                     <p class="content_heading">order number</p>
                     <p class="content_dtl">{{element.id}}</p>
                     <p class="content_heading">Total Amout</p>
-                    <p class="content_dtl">₹{{element.totalPayPrice}}</p>
+                    <p class="content_dtl">${{element.totalPayPrice}}</p>
                     <p class="content_heading">Items</p>
                     <p class="content_dtl">{{element.productId}}</p>
                     <p class="content_heading">ordered on</p>
                     <p class="content_dtl">{{element.createdAt}}</p>
                 </mat-card-content>
                 <mat-card-actions fxLayoutAlign="end">
-                    <button mat-button [routerLink]="'/user/order/detail/'+ element.id">view details</button>
+                    <button mat-button [routerLink]="'/user/order/detail/'+ element.orderId">view details</button>
                 </mat-card-actions>
             </mat-card>
         </ng-container>

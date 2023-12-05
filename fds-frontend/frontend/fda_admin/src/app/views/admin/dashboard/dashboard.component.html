@@ -66,13 +66,25 @@
         </mat-card>
     </div>
     
-    <div *ngIf="sessionUser.role === 0 || sessionUser.role === 2" class="col-lg-3 col-sm-6">
+    <div *ngIf="sessionUser.role === 0" class="col-lg-3 col-sm-6">
         <mat-card class="example-card">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image">
                     <i class="fa fa-users fa-fw fa-3x"></i>
                 </div>
                 <mat-card-title>{{dashboardData.totalRevenue}}</mat-card-title>
+                <mat-card-subtitle>Total Revenue</mat-card-subtitle>
+            </mat-card-header>
+            <!-- <button mat-raised-button color="primary">More detais click here..</button> -->
+        </mat-card>
+    </div>
+    <div *ngIf="sessionUser.role === 2" class="col-lg-3 col-sm-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                    <i class="fa fa-users fa-fw fa-3x"></i>
+                </div>
+                <mat-card-title>{{dashboardData.totalRestaurantRevenue}}</mat-card-title>
                 <mat-card-subtitle>Total Revenue</mat-card-subtitle>
             </mat-card-header>
             <!-- <button mat-raised-button color="primary">More detais click here..</button> -->

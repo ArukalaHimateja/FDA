@@ -6,8 +6,11 @@ import javax.validation.Valid;
 
 import org.mapstruct.Mapper;
 
+<<<<<<< HEAD
+=======
 import com.fda.app.dto.CategoryRequestDto;
 import com.fda.app.dto.FeedbackRequestDto;
+>>>>>>> d3b79d566c932f262577726729be4822ab33c101
 import com.fda.app.dto.LoginResponseDto;
 import com.fda.app.dto.ProductDto;
 import com.fda.app.dto.PromoCodeRequestDto;
@@ -33,6 +36,10 @@ public interface CustomMapper {
 
 	User userRequestDtoToUser(UserRequestDto userRequestDto);
 
+<<<<<<< HEAD
+	List<UserListResponseDto> userListToUserListResponseDtoList(List<User> userList);
+
+=======
 	FoodProduct fdaDtoTofda(@Valid ProductDto fdaDto);
 
 	Restaurant restaurantDtoToRestaurant(@Valid RestaurantDto restaurantDto);
@@ -53,6 +60,7 @@ public interface CustomMapper {
 
 	Report reportDtoToReport(@Valid ReportDto reportDto);
 
+>>>>>>> d3b79d566c932f262577726729be4822ab33c101
 	LoginResponseDto userToLoginResponseDto(User checkUser);
 
 }

@@ -87,4 +87,7 @@ export class MenuService {
     isInactiveProduct(id: any) {
         return this._apiService.post('', `product/inactive?id=${id}`)
     }
+    getReviewListByProductId(productId: any) {
+        return this._apiService.get(`get/review/${productId}`);
+    }
 }

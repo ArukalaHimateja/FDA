@@ -32,16 +32,16 @@ export class UserService {
   allFoodList() {
     return this._apiService.get('get/all/product/list')
   }
-  getProductById(id: string){
+  getProductById(id: string) {
     return this._apiService.get(`get/product/${id}`);
   }
   getImage(name: string) {
     return `${config.apiUrl}file/${name}`;
   }
-  getAllCategoryByRestaurantId(id: number){
+  getAllCategoryByRestaurantId(id: number) {
     return this._apiService.get(`category/list/by/restaurant/${id}`);
   }
-  getProductByCategoryId(data: any){
+  getProductByCategoryId(data: any) {
     return this._apiService.post(data, `product/pagination/filter`);
   }
 
@@ -117,11 +117,14 @@ export class UserService {
    * @param userId 
    * @returns 
    */
-  getAllOrderHistoryListByUserId(){
+  getAllOrderHistoryListByUserId() {
     return this._apiService.get(`get/all/order/user/${this.sessionUser.id}`);
   }
-  getOrderDetailByOrderId(orderId: number){
+  getOrderDetailByOrderId(orderId: number) {
     return this._apiService.get(`get/order/${orderId}`);
+  }
+  getSubOrderDetailByOrderId(orderId: number) {
+    return this._apiService.get(`get/sub/order/${orderId}`)
   }
 
 }
