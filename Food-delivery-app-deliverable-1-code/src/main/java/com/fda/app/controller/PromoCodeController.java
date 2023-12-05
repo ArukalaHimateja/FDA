@@ -52,9 +52,7 @@ public class PromoCodeController {
 //	@RequestMapping(value = "/promoCode/apply/{promoCode}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 //	public ApiResponseDto promoCodeApplyByPromoCode(@PathVariable(required = true) String promoCode) {
 //		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-//		if (posAuthService.validateCookies(request, apiResponseDtoBuilder)) {
 //		promoCodeService.promoCodeApplyByPromoCode(promoCode, apiResponseDtoBuilder);
-//		}
 //		return apiResponseDtoBuilder.build();
 //	}
 	@RequestMapping(value = "/promoCodes/pagination/filter", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)

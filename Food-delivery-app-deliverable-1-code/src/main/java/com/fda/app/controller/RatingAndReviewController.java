@@ -38,10 +38,10 @@ public class RatingAndReviewController {
 		ratingService.getReviewListByUserId(userId, apiResponseDtoBuilder);
 		return apiResponseDtoBuilder.build();
 	}
-	@RequestMapping(value = "/order/{orderId}/review", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public ApiResponseDto getReviewListByOrderId(@PathVariable(required = true) long orderId) {
+	@RequestMapping(value = "/get/review/{productId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public ApiResponseDto getReviewListByProductId(@PathVariable(required = true) long productId) {
 		ApiResponseDtoBuilder apiResponseDtoBuilder = new ApiResponseDtoBuilder();
-		ratingService.getReviewListByOrderId(orderId, apiResponseDtoBuilder);
+		ratingService.getReviewListByProductId(productId, apiResponseDtoBuilder);
 		return apiResponseDtoBuilder.build();
 	}
 }

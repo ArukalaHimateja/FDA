@@ -16,7 +16,6 @@ import com.fda.app.dto.ApiResponseDto.ApiResponseDtoBuilder;
 import com.fda.app.dto.ContactDto;
 import com.fda.app.model.Restaurant;
 import com.fda.app.model.RestaurantRequest;
-
 import com.fda.app.model.User;
 import com.fda.app.model.VerificationToken;
 import com.fda.app.repository.VerificationTokenRepository;
