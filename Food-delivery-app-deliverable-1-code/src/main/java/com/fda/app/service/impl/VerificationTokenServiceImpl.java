@@ -30,6 +30,7 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 	public static final String TOKEN_EXPIRED = "expired";
 	public static final String TOKEN_VALID = "valid";
 	@Autowired
+	Environment ev;	@Autowired
 	Environment ev;
 	@Autowired
 	private VerificationTokenRepository verificationTokenRepository;
@@ -105,6 +106,7 @@ public class VerificationTokenServiceImpl implements IVerificationTokenService {
 		VerificationToken token = createVerificationToken(userId);
 		String url = environment.getProperty(Constants.SERVER_DOMAIN_URL) + Constants.API_BASE_URL
 				+ "/registrationConfirm?token=" + token.getToken();
+		System.out.println(url);
 		System.out.println(url);
 		return url;
 	}
