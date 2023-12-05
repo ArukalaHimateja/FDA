@@ -1,4 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+// // .error-message {
+// //     background-color: #f44336;
+// //     /* Red background color */
+// //     color: #fff;
+// //     /* White text color */
+// //     font-size: 16px;
+// //     /* Adjust the font size */
+// //     text-align: center;
+// //     border-radius: 4px;
+// //     /* Add rounded corners */
+// // }
+
+// ::ng-deep .mat-error-snackbar {
+//     background-color: #f44336; /* Red background color */
+//     color: #fff; /* White text color */
+//     font-size: 16px; /* Adjust the font size */
+//     text-align: center;
+//     border-radius: 4px; /* Add rounded corners */
+//   }
