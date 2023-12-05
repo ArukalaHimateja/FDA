@@ -21,9 +21,9 @@ import com.fda.app.config.CustomJsonDateSerializer;
 import com.fda.app.constants.Constants;
 
 @Entity
-@Table(name = Constants.PRODUCT_TABLE_NAME)
+@Table(name = Constants.BILLING_TABLE_NAME)
 @JsonIgnoreProperties
-public class FoodProduct {
+public class Billing {
 
 	public static final long serialVersionUID = 1L;
 	@Id
@@ -44,81 +44,25 @@ public class FoodProduct {
 	@JsonDeserialize(using = CustomDateAndTimeDeserialize.class)
 	private Date updatedAt;
 
-	private Double price;
-	private String productSize;
+	private Long orderId;
+	private Long userId;
+	private Long productId;
+	private Double totalPayPrice;
+	private int payStatus = 0;
 	private Long restaurantId;
-	private String restaurantName;
-	private Boolean active = Boolean.TRUE;
-	private Long categoryId;
-	private String categoryName;
-	private String productName;
-	//private String stripeProductId;
-	//private String stripePriceId;
-	private String productImage;
-	private String description;
-
-	public String getRestaurantName() {
-		return restaurantName;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setRestaurantName(String restaurantName) {
-		this.restaurantName = restaurantName;
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public Long getOrderId() {
+		return orderId;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getproductSize() {
-		return productSize;
-	}
-
-	public void setproductSize(String productSize) {
-		this.productSize = productSize;
-	}
-
-	public String getproductImage() {
-		return productImage;
-	}
-
-	public void setproductImage(String productImage) {
-		this.productImage = productImage;
-	}
-
-	public String getproductName() {
-		return productName;
-	}
-
-	public void setproductName(String productName) {
-		this.productName = productName;
-	}
-
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 
 	public static long getSerialversionuid() {
@@ -133,15 +77,16 @@ public class FoodProduct {
 		this.restaurantId = restaurantId;
 	}
 
-	public Double getPrice() {
-		return price;
+	public int getPayStatus() {
+		return payStatus;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPayStatus(int payStatus) {
+		this.payStatus = payStatus;
 	}
 
 	public Long getId() {
+
 		return id;
 	}
 
@@ -163,6 +108,22 @@ public class FoodProduct {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Long getproductId() {
+		return productId;
+	}
+
+	public void setproductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public Double getTotalPayPrice() {
+		return totalPayPrice;
+	}
+
+	public void setTotalPayPrice(Double totalPayPrice) {
+		this.totalPayPrice = totalPayPrice;
 	}
 
 }

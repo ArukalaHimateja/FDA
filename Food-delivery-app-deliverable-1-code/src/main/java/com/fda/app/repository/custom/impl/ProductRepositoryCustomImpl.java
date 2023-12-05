@@ -99,7 +99,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 			ProductSearchFilterResponseDto productSearchFilterResponseDto = new ProductSearchFilterResponseDto();
 			productSearchFilterResponseDto.setRestaurantAddress((String) objects[0]);
 			productSearchFilterResponseDto.setRestaurantName((String) objects[1]);
-			productSearchFilterResponseDto.setProduct_name((String) objects[2]);
+			productSearchFilterResponseDto.setProductName((String) objects[2]);
 			productSearchFilterResponseDto.setId(Long.parseLong(objects[3].toString()));
 			productSearchFilterResponseDto.setPrice(Long.parseLong(objects[4].toString()));
 			productSearchFilterResponseDto.setCategoryName((String) objects[5]);
