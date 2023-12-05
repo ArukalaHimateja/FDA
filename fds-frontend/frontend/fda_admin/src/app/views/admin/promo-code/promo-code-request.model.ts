@@ -1,18 +1,18 @@
 export class PromoCodeRequest {
-    propertyId: Number;
+    id: Number;
     promoCode: String;
     startDate: any;
     endDate: any;
-    discount: Number;
+    value: Number;
     description: String;
 
     constructor(element?: any) {
         element = element || {};
-        this.propertyId = element.propertyId || null;
+        this.id = element.id || null;
         this.promoCode = element.promoCode || null;
         this.startDate = element.startDate || null;
         this.endDate = element.endDate || null;
-        this.discount = element.discount || null;
+        this.value = element.value || null;
         this.description = element.description || null;
     }
 }
