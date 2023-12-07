@@ -1,6 +1,7 @@
 
 **Food Delivery System** 
-A Team Project for Advanced Software Engineering Course - IT 426
+
+~ A Team Project for Advanced Software Engineering Course - IT 426
 
 **INTRODUCTION**
 
@@ -74,29 +75,32 @@ Food delivery app will provide a user-friendly platform for customers to easily 
 | Product Service | src\main\java\com\fda\app\service\impl\ProductServiceImpl.java|
 | PromoCode Service | src\main\java\com\fda\app\service\impl\PromoCodeServiceImpl.java|
 
+
+**MVC x LAYERED ARCHITECTURE**
+
+<img width="2155" alt="Drawing1 - ASE" src="https://github.com/ArukalaHimateja/FDA/assets/53402333/672bacfe-9680-4c63-9c8e-232338deff0b">
+
+In this architecture, the MVC pattern helps separate concerns within the presentation layer, with controllers handling user interactions and views handling the presentation of data. The N-tier architecture provides a clear separation of concerns across multiple layers, with the service layer containing business logic and the data access layer dealing with data storage.
+Communication flows from the presentation layer, where user interactions occur, to the application layer, which routes requests to the service layer for processing. The service layer interacts with the data access layer to retrieve or update data from the database. 
+
 **INSTALLATION**
+
 | Hardware/Software | Source| 
 | --- | --- |
 | Java (JDK 11) | https://www.oracle.com/java/technologies/downloads/#java11-windows |
 | Eclipse  | https://spring.io/tools   |
 | MySQL | https://www.mysql.com/   |
 
-
 **APPLIED TECHNOLOGIES**
 
-**IDE:** eclipse / Spring tool suite, VSCode
-
-**Programming languages :** java (JDK 11)
-
-**Frameworks and libraries :** Spring boot, Swagger 2.0 
-
-**Application server:** Apache Tomcat
-
-**Front end:** HTML, CSS, Javascript, TypeScript, Angular
-
-**Backend:** Java, spring boot, Spring web securities, Hibernet, Spring JPA, tomcat, MySQL, Swagger (API documentation), NodeJS, Spring boot Framework.
-
-**Database server/DMBS:** MySQL
+| **IDE**                | Eclipse / Spring Tool Suite, VSCode          |
+|------------------------|--------------------------------------------|
+| **Programming Languages** | Java (JDK 11)                              |
+| **Frameworks and Libraries** | Spring Boot, Swagger 2.0               |
+| **Application Server** | Apache Tomcat                              |
+| **Front End**          | HTML, CSS, JavaScript, TypeScript, Angular |
+| **Backend**            | Java, Spring Boot, Spring Web Security, Hibernate, Spring JPA, Tomcat, MySQL, Swagger (API Documentation), Node.js, Spring Boot Framework |
+| **Database Server/DMBS** | MySQL                                    |
 
 
 **TESTS**
@@ -123,31 +127,17 @@ Test cases:
 | PaymentControllerTest | src\test\java\com\fda\controller\PaymentControllerTest.java|
 
 
-**MVC x LAYERED ARCHITECTURE**
-
-<img width="2155" alt="Drawing1 - ASE" src="https://github.com/ArukalaHimateja/FDA/assets/53402333/672bacfe-9680-4c63-9c8e-232338deff0b">
-
-In this architecture, the MVC pattern helps separate concerns within the presentation layer, with controllers handling user interactions and views handling the presentation of data. The N-tier architecture provides a clear separation of concerns across multiple layers, with the service layer containing business logic and the data access layer dealing with data storage.
-Communication flows from the presentation layer, where user interactions occur, to the application layer, which routes requests to the service layer for processing. The service layer interacts with the data access layer to retrieve or update data from the database. 
-
-
-**Application of Design patterns on Food Delivery System.**
-
-Creational - Singleton Pattern 
-We have used the Singleton pattern, implemented with java beans creation. When a bean is configured in Spring with the @Component annotation (or its specialized versions like @Service, @Repository, or @Controller)
-
-Creational – Builder Pattern 
-In a Spring Boot project, the Builder pattern can be used to create complex objects such as DTOs (Data Transfer Objects) or entities, which may have a large number of fields or configurations. 
-
-Behavioral - Observer pattern 
-Here Observer patterns we have used to create schedulers or events like email triggers on an event. The observer design pattern enables a subscriber to register with and receive notifications from a provider.
- 
-Structural - Composite Pattern 
-We have used a Composite pattern that follows the parent and child structure. We have used services as interface and child classes.
-
+**Test Link** - https://github.com/ArukalaHimateja/FDA/tree/main/Food-delivery-app-deliverable-1-code/src/test/java/com/fda
 
 **AUTHORS**
 
-Yashaswini Mekala, Himateja Arukala, Praneel Reddy MAllu, Rajapraful 
-Reddy Kasarla, Gnanesh Reddy Kadiyam.
+Yashaswini Mekala (ymekala)
+
+Himateja Arukala (harukal)
+
+Praneel Reddy Mallu (pmallu)
+
+Rajapraful Reddy Kasarla (rkasarl)
+
+Gnanesh Reddy Kadiyam (gkadiy)
 
