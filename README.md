@@ -93,14 +93,16 @@ Communication flows from the presentation layer, where user interactions occur, 
 
 **APPLIED TECHNOLOGIES**
 
-| **IDE**                | Eclipse / Spring Tool Suite, VSCode          |
-|------------------------|--------------------------------------------|
-| **Programming Languages** | Java (JDK 11)                              |
-| **Frameworks and Libraries** | Spring Boot, Swagger 2.0               |
-| **Application Server** | Apache Tomcat                              |
-| **Front End**          | HTML, CSS, JavaScript, TypeScript, Angular |
-| **Backend**            | Java, Spring Boot, Spring Web Security, Hibernate, Spring JPA, Tomcat, MySQL, Swagger (API Documentation), Node.js, Spring Boot Framework |
-| **Database Server/DMBS** | MySQL                                    |
+| **Category**       | **Technologies and Tools**                                                                                   |
+|--------------------|------------------------------------------------------------------------------------------------------------|
+| IDE                | Eclipse / Spring Tool Suite, VSCode                                                                        |
+| Programming Languages | Java (JDK 11)                                                                                           |
+| Frameworks and Libraries | Spring Boot, Swagger 2.0                                                                            |
+| Application Server | Apache Tomcat                                                                                              |
+| Front End          | HTML, CSS, JavaScript, TypeScript, Angular                                                                |
+| Backend            | Java, Spring Boot, Spring Web Security, Hibernate, Spring JPA, Tomcat, MySQL, Swagger (API Documentation), Node.js, Spring Boot Framework |
+| Database Server/DMBS | MySQL                                                                                        |
+
 
 
 **TESTS**
